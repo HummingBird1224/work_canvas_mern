@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: 'user'
     },
     company_id: {
-      type: Sequelize.INTEGER
+      type: Sequelize.STRING
     },
     order: {
       type: Sequelize.INTEGER,
