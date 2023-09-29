@@ -104,17 +104,19 @@ const mainMenu = [
   },
 ]
 
-const TopMenu = () => (
-  <List className='py-0 pb-10'>
-    {topMenu.map((tMenu) => (
-      <ListItem key={tMenu.path} disablePadding>
-        <ListItemButton className='pl-30 py-0'>
-          <ListItemText className='my-0 py-0.5'>
-            <Link to={'/enterprise/' + tMenu.path} className="top__menu__text">{tMenu.name}</Link>
-          </ListItemText>
-        </ListItemButton>
-      </ListItem>
-    ))}
+const TopMenu = ({ menu }) => (
+  <List className='py-0 pb-10 w-100'>
+    <div className='dropdown__profile'>
+      {topMenu.map((tMenu) => (
+        <ListItem key={tMenu.path} disablePadding>
+          <ListItemButton className={`py-0 ${menu} ? 'pl-20' : 'pl-30'`}>
+            <ListItemText className='my-0 py-0.5'>
+              <Link to={'/enterprise/' + tMenu.path} className="top__menu__text">{tMenu.name}</Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </div>
   </List>
 )
 
@@ -134,13 +136,13 @@ const SubMenu = ({ subMenu, preLink }) => {
   );
 }
 
-const MainMenu = () => (
-  <List className='py-15 main__menu full-width'>
+const MainMenu = ({ menu }) => (
+  <List className={`full-width main__menu ${menu}?'':'py-15'`}>
     {mainMenu.map((mMenu) => (
       <ListItem key={mMenu.path} disablePadding>
         {mMenu.path.includes('http') ?
           <a href={mMenu.path} className="top__menu__text" target="_blank">
-            <ListItemButton className='black__text'>
+            <ListItemButton className={`black__text ${menu && 'p-0'}`}>
               <ListItemIcon className='black__text icon'>
                 {mMenu.icon}
               </ListItemIcon>
@@ -150,7 +152,7 @@ const MainMenu = () => (
             </ListItemButton>
           </a> :
           <Link to={'/enterprise/' + mMenu.path} >
-            <ListItemButton className='black__text'>
+            <ListItemButton className={`black__text ${menu && 'p-0'}`}>
               <ListItemIcon className='black__text icon'>
                 {mMenu.icon}
               </ListItemIcon>
@@ -181,32 +183,18 @@ const LineMenu = () => (
     <Link to='enterprise/feature/list' className='line__button d-flex align-items-center justify-content-center'>詳しくはこちら</Link>
   </Box>
 )
-const Sidebar = () => {
-  // const [state, setState] = useState({
-  //   left: false,
-  // });
 
-  // const toggleDrawer = (anchor, open) => (event) => {
-  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-  //     return;
-  //   }
-
-  //   setState({ ...state, [anchor]: open });
-  // };
-
-
+const Sidebar = ({ menu }) => {
   return (
     <Box
-      sx={{ width: 300, zIndex: 100 }}
+      sx={{ zIndex: 100 }}
       role="presentation"
-      className='sidebar'
-    // onClick={toggleDrawer(anchor, false)}
-    // onKeyDown={toggleDrawer(anchor, false)}
+      className={menu ? 'menubar' : 'sidebar'}
     >
-      <h6 className='brand px-20 pt-20 pb-10 mb-0'>C・crew</h6>
-      <TopMenu />
-      <Divider className='border-gray pt-10' />
-      <MainMenu />
+      <h6 className={menu ? 'brand' : 'px-20 pt-20 pb-10 mb-0'}>C・crew</h6>
+      <TopMenu menu={menu ? menu : false} />
+      {!menu && <Divider className='border-gray pt-10' />}
+      <MainMenu menu={menu ? menu : false} />
       <LineMenu />
       <List>
         <ListItem disablePadding>
