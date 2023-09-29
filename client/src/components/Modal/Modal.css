@@ -1,0 +1,261 @@
+.confirm__modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* min-width: 350px; */
+  width: 500px;
+  /* height: 400px; */
+  background-color: white;
+  box-shadow: 24;
+  padding: 60px 20px;
+  z-index: 100;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.confirm__modal button {
+  width: 150px;
+  padding: 15px 0;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.confirm__modal .yes__button {
+  background: #ff6c8a;
+}
+
+.modal__background {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  z-index: 10001;
+  width: 100%;
+  height: 100%;
+  padding: 50px 15px 30px;
+  overflow-y: scroll;
+  background-color: rgba(20,31,51,.95);
+}
+
+.modal__body {
+  width: 768px;
+  padding: 60px 120px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fade-in-up {
+  animation-name:fadeInUp
+}
+
+.animated {
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+hr {
+  border-top: 1px solid rgba(0,0,0,.5);
+  margin: 40px 0;
+}
+
+.mt-60 {
+  margin-top: 60px!important;
+}
+
+.modal__button {
+  padding: 0 10px;
+  box-shadow: 0 1px 3px rgba(20,31,51,.2);
+  font-size: 16px;
+  font-weight: 800;
+  height: 40px;
+  line-height: 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.icon__arrow__step {
+  display: block;
+  text-indent: -9999px;
+  height: 20px;
+  background-image: url('../../asset/img/icon-arrow-step.svg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.modal__title {
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.modal__title.smaller {
+  font-size: 1.125rem;
+}
+
+.table__editable thead th {
+  padding: 6px 15px;
+  font-weight: 700;
+  color: #141f33;
+  background: #f8f8f9;
+  border-left: 1px solid white;
+}
+
+.f__text__table {
+  font-size: .875rem;
+  width: 100px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.bg-blackgray {
+  background-color: #3d4553;
+}
+
+.bg-pink {
+  background-color: #ff6c8a;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.form__type__checkbox__card {
+  overflow: hidden;
+  padding: 5px 0;
+}
+
+.form__type__checkbox__card li:nth-child(odd) {
+  margin-right: 2%;
+}
+
+.form__type__checkbox__card li {
+  display: block;
+  float: left;
+  width: 49%;
+  margin-bottom: 2%;
+  position: relative;
+  cursor: pointer;
+}
+
+.form__type__checkbox__card li input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+input[type=checkbox], input[type=radio] {
+  margin: 4px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+}
+
+.form__type__checkbox__card li input:checked+label {
+  border: 2px solid #141f33;
+  background: #e7e8ea;
+}
+
+.form__type__checkbox__card li label {
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #e7e8ea;
+  text-align: left;
+  color: #141f33;
+  padding: 10px 20px 10px 10px;
+  line-height: 17px;
+  font-size: 14px;
+  position: relative;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.checked__icon {
+  margin-left: auto;
+  display: none;
+}
+
+.form__type__checkbox__card li input:checked+label>.checked__icon {
+  display: block;
+}
+
+.card__logo__list img {
+  display: inline-block;
+  width: auto;
+  height: 55px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.credit__card__iframe {
+  margin: 0px !important;
+  padding: 0px !important;
+  border: none !important;
+  display: block !important;
+  width: 1px !important;
+  min-width: 100% !important;
+  overflow: hidden !important;
+  user-select: none !important;
+  transform: translate(0px) !important;
+  height: 40px;
+}

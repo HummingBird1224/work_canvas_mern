@@ -1,0 +1,57 @@
+.enterprise__card {
+  width: 49%;
+  float: left;
+  background-color: #f8f8f9;
+  border: 1px solid #e7e8ea;
+  border-radius: 4px;
+  margin-top: 2%;
+  padding: 3% 4%;
+}
+
+.enterprise__card:hover{
+  border: 2px solid #ff6c8a;
+}
+
+.width-fit {
+  width: 100%;
+}
+
+.font-800 {
+  font-weight: 800;
+}
+
+.text-default {
+  color:#141f33;
+}
+
+.enterprise__card__description {
+  color:#898f99;
+  font-size: .8125rem;
+  height: 55px;
+}
+
+.script__small {
+  color: #b8bbc1;
+  font-size: .6875rem;
+  line-height: 15px;
+}
+
+.enterprise__card__info div{
+  margin-right: 20px;
+}
+
+.enterprise__card__info div h2{
+  font-size: 3.125rem;
+  color: #ff6c8a;
+  margin-top: 10px;
+}
+
+.enterprise__card__link {
+  margin-top: auto;
+  margin-left: auto;
+  color: #ff6c8a;
+  text-decoration: underline;
+  text-align: right;
+  font-weight: 800;
+  height: auto;
+}

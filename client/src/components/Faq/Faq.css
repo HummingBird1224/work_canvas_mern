@@ -1,0 +1,66 @@
+.faq__container h2 {
+  font-size: 1.625rem;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.faq__container .row .col-md-6>div {
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-left: 45px;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.faq__container .faq__qs {
+  margin-bottom: 15px;
+}
+
+.faq__container .row .col-md-6>div::before{
+  content: "Q";
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  background-color: #141f33;
+  border-radius: 50%;
+  margin-top: -17px;
+  margin-right: 10px;
+  overflow: hidden;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 2.1rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.faq__container .row .col-md-6 .faq__as::before{
+  content: "A";
+  width: 35px;
+  height: 35px;
+  background-color: #ff6c8a;
+  line-height: 2.2rem;
+  top: 20px;
+}
+
+.ballon__left__as {
+  position: relative;
+  margin: unset;
+  border-radius: 4px;
+  background: #f8f8f9;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.ballon__left__as::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: -20px;
+  border: 10px solid transparent;
+  border-right-color: #f8f8f9;
+}

@@ -1,0 +1,15 @@
+.enterprise__container {
+  width: 100%;
+  padding: 0 10px 40px;
+}
+
+.enterprise__box {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width:1300px){
+  .enterprise__box {
+    max-width: 100%;
+  }
+}

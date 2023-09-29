@@ -1,0 +1,53 @@
+.feature__card {
+    overflow: hidden;
+    -webkit-box-shadow: 0 2px 4px rgba(184,187,193,.2);
+    box-shadow: 0 2px 4px rgba(184,187,193,.2);
+    border: 1px solid #f8f8f9;
+    padding: 10px;
+    width: 49%;
+    float: left;
+    margin-bottom: 2%;
+    background-size: cover;
+    background-position: 30% 30%;
+    border-radius: 4px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bl-pink {
+    border-left : 4px solid #ff6c8a;
+}
+
+.bl-gray {
+    border-left : 4px solid #b8bbc1;
+}
+
+.feature__card dl dt div {
+    display: inline-block;
+    background-color: #f8f8f9;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.fc-pink {
+    color: #ff6c8a;
+}
+
+.fs-10 {
+    font-size: 0.625rem;
+}
+
+.fc-gray {
+    color: #b8bbc1!important;
+}

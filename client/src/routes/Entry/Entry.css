@@ -1,0 +1,15 @@
+.enterprise__thead {
+  display: table;
+  table-layout: fixed;
+  background-color: #f8f8f9;
+  -webkit-box-shadow: 0 2px 8px rgba(20,31,51,.1);
+  box-shadow: 0 2px 8px rgba(20,31,51,.1);
+  font-size: .75rem;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.entries__th {
+  display: table-cell;
+  padding: 10px;
+}

@@ -1,0 +1,311 @@
+.fc-dgray {
+  color: #545c6b;
+}
+
+.ml-30 {
+  margin-left: 30px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.fs-13 {
+  font-size: .8125rem!important;
+}
+
+.plans__wrapper {
+  padding: 30px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #f8f8f9;
+  -webkit-box-shadow: 0 4px 20px rgba(20,31,51,.1);
+  box-shadow: 0 4px 20px rgba(20,31,51,.1);
+  background: #fff;
+}
+
+.plan__price__initial {
+  width: 260px;
+}
+
+.fs-20 {
+  font-size: 1.25rem;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.price__emphasis {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #ff6c8a;
+}
+
+.td-lt {
+  text-decoration: line-through;
+}
+
+.plans__wrapper .initial__cost__wrapper .initial__balloon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: calc(100% - 260px);
+  line-height: 2;
+}
+
+.balloon__left {
+  position: relative;
+  margin: unset;
+  border-radius: 4px;
+  background: #f8f8f9;
+}
+
+.balloon__left:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right-color: #f8f8f9;
+}
+
+.plans__wrapper .initial__cost__wrapper .initial__balloon li {
+  position: relative;
+  padding-left: 20px;
+  width: 48%;
+}
+
+.plans__wrapper .initial__cost__wrapper .initial__balloon li:before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  -webkit-transform: rotate(50deg);
+  transform: rotate(50deg);
+  width: 8px;
+  height: 11px;
+  border-right: 2px solid #141f33;
+  border-bottom: 2px solid #141f33;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.plans__wrapper .plan__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: auto;
+  padding: 16px 8px;
+  background: #f8f8f9;
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.list__plan__wrapper {
+  font-feature-settings: "palt";
+  margin: 40px 0;
+}
+
+.list__plan__wrapper h3 {
+  font-size: 1rem;
+  position: relative;
+  width: 100%;
+  margin: auto 0 20px auto;
+  text-align: center;
+}
+
+.list__plan__wrapper h3 span{
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0 24px;
+  background: #fff;
+}
+
+.list__plan__wrapper h3:after{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #141f33;
+}
+
+.list__plan__wrapper .list__plan__contents {
+  position: relative; 
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li {
+  display: block;
+  background: #fff;
+  width: 23%;
+  height: 153px;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  position: relative;
+  border: 1px solid #e7e8ea;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div:first-child {
+  line-height: 2.5rem;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  font-size: .8125rem;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div.is__senior {
+  background-color: #141f33;
+  color: #fff;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div:nth-child(2) {
+  height: 76px;
+  padding-top: 9px;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div:nth-child(3).has__license {
+  background-color: #f8f8f9;
+}
+
+.list__plan__wrapper .list__plan__contents .list__plan__prise li div:nth-child(3) {
+  height: 35px;
+  font-weight: 400;
+  line-height: 2.2rem;
+}
+
+.button__wrapper {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.border__box {
+  display: block;
+  border: 1px solid #e7e8ea;
+  border-radius: 4px;
+  margin: 40px 0;
+  padding: 20px;
+}
+
+.border__box h3 {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.border__box p, .border__box strong  {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+.border__box p {
+  font-size: .75rem;
+  margin: 0 0 10px;
+  color: #54575e;
+}
+
+
+.border__box strong {
+  font-size: .8125rem;
+  font-weight: border;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+@media screen and (max-width:768px) {
+  .initial__cost__wrapper .plan__price__initial {
+    width: 160px;
+    flex-wrap: wrap;
+  }
+  .initial__cost__wrapper .plan__price__initial .initial{
+    width: 100%;
+  }
+  .plans__wrapper .initial__cost__wrapper .initial__balloon {
+    width: calc(100% - 160px);
+  }
+  .list__plan__wrapper h3:after{
+    display: none;
+  }
+  .plans__wrapper .initial__cost__wrapper .initial__balloon li {
+    width: 100%;
+  }
+  .list__plan__wrapper .list__plan__contents .list__plan__prise {
+    flex-wrap: wrap;
+  }
+  .list__plan__wrapper .list__plan__contents .list__plan__prise li {
+    width: 46%;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width:500px) {
+  .initial__cost__wrapper .plan__price__initial {
+    width: 100%;
+    justify-content: center;
+  }
+  .initial__cost__wrapper .plan__price__initial .initial{
+    width: auto;
+  }
+  .plans__wrapper .initial__cost__wrapper .initial__balloon {
+    width: 100%;
+  }
+  .balloon__left:before {
+    top: -25px;
+    left: 50%;
+    margin-top: unset;
+    margin-left: -15px;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .list__plan__wrapper .list__plan__contents  {
+    width: calc(100% + 76px);
+    left: -36px;
+    overflow: auto;
+    padding-left: 36px;
+  }
+  .list__plan__wrapper .list__plan__contents .list__plan__prise {
+    width: 185%;
+    padding-right: 36px;
+  }
+  .list__plan__wrapper .list__plan__contents .list__plan__prise li {
+    width: 24%;
+    margin-bottom: unset;
+  }
+}

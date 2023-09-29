@@ -1,0 +1,160 @@
+.title__lv1 {
+  font-size: 1.875rem;
+  font-weight: 400;
+  padding-bottom: 40px;
+  margin-bottom: 0;
+}
+
+.title__lv1::before {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-image: url('../../asset/img/icon-arrow-title.svg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+}
+
+.title__lv2 {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  margin: 50px 0 30px;
+  font-weight: 700;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.member section .text-right {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.member section span.info__sign {
+  color: #ff6c8a;
+  font-size: .75rem;
+}
+
+.member section span.info__sign::before {
+  content: "\e086";
+}
+
+.select__role {
+  font-size: 16px;
+  border: 1px solid #e7e8ea;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  height: 40px;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: unset;
+  -moz-appearance: unset;
+  appearance: unset;
+  background-color: #fff;
+  background-image: url(https://cdn1.work-canvas.com/assets/images/icon-arrow-select.svg);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: 24px 14px;
+  padding: 5px 30px 5px 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.user__delete {
+  padding: 15px;
+  vertical-align: middle;
+}
+
+.user__delete .delete__button {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../asset/img/icon-minus-medium-gray.svg');
+}
+
+.table__staff {
+  font-size: .875rem;
+  width: 100%;
+}
+
+.table__staff tr {
+  border-bottom: 1px solid #f8f8f9;
+}
+
+.table__staff tr th, .table__staff tr td {
+  padding: 15px;
+  vertical-align: middle;
+}
+
+.fs-12 {
+  font-size: .75rem;
+}
+
+.enterprise__staff figure {
+  display: inline-block;
+
+  margin: 0;
+  vertical-align: middle;
+  border: 1px solid #f8f8f9;
+  border-radius: 50%;
+}
+
+.enterprise__staff img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.guide {
+  padding: 20px;
+  border: 4px solid #e7e8ea;
+}
+
+.textlink {
+  color: #005aa3;
+}
+
+.staff__url {
+  font-size: .875rem;
+  zoom: 1;
+  background: #f8f8f9;
+  padding: 20px;
+  position: relative;
+}
+
+.height-auto {
+  height: auto;
+}
+
+.mt-40 {
+  margin-top: 40px!important;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.f__textarea {
+  font-size: .875rem;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #e7e8ea;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.bg-green {
+  background-color: #06c755;
+}

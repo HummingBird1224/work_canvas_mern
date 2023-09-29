@@ -1,0 +1,36 @@
+.tab {
+  overflow-x: auto;
+  white-space: nowrap;
+  cursor: pointer;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  color: #141f33;
+  border-bottom: 1px solid #e7e8ea;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.tab li {
+  position: relative;
+  font-size: 14px;
+}
+
+.tab li>* {
+  padding: 10px 20px;
+}
+
+.tab li:hover {
+  background-color: #f8f8f9;
+  border-bottom: 2px solid #b8bbc1;
+}
+
+.tab li.active {
+  font-weight: 800;
+  cursor: default;
+  border-bottom: 2px solid #141f33;
+}

@@ -1,0 +1,54 @@
+.tag {
+  font-size: 12px;
+  padding: 0 5px;
+  margin-bottom: 5px;
+  border: 2px solid #e7e8ea;
+  background-color: #fff;
+  color: #141f33;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.tag__primary {
+  border-color: #ff6c8a;
+  color: #ff6c8a;
+}
+
+.tag__secondary {
+  border-color: #545c6b;
+  color: #545c6b;
+}
+
+.form__type__text {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #e7e8ea;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: #2e3033d4;
+}
+
+.form__type__select {
+  font-size: 16px;
+  border: 1px solid #e7e8ea;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  height: 40px;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: unset;
+  -moz-appearance: unset;
+  appearance: unset;
+  background-color: #fff;
+  background-image: url(https://cdn1.work-canvas.com/assets/images/icon-arrow-select.svg);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: 24px 14px;
+  padding: 5px 30px 5px 10px;
+}
+
+.w-50 {
+  width: 50%;
+}

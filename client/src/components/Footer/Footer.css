@@ -1,0 +1,33 @@
+.footer__container {
+    height: auto;
+    width: 100%;
+    margin: auto;
+    padding: 20px 0 40px;
+    text-align: center;
+}
+
+.footer__navigation {
+    padding: 0;
+    margin: 0 auto 30px;
+    max-width: 1200px;
+    list-style-type: none;
+}
+
+.footer__navigation li {
+    display: inline-block;
+    padding: 0 4px 0 8px;
+    line-height: 1;
+    margin-top: 20px;
+}
+
+.footer__navigation li+li {
+    border-left: 1px solid #545c6b;
+}
+
+.footer__navigation li a{
+    text-decoration: underline;
+}
+
+.footer__copylight {
+    font-size: .75rem;
+}

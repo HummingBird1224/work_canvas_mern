@@ -1,0 +1,32 @@
+.manualcard {
+  overflow: hidden;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 4px rgba(20,31,51,.1);
+  box-shadow: 0 2px 4px rgba(20,31,51,.1);
+  background: #fff;
+  border: 1px solid #e7e8ea;
+  width: 48%;
+}
+
+.manualcard a:hover {
+  opacity: .8;
+}
+
+.paycard__eyecatch {
+  padding: 15px 20px;
+  color: #141f33;
+  background-color: #feff6c;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  text-align: center;
+  height: 150px;
+  line-height: 150px;
+  background-size: cover;
+  border-radius: 4px 4px 0 0;
+}
+
+.manualcard__title {
+  font-size: 1rem;
+  padding: 10px;
+  font-weight: 400;
+}

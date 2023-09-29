@@ -1,0 +1,62 @@
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.fw-700 {
+  font-weight: 700!important;
+}
+
+table{
+  font-size: .875rem;
+  width: 100%;
+}
+
+.table__editable tr {
+  border-bottom: 1px solid #f8f8f9;
+}
+
+.table__editable tr th,  .table__editable tr td{
+  color: #545c6b;
+  font-weight: 400;
+  padding: 15px;
+  word-break: break-all;
+}
+
+.table__editable tr th{
+  width: 20%;
+}
+
+.table__editable tr td{
+  width: 50%;
+}
+
+.table__editable span {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.f__required {
+  font-size: 1.125rem;
+  color: #ff6c8a;
+}
+
+.mt-60 {
+  margin-top: 60px;
+}
+
+.title__lv3 {
+  font-size: 1rem;
+  margin: 0;
+  background: #f8f8f9;
+  line-height: 1;
+  padding: 15px;
+}
+
+.fc-lightgray {
+  color: #898f99
+}
+
+.fs-14 {
+  font-size: .875rem;
+}

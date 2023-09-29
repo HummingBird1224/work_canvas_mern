@@ -1,0 +1,28 @@
+.alert__box {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  opacity: 0.9;
+}
+
+.fs-16 {
+  font-size: 1.25rem!important;
+}
+
+.border__error {
+  border: 4px solid #ff6c8a;
+}
+
+.color__error {
+  color: #ff6c8a!important;
+}
+
+.color__default {
+  color: #141f33!important;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}

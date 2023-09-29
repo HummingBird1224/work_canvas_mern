@@ -1,0 +1,35 @@
+.terms ol {
+  list-style-type: none;
+}
+
+.terms ol.list__style__decimal {
+  list-style-type: decimal;
+}
+
+.table__term__dl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-left: 40px;
+}
+
+.table__term__dl dt {
+  width: 70%;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.table__term__dl dd {
+  width: 25%;
+  margin-left: 5%;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.table__term__dl dd span {
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
