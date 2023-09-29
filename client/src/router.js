@@ -5,10 +5,8 @@ import {
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
-import Auth from './utils/Auth';
-
 import HomeLayout from './layout/HomeLayout.js';
-import AuthLayout from './layout/AuthLayout.js';
+import FeatureLayout from './layout/feature/Layout.jsx';
 // import AdminLayout from './layout/AdminLayout.js';
 
 import Home from './routes/Enterprise/Home.jsx';
@@ -20,81 +18,159 @@ import FeatureList from './routes/Feature/FeatureList.jsx';
 import EntriesList from './routes/Entry/EntriesList.jsx';
 import ScoutsList from './routes/Scout/ScoutsList.jsx';
 import Plan from './routes/Plan/Plan.jsx';
+import PlanList from './routes/Plan/PlanList.jsx';
 import Payment from './routes/Payment/Payment.jsx';
-import Manual from './routes/Manual/Manual.jsx';
-import Term from './routes/Term/Term.jsx';
-import PaidTerm from './routes/Term/PaidTerm.jsx';
-import CampaignPaidTerm from './routes/Term/CampaignPaidTerm.jsx';
 
-import Login from './routes/Auth/Login.jsx';
+import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
+import Vacation from './routes/Feature/List/Vacation.jsx';
+import Workstyle from './routes/Feature/List/Workstyle.jsx';
+import Equipment from './routes/Feature/List/Equipment.jsx';
+import SelectionMethod from './routes/Feature/List/SelectionMethod.jsx';
+import StylistEmploymentRequirement from './routes/Feature/List/StylistEmploymentRequirement.jsx';
+import StylistOutsourcingTreatment from './routes/Feature/List/StylistOutsourcingTreatment.jsx';
+import StylistFulltimeTreatment from './routes/Feature/List/StylistFulltimeTreatment.jsx';
+import StylistAssistantTreatment from './routes/Feature/List/StylistAssistantTreatment.jsx';
+import StylistSpecialService from './routes/Feature/List/StylistSpecialService.jsx';
+import StylistExtraCharacter from './routes/Feature/List/StylistExtraCharacter.jsx';
+import StylistArbeitTreatment from './routes/Feature/List/StylistArbeitTreatment.jsx';
+import StylistEducation from './routes/Feature/List/StylistEducation.jsx';
+import IlistEmploymentRequirement from './routes/Feature/List/IlistEmploymentRequirement.jsx';
+import IlistExperiencedTreatment from './routes/Feature/List/IlistExperiencedTreatment.jsx';
+import IlistUnexperiencedTreatment from './routes/Feature/List/IlistUnexperiencedTreatment.jsx';
+import IlistOutsourcingTreatment from './routes/Feature/List/IlistOutsourcingTreatment.jsx';
+import IlistArbeitTreatment from './routes/Feature/List/IlistArbeitTreatment.jsx';
+import IlistEducation from './routes/Feature/List/IlistEducation.jsx';
+import IlistExtraCharacter from './routes/Feature/List/IlistExtraCharacter.jsx';
+import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
 
-// import Point from './components/Account/Point/Point.js';
-// import Purchase from './components/Account/Point/Purchase.js';
-// import Address from './components/Account/Address/Address.js';
-// import AddressEdit from './components/Account/Address/Edit.js';
-// import ManageAccount from './components/Account/ManageAccount/ManageAccount';
-// import History from './components/Account/History/History';
-// import GiftList from './components/Account/Gift/List';
-// import LotteryResult from './components/Result/Lottery/Result';
-// import Result from './components/Result/Result';
-
-// import MyAccount from './components/Account/MyAccount/MyAccount';
-// import Shop from './components/Shop/Shop';
-// import CategoryView from './routes/CategoryView';
-// // import SearchView from './routes/Search';
-// import CartItemsProvider from './Context/CartItemsProvider';
-// import Login from './components/Authentication/Login/Login';
-// import Register from './components/Authentication/Register/Register';
-// import Wishlist from './components/Wishlist';
-// import WishItemsProvider from './Context/WishItemsProvider';
-// import DrawerNav from './components/Nav/DrawerNav/DrawerNav';
-// import Checkout from './components/Checkout/Checkout';
-// import SearchProvider from './Context/SearchProvider';
-
-// import AccountManaging from './components/Admin/Account/AccountManaging';
-// import GachaCategory from './components/Admin/GachaCategory/GachaCategory';
-// import GachaCategoryEdit from './components/Admin/GachaCategory/Edit';
-// import Gacha from './components/Admin/Gacha/Gacha';
-// import GachaEdit from './components/Admin/Gacha/Edit';
-// import GachaHistory from './components/Admin/Gacha/GachaHistory.js';
-// import OrderList from './components/Admin/Gift/Order.js';
-
-// import Auth from '../src/modules/Auth';
-
-// const AdminRouter = ({ component, ...options }) => {
-//   const finalComponent =
-//     Auth.getUserDetails() !== undefined &&
-//       Auth.getUserDetails() !== null &&
-//       Auth.getUserRole() == 'admin' ? (
-//       <Route {...options} component={component} />
-//     ) : (
-//       <Redirect to="/" />
-//     );
-
-//   return finalComponent;
-// }
-
-const HomeRouter = ({ component, ...options }) => {
-  const finalComponent =
-    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
-      <Route {...options} component={component} />
-    ) : (
-      <Redirect to="/enterprise/login" />
-    );
-
-  return finalComponent;
-}
-
-const AuthRouter = ({ component, ...options }) => {
-  const finalComponent =
-    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
-      <Redirect to="/enterprise" />
-    ) : (
-      <Route {...options} component={component} />
-    );
-
-  return finalComponent;
-}
+const FeatureRoutes = [
+  {
+    path: '/enterprise/basicSurveyEnquete/1',
+    exact: true,
+    layout: FeatureLayout,
+    component: TrafficInsurance
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/2',
+    exact: true,
+    layout: FeatureLayout,
+    component: Vacation
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/3',
+    exact: true,
+    layout: FeatureLayout,
+    component: Workstyle
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/4',
+    exact: true,
+    layout: FeatureLayout,
+    component: Equipment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/5',
+    exact: true,
+    layout: FeatureLayout,
+    component: SelectionMethod
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/6',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistEmploymentRequirement
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/7',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistOutsourcingTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/8',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistFulltimeTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/9',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistAssistantTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/10',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistSpecialService
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/11',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistExtraCharacter
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/12',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistArbeitTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/13',
+    exact: true,
+    layout: FeatureLayout,
+    component: StylistEducation
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/14',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistEmploymentRequirement
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/15',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistExperiencedTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/16',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistUnexperiencedTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/17',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistOutsourcingTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/18',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistArbeitTreatment
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/19',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistEducation
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/20',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistExtraCharacter
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/21',
+    exact: true,
+    layout: FeatureLayout,
+    component: IlistSpecialService
+  },
+];
 
 const HomeRoutes = [
   {
@@ -130,7 +206,7 @@ const HomeRoutes = [
   {
     path: '/enterprise/feature/list',
     exact: true,
-    layout: HomeLayout,
+    layout: FeatureLayout,
     component: FeatureList
   },
   {
@@ -145,6 +221,12 @@ const HomeRoutes = [
     layout: HomeLayout,
     component: ScoutsList
   },
+  // {
+  //   path: '/enterprise/plan?type=planList',
+  //   exact: true,
+  //   layout: HomeLayout,
+  //   component: PlanList
+  // },
   {
     path: '/enterprise/plan',
     exact: true,
@@ -157,67 +239,19 @@ const HomeRoutes = [
     layout: HomeLayout,
     component: Payment
   },
-  {
-    path: '/enterprise/manual',
-    exact: true,
-    layout: HomeLayout,
-    component: Manual
-  },
-  {
-    path: '/enterprise/terms',
-    exact: true,
-    layout: HomeLayout,
-    component: Term
-  },
-  {
-    path: '/enterprise/paid_terms',
-    exact: true,
-    layout: HomeLayout,
-    component: PaidTerm
-  },
-  {
-    path: '/enterprise/campaign_paid_terms',
-    exact: true,
-    layout: HomeLayout,
-    component: CampaignPaidTerm
-  },
 ];
-
-const AuthRoutes = [
-  {
-    path: '/enterprise/login',
-    exact: true,
-    layout: AuthLayout,
-    component: Login
-  },
-]
 
 const Routes = () => {
   return (
     <Router>
+      {/* <Header /> */}
       <Switch>
         <Route exact path='/'>
           <Redirect to='/enterprise' />
         </Route>
-        {AuthRoutes.map((authRoute, index) => {
-          return (
-            <AuthRouter
-              key={index}
-              path={authRoute.path}
-              exact={authRoute.exact}
-              component={props => {
-                return (
-                  <authRoute.layout {...props}>
-                    <authRoute.component {...props} />
-                  </authRoute.layout>
-                );
-              }}
-            />
-          );
-        })}
         {HomeRoutes.map((homeRoute, index) => {
           return (
-            <HomeRouter
+            <Route
               key={index}
               path={homeRoute.path}
               exact={homeRoute.exact}
@@ -231,38 +265,22 @@ const Routes = () => {
             />
           );
         })}
-        {/* {PrivateRoutes.map((privateRoute, index) => {
+        {FeatureRoutes.map((homeRoute, index) => {
           return (
-            <PrivateRouter
+            <Route
               key={index}
-              path={privateRoute.path}
-              exact={privateRoute.exact}
+              path={homeRoute.path}
+              exact={homeRoute.exact}
               component={props => {
                 return (
-                  <privateRoute.layout {...props}>
-                    <privateRoute.component {...props} />
-                  </privateRoute.layout>
+                  <homeRoute.layout {...props}>
+                    <homeRoute.component {...props} />
+                  </homeRoute.layout>
                 );
               }}
             />
           );
         })}
-        {AdminRoutes.map((adminRoute, index) => {
-          return (
-            <AdminRouter
-              key={index}
-              path={adminRoute.path}
-              exact={adminRoute.exact}
-              component={props => {
-                return (
-                  <adminRoute.layout {...props}>
-                    <adminRoute.component {...props} />
-                  </adminRoute.layout>
-                );
-              }}
-            />
-          );
-        })} */}
       </Switch>
       {/* <Footer /> */}
     </Router>
