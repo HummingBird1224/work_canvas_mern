@@ -14,7 +14,7 @@ import './Home.css';
 const staticCardsInfo=[
   {
     name: '応募者一覧',
-    path: 'entiresList',
+    path: 'entriesList',
     icon: <PermContactCalendarOutlined/>,
     strong:'応募者の情報や応募状況を確認',
     after:'できます。',
