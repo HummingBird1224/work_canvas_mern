@@ -19,16 +19,14 @@ const EnterpriseCard = ({ props }) => {
           <br />
           {props.small && <span className='script__small'>{props.small}</span>}
         </p>
-        {props.info &&
-          <div className='enterprise__card__info d-flex'>
-            {props.info.map((pInfo) => (
-              <div key={pInfo.name}>
-                <h2>{pInfo.number}</h2>
-                <p>{pInfo.name}</p>
-              </div>
-            ))}
-          </div>
-        }
+        <div className='enterprise__card__info d-flex'>
+          {props.info && props.info.map((pInfo) => (
+            <div key={pInfo.name}>
+              <h2>{pInfo.number}</h2>
+              <p>{pInfo.name}</p>
+            </div>
+          ))}
+        </div>
         <p className='enterprise__card__link'>
           {props.link}
           <ChevronRightIcon />
