@@ -8,7 +8,7 @@ const EnterpriseCard = ({ props }) => {
   return (
     <div className={props.widthFit ? 'enterprise__card width-fit' : 'enterprise__card'}>
       <Link to={'enterprise/' + props.path} className='text-default'>
-        <div className='enterprise__card__title d-flex '>
+        <div className='enterprise__card__title d-flex align-items-center'>
           {props.icon}
           <h5 className='font-800'>{props.name}</h5>
         </div>
