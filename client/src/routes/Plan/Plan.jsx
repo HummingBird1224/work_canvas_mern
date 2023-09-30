@@ -16,8 +16,8 @@ const cardInfo=[
   },
   {
     image:'image-plan-02.jpg',
-    title:'料金プラン',
-    description:'料金の詳細、よくある質問の確認が行えます。',
+    title:'ご利用中のプラン',
+    description:'ご利用中のプランの確認が行えます。',
     link:'currentPlan',
     id:2
   },
