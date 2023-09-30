@@ -62,7 +62,7 @@ const staticCardsInfo=[
   },
   {
     name: '特徴管理',
-    path: 'feature',
+    path: 'feature/list',
     icon: <FactCheckOutlined/>,
     before:'採用状況基本情報以外に',
     strong:'サロンの特徴',
