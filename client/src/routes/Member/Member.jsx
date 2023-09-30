@@ -103,8 +103,7 @@ const Member=()=>{
                     </select>
                   }
                 </td>
-                {
-                  user.id !== Auth.getUserId() || user.role !== 'administrator' &&
+                {( user.id !== Auth.getUserId() || user.role !== 'administrator' )&&
                 <td className='user__delete text-center' onClick={()=>handleConfirmChange(true)}>
                   <div className='delete__button'></div>
                 </td>
