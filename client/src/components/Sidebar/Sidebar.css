@@ -15,7 +15,8 @@
   }
 }
 
-.sidebar .top__menu__text {
+.sidebar .top__menu__text,
+.menubar .top__menu__text {
   font-size: 0.8125em;
   color: #141f33;
   font-weight: 400;
@@ -40,8 +41,10 @@
   font-size: 14px;
 }
 
-.sidebar .icon {
+.sidebar .icon,
+.menubar .icon {
   min-width: 30px;
+  color: #141f33;
 }
 
 .pl-30 {
@@ -125,7 +128,8 @@
   width: 270px;
 }
 
-.menubar ul {
+.menubar ul,
+.menubar ul.main__menu li {
   padding: 6px 5px;
   float: left;
   position: relative;
@@ -147,9 +151,14 @@
 }
 
 .menubar .dropdown__profile>li a {
-    font-size: .8125rem;
-    padding: 5px 10px;
-    margin: -5px;
-    color: #141f33;
-    text-decoration: none;
+  font-size: .8125rem;
+  padding: 5px 10px;
+  margin: -5px;
+  color: #141f33;
+  text-decoration: none;
+}
+
+.menubar .main__menu__text span { 
+  font-weight: 800;
+  font-size: 14px;
 }

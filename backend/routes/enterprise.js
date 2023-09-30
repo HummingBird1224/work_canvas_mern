@@ -146,20 +146,55 @@ router.post('/login', async function (req, res, next) {
     })
 })
 
-
-
-
-
-//GET /
-router.get('/', ensureAuthenticated, async function (req, res, next) {
-  await User.findAll({ where: { role: { [Op.ne]: 'admin' } } })
-    .then(users => {
-      res.status(201).json(users);
+router.get('/mainData/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await User.count({ where: { company_id: companyId } })
+    .then(async (users) => {
+      await Store.count({ where: { company_id: companyId } })
+        .then(stores => {
+          res.status(200).json({
+            members: users,
+            stores: stores
+          })
+        })
+        .catch(err => {
+          throw err;
+        })
     })
     .catch(err => {
       return next(err);
     })
 })
+
+router.get('/company/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await Company.findOne({ where: { id: companyId } })
+    .then(async (company) => {
+      res.status(200).json(company);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.get('/company/:companyId/members', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await User.findAll({
+    attributes: ['id', 'username', 'role', 'order'],
+    where: { company_id: companyId }
+  })
+    .then(async (members) => {
+      res.status(200).json(members);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+
+
+
+//GET /
 
 router.get('/:userId', ensureAuthenticated, async function (req, res, next) {
   const userId = req.params.userId;

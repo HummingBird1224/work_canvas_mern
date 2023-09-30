@@ -13,8 +13,10 @@ import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from 'react-router-dom';
 
+import Auth from '../../utils/Auth'
 import LineIcon from '../../asset/img/icon-line.svg'
 import './Sidebar.css'
 
@@ -105,7 +107,7 @@ const mainMenu = [
 ]
 
 const TopMenu = ({ menu }) => (
-  <List className='py-0 pb-10 w-100'>
+  <List className='py-0 pb-10 w-100 top__menu'>
     <div className='dropdown__profile'>
       {topMenu.map((tMenu) => (
         <ListItem key={tMenu.path} disablePadding>
@@ -120,14 +122,14 @@ const TopMenu = ({ menu }) => (
   </List>
 )
 
-const SubMenu = ({ subMenu, preLink }) => {
+const SubMenu = ({ subMenu, preLink, menu }) => {
   return (
     <List className='py-0 pb-10'>
       {subMenu.map((sMenu) => (
-        <ListItem key={sMenu.path}  >
+        <ListItem key={sMenu.path} className={menu && 'py-0'} >
           <ListItemButton className='pl-30 py-0'>
             <ListItemText className='my-0 py-0.5 '>
-              <Link to={preLink + '?type=' + sMenu.path} className="top__menu__text w-100" style={{ display: 'block' }}>{sMenu.name}</Link>
+              <Link to={preLink + '?type=' + sMenu.path} className='top__menu__text w-100 ' style={{ display: 'block' }}>{sMenu.name}</Link>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -136,37 +138,57 @@ const SubMenu = ({ subMenu, preLink }) => {
   );
 }
 
-const MainMenu = ({ menu }) => (
-  <List className={`full-width main__menu ${menu}?'':'py-15'`}>
-    {mainMenu.map((mMenu) => (
-      <ListItem key={mMenu.path} disablePadding>
-        {mMenu.path.includes('http') ?
-          <a href={mMenu.path} className="top__menu__text" target="_blank">
-            <ListItemButton className={`black__text ${menu && 'p-0'}`}>
-              <ListItemIcon className='black__text icon'>
-                {mMenu.icon}
+const MainMenu = ({ menu }) => {
+  const logout = () => {
+    Auth.logout();
+    window.location.href = '/enterprise/login';
+  }
+  return (
+    <List className={`full-width main__menu ${menu}?'':'py-15'`}>
+      {mainMenu.map((mMenu) => (
+        <ListItem key={mMenu.path} disablePadding>
+          {mMenu.path.includes('http') ?
+            <a href={mMenu.path} className="top__menu__text" target="_blank">
+              <ListItemButton className={`black__text ${menu && 'p-0'}`}>
+                <ListItemIcon className='text-default icon'>
+                  {mMenu.icon}
+                </ListItemIcon>
+                <ListItemText className='my-0 py-0.5 main__menu__text'>
+                  {mMenu.name}
+                </ListItemText>
+              </ListItemButton>
+            </a> :
+            <Link to={'/enterprise/' + mMenu.path} >
+              <ListItemButton className={`black__text ${menu && 'p-0'}`}>
+                <ListItemIcon className='black__text icon'>
+                  {mMenu.icon}
+                </ListItemIcon>
+                <ListItemText className='my-0 py-0.5 main__menu__text'>
+                  {mMenu.name}
+                </ListItemText>
+              </ListItemButton>
+              {mMenu.subMenu && <SubMenu subMenu={mMenu.subMenu} preLink={'/enterprise/' + mMenu.path} menu={menu ? menu : false} />}
+            </Link>
+          }
+        </ListItem>
+      ))}
+      {menu &&
+        <ListItem disablePadding>
+          <div onClick={logout} className="top__menu__text" >
+            <ListItemButton className='black__text p-0'>
+              <ListItemIcon className='text-default icon'>
+                <LogoutOutlinedIcon />
               </ListItemIcon>
               <ListItemText className='my-0 py-0.5 main__menu__text'>
-                {mMenu.name}
+                ログアウト
               </ListItemText>
             </ListItemButton>
-          </a> :
-          <Link to={'/enterprise/' + mMenu.path} >
-            <ListItemButton className={`black__text ${menu && 'p-0'}`}>
-              <ListItemIcon className='black__text icon'>
-                {mMenu.icon}
-              </ListItemIcon>
-              <ListItemText className='my-0 py-0.5 main__menu__text'>
-                {mMenu.name}
-              </ListItemText>
-            </ListItemButton>
-            {mMenu.subMenu && <SubMenu subMenu={mMenu.subMenu} preLink={'/enterprise/' + mMenu.path} />}
-          </Link>
-        }
-      </ListItem>
-    ))}
-  </List>
-)
+          </div>
+        </ListItem>
+      }
+    </List>
+  )
+}
 
 const LineMenu = () => (
   <Box className="line__container">
@@ -195,7 +217,7 @@ const Sidebar = ({ menu }) => {
       <TopMenu menu={menu ? menu : false} />
       {!menu && <Divider className='border-gray pt-10' />}
       <MainMenu menu={menu ? menu : false} />
-      <LineMenu />
+      {!menu && <LineMenu />}
       <List>
         <ListItem disablePadding>
           {/* <Control /> */}
