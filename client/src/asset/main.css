@@ -45095,7 +45095,8 @@ select:focus {
 
 .enterprise_main {
     margin: 20px 0 40px 300px;
-    position: relative
+    position: relative;
+    padding-top: 52px;
 }
 
 .enterprise_main--basic_info {
