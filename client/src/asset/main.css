@@ -24045,7 +24045,7 @@ button.close {
     margin: 1px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: #000\9;
+    /* background-color: #000\9; */
     background-color: transparent;
     border: 1px solid #fff;
     border-radius: 10px
@@ -26345,7 +26345,7 @@ html header[class^=admin] {
 body {
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
-    padding-top: 52px;
+    /* padding-top: 52px; */
     font-family: ヒラギノ角ゴ Pro, Hiragino Kaku Gothic Pro, Hiragino Sans, YuGothic, Yu Gothic, メイリオ, Meiryo, Osaka, ＭＳ Ｐゴシック, MS PGothic, Roboto, arial, sans-serif;
     line-height: 1.7;
     color: #141f33;

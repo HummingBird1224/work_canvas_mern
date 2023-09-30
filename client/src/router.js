@@ -5,8 +5,11 @@ import {
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
+import Auth from './utils/Auth';
+
 import HomeLayout from './layout/HomeLayout.js';
-import FeatureLayout from './layout/feature/Layout.jsx';
+import FeatureLayout from './layout/FeatureLayout.js';
+import AuthLayout from './layout/AuthLayout.js';
 // import AdminLayout from './layout/AdminLayout.js';
 
 import Home from './routes/Enterprise/Home.jsx';
@@ -18,8 +21,9 @@ import FeatureList from './routes/Feature/FeatureList.jsx';
 import EntriesList from './routes/Entry/EntriesList.jsx';
 import ScoutsList from './routes/Scout/ScoutsList.jsx';
 import Plan from './routes/Plan/Plan.jsx';
-import PlanList from './routes/Plan/PlanList.jsx';
 import Payment from './routes/Payment/Payment.jsx';
+
+import Login from './routes/Auth/Login.jsx';
 
 import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
 import Vacation from './routes/Feature/List/Vacation.jsx';
@@ -42,6 +46,28 @@ import IlistArbeitTreatment from './routes/Feature/List/IlistArbeitTreatment.jsx
 import IlistEducation from './routes/Feature/List/IlistEducation.jsx';
 import IlistExtraCharacter from './routes/Feature/List/IlistExtraCharacter.jsx';
 import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
+
+const HomeRouter = ({ component, ...options }) => {
+  const finalComponent =
+    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
+      <Route {...options} component={component} />
+    ) : (
+      <Redirect to="/enterprise/login" />
+    );
+
+  return finalComponent;
+}
+
+const AuthRouter = ({ component, ...options }) => {
+  const finalComponent =
+    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
+      <Redirect to="/enterprise" />
+    ) : (
+      <Route {...options} component={component} />
+    );
+
+  return finalComponent;
+}
 
 const FeatureRoutes = [
   {
@@ -221,12 +247,6 @@ const HomeRoutes = [
     layout: HomeLayout,
     component: ScoutsList
   },
-  // {
-  //   path: '/enterprise/plan?type=planList',
-  //   exact: true,
-  //   layout: HomeLayout,
-  //   component: PlanList
-  // },
   {
     path: '/enterprise/plan',
     exact: true,
@@ -241,17 +261,47 @@ const HomeRoutes = [
   },
 ];
 
+const AuthRoutes = [
+  {
+    path: '/enterprise/login',
+    exact: true,
+    layout: AuthLayout,
+    component: Login
+  },
+  // {
+  //   path: '/enterprise/register',
+  //   exact: true,
+  //   layout: AuthLayout,
+  //   component: Register
+  // },
+]
+
 const Routes = () => {
   return (
     <Router>
-      {/* <Header /> */}
       <Switch>
         <Route exact path='/'>
           <Redirect to='/enterprise' />
         </Route>
+        {AuthRoutes.map((authRoute, index) => {
+          return (
+            <AuthRouter
+              key={index}
+              path={authRoute.path}
+              exact={authRoute.exact}
+              component={props => {
+                return (
+                  <authRoute.layout {...props}>
+                    <authRoute.component {...props} />
+                  </authRoute.layout>
+                );
+              }}
+            />
+          );
+        })}
         {HomeRoutes.map((homeRoute, index) => {
           return (
-            <Route
+            <HomeRouter
               key={index}
               path={homeRoute.path}
               exact={homeRoute.exact}
@@ -282,7 +332,6 @@ const Routes = () => {
           );
         })}
       </Switch>
-      {/* <Footer /> */}
     </Router>
   )
 }
