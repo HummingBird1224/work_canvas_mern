@@ -22,6 +22,10 @@ import EntriesList from './routes/Entry/EntriesList.jsx';
 import ScoutsList from './routes/Scout/ScoutsList.jsx';
 import Plan from './routes/Plan/Plan.jsx';
 import Payment from './routes/Payment/Payment.jsx';
+import Manual from './routes/Manual/Manual';
+import Term from './routes/Term/Term';
+import PaidTerm from './routes/Term/PaidTerm';
+import CampaignPaidTerm from './routes/Term/CampaignPaidTerm';
 
 import Login from './routes/Auth/Login.jsx';
 
@@ -258,6 +262,30 @@ const HomeRoutes = [
     exact: true,
     layout: HomeLayout,
     component: Payment
+  },
+  {
+    path: '/enterprise/manual',
+    exact: true,
+    layout: HomeLayout,
+    component: Manual
+  },
+  {
+    path: '/enterprise/terms',
+    exact: true,
+    layout: HomeLayout,
+    component: Term
+  },
+  {
+    path: '/enterprise/paid_terms',
+    exact: true,
+    layout: HomeLayout,
+    component: PaidTerm
+  },
+  {
+    path: '/enterprise/campaign_paid_terms',
+    exact: true,
+    layout: HomeLayout,
+    component: CampaignPaidTerm
   },
 ];
 
