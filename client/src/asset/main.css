@@ -17501,11 +17501,6 @@ textarea {
     line-height: inherit
 }
 
-a {
-    color: #337ab7;
-    text-decoration: none
-}
-
 a:focus,
 a:hover {
     color: #23527c;
@@ -26384,14 +26379,10 @@ body.clear-body {
     background: #fff
 }
 
-a {
-    text-decoration: underline
-}
-
-a,
+/* a,
 a:visited {
     color: #141f33
-}
+} */
 
 @media (hover:hover) {
     a:hover {
