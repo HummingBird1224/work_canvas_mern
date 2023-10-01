@@ -28,6 +28,8 @@ import PaidTerm from './routes/Term/PaidTerm';
 import CampaignPaidTerm from './routes/Term/CampaignPaidTerm';
 
 import Login from './routes/Auth/Login.jsx';
+import Register from './routes/Auth/Register';
+import Step from './routes/Auth/Step';
 
 import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
 import Vacation from './routes/Feature/List/Vacation.jsx';
@@ -294,7 +296,21 @@ const AuthRoutes = [
     path: '/enterprise/login',
     exact: true,
     layout: AuthLayout,
-    component: Login
+    component: Login,
+    register:false
+  },
+  {
+    path: '/enterprise/register',
+    exact: true,
+    layout: AuthLayout,
+    component: Register,
+    register:true
+  },
+  {
+    path: '/enterprise/step',
+    exact: true,
+    layout: AuthLayout,
+    component: Step
   },
   // {
   //   path: '/enterprise/register',
