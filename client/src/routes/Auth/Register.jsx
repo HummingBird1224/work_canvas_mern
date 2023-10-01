@@ -12,7 +12,7 @@ const Register = () => {
   const passwordError='*規定の文字数を確認してください。';
   const phoneError='*使用出来ない文字が含まれています。';
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^(\+\d{1,3})?\s?(\d{3})[-.\s]?(\d{3})[-.\s]?(\d{4})$/;
+  const phoneRegex = /^\d+$/;
   const [data, setData] = useState({
     corporate_name:'',
     username:'',
