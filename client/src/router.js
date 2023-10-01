@@ -23,6 +23,7 @@ import Manual from './routes/Manual/Manual';
 import Term from './routes/Term/Term';
 import PaidTerm from './routes/Term/PaidTerm';
 import CampaignPaidTerm from './routes/Term/CampaignPaidTerm';
+import Notification from './routes/Notification/Notification';
 
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
@@ -52,11 +53,12 @@ import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
 
 const HomeRouter = ({ component, ...options }) => {
   const finalComponent =
-    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
-      <Route {...options} component={component} />
-    ) : (
-      <Redirect to="/enterprise/login" />
-    );
+    // Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
+    //   <Route {...options} component={component} />
+    // ) : (
+    //   <Redirect to="/enterprise/login" />
+    // );
+    <Route {...options} component={component} />
 
   return finalComponent;
 }
@@ -291,6 +293,12 @@ const HomeRoutes = [
     exact: true,
     layout: HomeLayout,
     component: CampaignPaidTerm
+  },
+  {
+    path: '/enterprise/notifications',
+    exact: true,
+    layout: HomeLayout,
+    component: Notification
   },
 ];
 
