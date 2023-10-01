@@ -5,7 +5,7 @@ export const login = async (data) => {
   // console.log(data)
   return await API({
     method: 'post',
-    url: '/login',
+    url: 'users/login',
     data: data
   })
     .then(({ data }) => {
@@ -47,6 +47,33 @@ export const getMembersData = async (companyId) => {
   return await API({
     method: 'get',
     url: '/company/' + companyId + '/members',
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const changeRole = async (userId, role) => {
+  return await API({
+    method: 'post',
+    url: '/members/' + userId + '/roleChange',
+    data: { role: role, companyId: Auth.getCompanyId() }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const deleteMember = async (memberId) => {
+  return await API({
+    method: 'get',
+    url: '/members/' + memberId + '/delete'
   })
     .then((res) => {
       return { status: res.status, data: res.data };

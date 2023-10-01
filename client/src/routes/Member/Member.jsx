@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 
 import Auth from '../../utils/Auth';
-import {getMembersData} from '../../actions/action';
+import {getMembersData, changeRole, deleteMember} from '../../actions/action';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import RoleModal from '../../components/Modal/RoleModal';
 import OrderModal from '../../components/Modal/OrderModal';
@@ -29,6 +29,7 @@ const userList=[
 const Member=()=>{
   const companyId=Auth.getCompanyId();
   const [members, setMembers] = useState([]);
+  const [memberId, setMemberId] = useState('');
   const registerUrl='https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4';
   const [confirmOpen, setConfirmOpen]=useState(false);
   const [roleOpen, setRoleOpen]=useState(false);
@@ -36,8 +37,25 @@ const Member=()=>{
   const [registerOpen, setRegisterOpen]=useState(false);
   const [clipboardOpen, setClipboardOpen]=useState(false);
   const [mailOpen, setMailOpen]=useState(false);
-  const handleConfirmChange=(open)=>{
-    setConfirmOpen(open);
+  const roleChange= async (userId, e)=>{
+    await changeRole(userId, e.target.value)
+    .then(res=>{
+      if(res.status == '200') {
+        setMembers(res.data);
+      }
+      else {
+        console.log(res.error.message);
+      }
+    })
+  } 
+  const handleConfirmChange=(memberId)=>{
+    setConfirmOpen(true);
+    setMemberId(memberId);
+  }
+  const handleMemberDelete=async(del)=>{
+    if(del){
+      await deleteMember(memberId)
+    }
   }
   const handleRoleChange=(open)=>{
     setRoleOpen(open);
@@ -97,14 +115,23 @@ const Member=()=>{
                   {
                     user.id == Auth.getUserId()
                     ?<span>{user.role == 'administrator'? '管理者':'採用担当者'}</span>
-                    :<select name='role' className='select__role full-width' value={user.role} disabled={user.role == 'administrator'}>
-                      <option value='administrator'>管理者</option>
+                    :<select 
+                      name='role' 
+                      className='select__role full-width' 
+                      value={user.role} 
+                      disabled={user.role == 'administrator' && Auth.getUserRole() !== 'administrator'}
+                      onChange={(e)=>roleChange(user.id, e)}
+                    >
+                      <option 
+                        value='administrator' 
+                        style={{display: Auth.getUserRole() !== 'administrator' ? 'none':'block'}}
+                        >管理者</option>
                       <option value='recruiter'>採用担当者</option>
                     </select>
                   }
                 </td>
-                {( user.id !== Auth.getUserId() || user.role !== 'administrator' )&&
-                <td className='user__delete text-center' onClick={()=>handleConfirmChange(true)}>
+                {( user.id !== Auth.getUserId() && (Auth.getUserRole() == 'administrator' || (Auth.getUserRole() != 'administrator' && user.role != 'administrator')))&&
+                <td className='user__delete text-center cursor-pointer' onClick={()=>handleConfirmChange(user.id)}>
                   <div className='delete__button'></div>
                 </td>
                 }
@@ -160,7 +187,7 @@ const Member=()=>{
         <div className='mt-40 d-flex justify-content-center'>
           <Link to='/enterprise' className='modal__button text__default '>トップに戻る</Link>
         </div>
-        <ConfirmModal open={confirmOpen} handleChange={handleConfirmChange}/>
+        <ConfirmModal open={confirmOpen} handleChange={handleConfirmChange} handleDelete={handleMemberDelete}/>
         <RoleModal open={roleOpen} handleChange={handleRoleChange}/>
         <OrderModal open={orderOpen} handleChange={handleOrderChange}/>
         <RegisterModal open={registerOpen} handleChange={handleRegisterChange}/>

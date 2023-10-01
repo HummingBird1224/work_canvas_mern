@@ -8,9 +8,6 @@ const ConfirmModal = (props) => {
   const handleClose = () => {
     props.handleChange(false)
   }
-  const deleteUser = () => {
-    console.log('delete');
-  }
   return (
     <Modal
       open={props.open}
@@ -21,7 +18,7 @@ const ConfirmModal = (props) => {
           <h5 className='font-800'>削除してもいいですか？</h5>
           <p>一度削除したものは戻すことができません。</p>
           <div className='modal__button__wrapper d-flex align-items-center justify-content-center mt-20'>
-            <button className='yes__button ' onClick={deleteUser}>確認</button>
+            <button className='yes__button ' onClick={() => props.handleDelete(true)}>確認</button>
             <button className='no__button' onClick={handleClose}>キャンセル</button>
           </div>
         </div>
