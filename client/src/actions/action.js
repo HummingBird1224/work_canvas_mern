@@ -1,11 +1,26 @@
 import API from '../utils/API';
 import Auth from '../utils/Auth';
 
+export const register = async (data) => {
+  return await API({
+    method: 'post',
+    url: '/users/register',
+    data: data
+  })
+    .then(({ data }) => {
+      Auth.setUserToken(data);
+      return true;
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
 export const login = async (data) => {
   // console.log(data)
   return await API({
     method: 'post',
-    url: 'users/login',
+    url: '/users/login',
     data: data
   })
     .then(({ data }) => {
