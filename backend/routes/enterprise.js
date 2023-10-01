@@ -20,6 +20,7 @@ const getMembers = async (companyId) => {
 }
 
 router.get('/', async function (req, res, next) {
+
   const result = await emailVerificationService.sendVerificationEmail(1);
   console.log(result);
 })
@@ -89,7 +90,7 @@ router.post('/users/register', async function (req, res, next) {
             // User.create({ ..._user, _token: token, company_id: company_id })
             User.create({ ..._user, company_id: company_id })
               .then(async (user) => {
-                await emailVerificationService.sendVerificationEmail(user.id);
+                // await emailVerificationService.sendVerificationEmail(user.id);
                 return res.json({
                   user_id: user.id,
                   user_name: user.username,
