@@ -11,6 +11,18 @@ const TypedError = require('../modules/ErrorHandler')
 
 // const User = db.User;
 
+const getMembers = (companyId) => {
+  User.findAll({
+    attributes: ['id', 'username', 'role', 'order'],
+    where: { company_id: companyId }
+  })
+    .then(async (members) => {
+      res.status(200).json(members);
+    })
+    .catch(err => {
+      return next(err);
+    })
+}
 
 //POST /signup
 router.post('/register', async function (req, res, next) {
@@ -104,7 +116,7 @@ router.post('/register', async function (req, res, next) {
 });
 
 //POST /signin
-router.post('/login', async function (req, res, next) {
+router.post('/users/login', async function (req, res, next) {
   const { email, password } = req.body || {};
 
   if (!email || !password) {
@@ -179,6 +191,47 @@ router.get('/company/:companyId', ensureAuthenticated, async function (req, res,
 
 router.get('/company/:companyId/members', ensureAuthenticated, async function (req, res, next) {
   const companyId = req.params.companyId;
+  await User.findAll({
+    attributes: ['id', 'username', 'role', 'order'],
+    where: { company_id: companyId }
+  })
+    .then(async (members) => {
+      res.status(200).json(members);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.post('/members/:userId/roleChange', ensureAuthenticated, async function (req, res, next) {
+  const { userId } = req.params;
+  const { role, companyId } = req.body;
+  await User.update(
+    {
+      role: role
+    },
+    { where: { id: userId } }
+  );
+  await User.findAll({
+    attributes: ['id', 'username', 'role', 'order'],
+    where: { company_id: companyId }
+  })
+    .then(async (members) => {
+      res.status(200).json(members);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.get('/members/:memberId/delete', ensureAuthenticated, async function (req, res, next) {
+  const { memberId } = req.params;
+  await User.update(
+    {
+      role: role
+    },
+    { where: { id: userId } }
+  );
   await User.findAll({
     attributes: ['id', 'username', 'role', 'order'],
     where: { company_id: companyId }
