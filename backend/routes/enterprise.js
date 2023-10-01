@@ -8,31 +8,32 @@ const crypto = require('crypto');
 const { Op } = require('sequelize');
 const { User, Company, Feature, PayList, PaymentBank, PaymentCard, Plan, Store } = require("../models");
 const TypedError = require('../modules/ErrorHandler')
+const emailVerificationService = require('../modules/mailVerified');
 
 // const User = db.User;
 
-const getMembers = (companyId) => {
-  User.findAll({
+const getMembers = async (companyId) => {
+  return await User.findAll({
     attributes: ['id', 'username', 'role', 'order'],
     where: { company_id: companyId }
-  })
-    .then(async (members) => {
-      res.status(200).json(members);
-    })
-    .catch(err => {
-      return next(err);
-    })
+  });
 }
 
+router.get('/', async function (req, res, next) {
+  const result = await emailVerificationService.sendVerificationEmail(1);
+  console.log(result);
+})
+
 //POST /signup
-router.post('/register', async function (req, res, next) {
+router.post('/users/register', async function (req, res, next) {
   // console.log('---------------------- test1 -----------------\n', req.body);
   let _user = req.body;
 
-  req.checkBody('company_name', 'Company is required').notEmpty();
+  req.checkBody('corporate_name', 'Corporate is required').notEmpty();
   req.checkBody('username', 'User Name is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
+  req.checkBody('phone', 'Phone number is required').notEmpty();
 
   let missingFieldErrors = req.validationErrors();
   if (missingFieldErrors) {
@@ -55,7 +56,7 @@ router.post('/register', async function (req, res, next) {
 
   const inviteId = crypto.randomBytes(8).toString('hex');
   const company_data = {
-    company_name: _user.company_name,
+    corporate_name: _user.corporate_name,
     invite_id: inviteId
   }
 
@@ -67,12 +68,11 @@ router.post('/register', async function (req, res, next) {
     .catch(err => {
       return next(err);
     })
-
   User.findOne({ where: { email: _user.email } })
     .then((user) => {
       if (user) {
-        let err = new TypedError('register error', 403, 'invalid_field', {
-          message: "user is existed"
+        let err = new TypedError('register error', 400, 'invalid_field', {
+          message: "メールアドレスが既に存在します。"
         })
         throw err;
         return next(err);
@@ -80,17 +80,16 @@ router.post('/register', async function (req, res, next) {
       else {
         bcrypt.genSalt(10, async function (err, salt) {
           await bcrypt.hash(_user.password, salt, function (err, hash) {
-            console.log(hash)
             _user.password = hash;
             let token = jwt.sign(
               { email: _user.email },
               config.secret,
               // { expiresIn: '1h' }
             )
-            console.log(_user);
             // User.create({ ..._user, _token: token, company_id: company_id })
             User.create({ ..._user, company_id: company_id })
-              .then(user => {
+              .then(async (user) => {
+                await emailVerificationService.sendVerificationEmail(user.id);
                 return res.json({
                   user_id: user.id,
                   user_name: user.username,
@@ -191,10 +190,7 @@ router.get('/company/:companyId', ensureAuthenticated, async function (req, res,
 
 router.get('/company/:companyId/members', ensureAuthenticated, async function (req, res, next) {
   const companyId = req.params.companyId;
-  await User.findAll({
-    attributes: ['id', 'username', 'role', 'order'],
-    where: { company_id: companyId }
-  })
+  await getMembers(companyId)
     .then(async (members) => {
       res.status(200).json(members);
     })
@@ -212,10 +208,7 @@ router.post('/members/:userId/roleChange', ensureAuthenticated, async function (
     },
     { where: { id: userId } }
   );
-  await User.findAll({
-    attributes: ['id', 'username', 'role', 'order'],
-    where: { company_id: companyId }
-  })
+  await getMembers(companyId)
     .then(async (members) => {
       res.status(200).json(members);
     })
@@ -232,10 +225,7 @@ router.get('/members/:memberId/delete', ensureAuthenticated, async function (req
     },
     { where: { id: userId } }
   );
-  await User.findAll({
-    attributes: ['id', 'username', 'role', 'order'],
-    where: { company_id: companyId }
-  })
+  await getMembers(companyId)
     .then(async (members) => {
       res.status(200).json(members);
     })

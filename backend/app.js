@@ -3,7 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 var express = require('express');
-var cors = require('cors')
+var cors = require('cors');
+require('dotenv').config();
 var expressValidator = require('express-validator');
 var indexRouter = require('./routes/index');
 var enterpriseRouter = require('./routes/enterprise');

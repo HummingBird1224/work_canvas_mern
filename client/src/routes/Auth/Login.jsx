@@ -1,4 +1,5 @@
-import {  useEffect, useState } from "react";
+import {useState } from "react";
+import {Link} from 'react-router-dom';
 
 import {login} from '../../actions/action';
 import Alert from '../../components/Alert/Alert';
@@ -59,12 +60,18 @@ const Login = () => {
             placeholder="パスワード"
             required 
             onChange={handleChange}/>
-          <div className="button__wrapper justify-content-center mt-40 w-100 d-flex" >
+          <div className=" justify-content-center mt-40 w-100 d-flex" >
             {filled?
               <button type='button' className="bg-pink text-white modal__button fw-700 w-250" onClick={handleSubmit}>ログイン</button>
               :<button className="bg-pink text-white modal__button fw-700 w-250" style={{opacity:'0.8'}}>未入力の項目があります</button>
             }
           </div>
+          <hr className="my-30"/>
+          <p className="bottom__link">
+            <Link to='/enterprise/register'>
+              {'新規申込の方 >'}
+            </Link>
+          </p>
         </form>
       </div>
       <Alert open={alertOpen} handleClose={handleAlertClose} text={text} error={true} />

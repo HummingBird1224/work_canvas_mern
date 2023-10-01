@@ -19,7 +19,17 @@ module.exports = (sequelize, Sequelize) => {
     order: {
       type: Sequelize.INTEGER,
       defaultValue: 9999
-    }
+    },
+    phone: {
+      type: Sequelize.STRING,
+    },
+    mobile_phone: {
+      type: Sequelize.STRING,
+    },
+    is_verified: {
+      type: Sequelize.STRING,
+      defaultValue: false
+    },
   },
     {
       timestamps: true

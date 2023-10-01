@@ -2,7 +2,12 @@
 
 # dependencies
 client/node_modules
+client/src/utils/API.js
+
 backend/node_modules
+backend/models/index.js
+backend/.env
+
 /.pnp
 .pnp.js
 
