@@ -13,12 +13,10 @@ import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from 'react-router-dom';
 
-import Auth from '../../utils/Auth'
 import LineIcon from '../../asset/img/icon-line.svg'
-import './Sidebar.css'
+import { PropaneSharp } from '@mui/icons-material';
 
 const topMenu = [
   {
@@ -78,7 +76,7 @@ const mainMenu = [
     subMenu: [
       {
         name: '会社・請求先情報',
-        path: 'billingInfo'
+        path: 'billinginfo'
       },
       {
         name: 'お支払い方法',
@@ -106,30 +104,28 @@ const mainMenu = [
   },
 ]
 
-const TopMenu = ({ menu }) => (
-  <List className='py-0 pb-10 w-100 top__menu'>
-    <div className='dropdown__profile'>
-      {topMenu.map((tMenu) => (
-        <ListItem key={tMenu.path} disablePadding>
-          <ListItemButton className={`py-0 ${menu} ? 'pl-20' : 'pl-30'`}>
-            <ListItemText className='my-0 py-0.5'>
-              <Link to={'/enterprise/' + tMenu.path} className="top__menu__text">{tMenu.name}</Link>
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </div>
+const TopMenu = () => (
+  <List className='py-0 pb-10'>
+    {topMenu.map((tMenu) => (
+      <ListItem key={tMenu.path} disablePadding>
+        <ListItemButton className='pl-30 py-0'>
+          <ListItemText className='my-0 py-0.5'>
+            <Link to={'/enterprise/' + tMenu.path} className="top__menu__text">{tMenu.name}</Link>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+    ))}
   </List>
 )
 
-const SubMenu = ({ subMenu, preLink, menu }) => {
+const SubMenu = ({ subMenu, preLink }) => {
   return (
     <List className='py-0 pb-10'>
       {subMenu.map((sMenu) => (
-        <ListItem key={sMenu.path} className={menu && 'py-0'} >
+        <ListItem key={sMenu.path} disablePadding>
           <ListItemButton className='pl-30 py-0'>
-            <ListItemText className='my-0 py-0.5 '>
-              <Link to={preLink + '?type=' + sMenu.path} className='top__menu__text w-100 ' style={{ display: 'block' }}>{sMenu.name}</Link>
+            <ListItemText className='my-0 py-0.5'>
+              <Link to={preLink + '?type=' + sMenu.path} className="top__menu__text" >{sMenu.name}</Link>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -138,57 +134,37 @@ const SubMenu = ({ subMenu, preLink, menu }) => {
   );
 }
 
-const MainMenu = ({ menu }) => {
-  const logout = () => {
-    Auth.logout();
-    window.location.href = '/enterprise/login';
-  }
-  return (
-    <List className={`full-width main__menu ${menu}?'':'py-15'`}>
-      {mainMenu.map((mMenu) => (
-        <ListItem key={mMenu.path} disablePadding>
-          {mMenu.path.includes('http') ?
-            <a href={mMenu.path} className="top__menu__text" target="_blank">
-              <ListItemButton className={`black__text ${menu && 'p-0'}`}>
-                <ListItemIcon className='text-default icon'>
-                  {mMenu.icon}
-                </ListItemIcon>
-                <ListItemText className='my-0 py-0.5 main__menu__text'>
-                  {mMenu.name}
-                </ListItemText>
-              </ListItemButton>
-            </a> :
-            <Link to={'/enterprise/' + mMenu.path} >
-              <ListItemButton className={`black__text ${menu && 'p-0'}`}>
-                <ListItemIcon className='black__text icon'>
-                  {mMenu.icon}
-                </ListItemIcon>
-                <ListItemText className='my-0 py-0.5 main__menu__text'>
-                  {mMenu.name}
-                </ListItemText>
-              </ListItemButton>
-              {mMenu.subMenu && <SubMenu subMenu={mMenu.subMenu} preLink={'/enterprise/' + mMenu.path} menu={menu ? menu : false} />}
-            </Link>
-          }
-        </ListItem>
-      ))}
-      {menu &&
-        <ListItem disablePadding>
-          <div onClick={logout} className="top__menu__text" >
-            <ListItemButton className='black__text p-0'>
-              <ListItemIcon className='text-default icon'>
-                <LogoutOutlinedIcon />
+const MainMenu = () => (
+  <List className='py-15 main__menu full-width'>
+    {mainMenu.map((mMenu) => (
+      <ListItem key={mMenu.path} disablePadding>
+        {mMenu.path.includes('http') ?
+          <a href={mMenu.path} className="top__menu__text" target="_blank">
+            <ListItemButton className='black__text'>
+              <ListItemIcon className='black__text icon'>
+                {mMenu.icon}
               </ListItemIcon>
               <ListItemText className='my-0 py-0.5 main__menu__text'>
-                ログアウト
+                {mMenu.name}
               </ListItemText>
             </ListItemButton>
-          </div>
-        </ListItem>
-      }
-    </List>
-  )
-}
+          </a> :
+          <Link to={'/enterprise/' + mMenu.path} >
+            <ListItemButton className='black__text'>
+              <ListItemIcon className='black__text icon'>
+                {mMenu.icon}
+              </ListItemIcon>
+              <ListItemText className='my-0 py-0.5 main__menu__text'>
+                {mMenu.name}
+              </ListItemText>
+            </ListItemButton>
+            {mMenu.subMenu && <SubMenu subMenu={mMenu.subMenu} preLink={'/enterprise/' + mMenu.path} />}
+          </Link>
+        }
+      </ListItem>
+    ))}
+  </List>
+)
 
 const LineMenu = () => (
   <Box className="line__container">
@@ -206,18 +182,33 @@ const LineMenu = () => (
   </Box>
 )
 
-const Sidebar = ({ menu }) => {
+const Sidebar = () => {
+  const [state, setState] = useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+
   return (
     <Box
-      sx={{ zIndex: 100 }}
+      sx={{ width: 300, zIndex: 100 }}
       role="presentation"
-      className={menu ? 'menubar' : 'sidebar'}
+      className='sidebar'
+    // onClick={toggleDrawer(anchor, false)}
+    // onKeyDown={toggleDrawer(anchor, false)}
     >
-      <h6 className={menu ? 'brand' : 'px-20 pt-20 pb-10 mb-0'}>C・crew</h6>
-      <TopMenu menu={menu ? menu : false} />
-      {!menu && <Divider className='border-gray pt-10' />}
-      <MainMenu menu={menu ? menu : false} />
-      {!menu && <LineMenu />}
+      <h6 className='brand px-20 pt-20 pb-10 mb-0'>C・crew</h6>
+      <TopMenu />
+      <Divider className='border-gray pt-10' />
+      <MainMenu />
+      <LineMenu />
       <List>
         <ListItem disablePadding>
           {/* <Control /> */}

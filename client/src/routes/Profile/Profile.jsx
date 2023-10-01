@@ -1,8 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-import './Profile.css'
+import Auth from '../../utils/Auth';
+import {getCompanyData} from '../../actions/action';
+import prefectures from '../../utils/tbl_prefecture_region.json';
+import './Profile.css';
 
 const Profile=()=>{
+  const [company, setCompany]=useState({
+    corporate_name:'',
+    company_name:'',
+    founder:'',
+    foundation_date:'',
+    prefecture_id:'',
+    address_main:'',
+    address_detail:'',
+    facebook:'',
+    twitter:'',
+    instagram:'',
+    homepage:'',
+  });
+  const companyId=Auth.getCompanyId();
+  useEffect(()=>{
+    async function getData(){
+      companyId && await getCompanyData(companyId)
+      .then(res=>{
+        if(res.status == '200') {
+          setCompany(res.data);
+        }
+      })
+    }
+    getData();
+  }, [])
   return(
     <div className="enterprise__container">
       <div className='enterprise__box text-default'>
@@ -12,7 +40,7 @@ const Profile=()=>{
             <tbody>
               <tr>
                 <th>企業アカウント名</th>
-                <td>C・crew</td>
+                <td>{company.corporate_name}</td>
               </tr>
             </tbody>
           </table>
@@ -26,43 +54,48 @@ const Profile=()=>{
                   会社名 
                   <span className='f__required'>*</span>
                 </th>
-                <td>C・crew 渋谷</td>
+                <td>{company.company_name}</td>
               </tr>
               <tr>
                 <th>創業者</th>
-                <td></td>
+                <td>{company.founder}</td>
               </tr>
               <tr>
                 <th>設立年月</th>
-                <td></td>
+                <td>{company.foundation_date}</td>
               </tr>
               <tr>
                 <th>都道府県</th>
-                <td>東京都</td>
+                <td>
+                  {prefectures.map(prefecture=>{
+                    if(prefecture.id == company.prefecture_id)
+                     return prefecture.jp_name;
+                  })}
+                </td>
               </tr>
               <tr>
                 <th>住所(番地まで)</th>
-                <td>渋谷区道玄坂1-17-7</td>
+                <td>{company.address_main}</td>
               </tr>
               <tr>
                 <th>住所(ビル名・部屋番号)</th>
-                <td>渋谷くすのきビル1-3F</td>
+                <td>{company.address_detail}</td>
               </tr>
               <tr>
                 <th>Facebook</th>
-                <td></td>
+                <td>{company.facebook}</td>
               </tr>
               <tr>
                 <th>Twitter</th>
-                <td></td>
+                <td>{company.twitter}</td>
               </tr>
               <tr>
                 <th>Instagram</th>
-                <td></td>
+                <td>{company.instagram}</td>
               </tr>
               <tr>
                 <th>HPアドレス</th>
-                <td></td>
+                <td>{company.homepage}</td>
               </tr>
             </tbody>
           </table>

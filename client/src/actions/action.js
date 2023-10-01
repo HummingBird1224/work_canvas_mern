@@ -17,17 +17,42 @@ export const login = async (data) => {
     });
 }
 
-export const getMainData = async () => {
+export const getMainData = async (companyId) => {
   return await API({
     method: 'get',
-    url: '/users/login',
+    url: '/mainData/' + companyId,
   })
-    .then(({ data }) => {
-      Auth.setUserToken(data);
-      return data;
+    .then((res) => {
+      return { status: res.status, data: res.data };
     })
     .catch(error => {
-      return error.response;
+      return error.response.data;
+    });
+}
+
+export const getCompanyData = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/company/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getMembersData = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/company/' + companyId + '/members',
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
     });
 }
 

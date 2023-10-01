@@ -1,8 +1,8 @@
 module.exports = {
   "username": "admin",
-  "password": "4PDrX46rxpFNnr8XP7jhvsK2empxzuxs",
-  "database": "gacha_jejs",
-  "host": "dpg-cja9jgee546c73f70m80-a",
+  "password": "Nqo3qf0jrQ4ExpzMBYuEwq01S0q7bTZA",
+  "database": "work_canvas",
+  "host": "dpg-ckc1gcsiibqc73dfpcfg-a",
   "dialect": "postgres",
   "logging": false
 };

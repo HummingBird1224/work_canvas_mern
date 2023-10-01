@@ -4,7 +4,7 @@ const PlanListWrapper = ({ props }) => {
   return (
     <div className="list__plan__wrapper text-default" id="planHairdresser">
       <h3 className="fw-700"><span>{props.title}</span></h3>
-      <div classNameass="list__plan__contents">
+      <div className="list__plan__contents">
         <ul className="list__plan__prise">
           {props.plans.map((plan) => (
             <li key={plan.id}>

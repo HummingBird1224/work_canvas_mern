@@ -1,7 +1,7 @@
 import {  useEffect, useState } from "react";
 
 import Alert from '../../components/Alert/Alert'
-import prefectures from './tbl_prefecture_region.json';
+import prefectures from '../../utils/tbl_prefecture_region.json';
 import './Payment.css'
 
 const companyInfo={

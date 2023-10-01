@@ -8,7 +8,7 @@ const EnterpriseCard = ({ props }) => {
   return (
     <div className={props.widthFit ? 'enterprise__card width-fit' : 'enterprise__card'}>
       <Link to={'enterprise/' + props.path} className='text-default'>
-        <div className='enterprise__card__title d-flex '>
+        <div className='enterprise__card__title d-flex align-items-center'>
           {props.icon}
           <h5 className='font-800'>{props.name}</h5>
         </div>
@@ -19,16 +19,14 @@ const EnterpriseCard = ({ props }) => {
           <br />
           {props.small && <span className='script__small'>{props.small}</span>}
         </p>
-        {props.info &&
-          <div className='enterprise__card__info d-flex'>
-            {props.info.map((pInfo) => (
-              <div key={pInfo.name}>
-                <h2>{pInfo.number}</h2>
-                <p>{pInfo.name}</p>
-              </div>
-            ))}
-          </div>
-        }
+        <div className='enterprise__card__info d-flex'>
+          {props.info && props.info.map((pInfo) => (
+            <div key={pInfo.name}>
+              <h2>{pInfo.number}</h2>
+              <p>{pInfo.name}</p>
+            </div>
+          ))}
+        </div>
         <p className='enterprise__card__link'>
           {props.link}
           <ChevronRightIcon />

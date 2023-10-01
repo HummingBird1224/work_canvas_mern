@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 
+import Auth from '../../utils/Auth';
+import {getMembersData} from '../../actions/action';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import RoleModal from '../../components/Modal/RoleModal';
 import OrderModal from '../../components/Modal/OrderModal';
@@ -25,6 +27,8 @@ const userList=[
 ]
 
 const Member=()=>{
+  const companyId=Auth.getCompanyId();
+  const [members, setMembers] = useState([]);
   const registerUrl='https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4';
   const [confirmOpen, setConfirmOpen]=useState(false);
   const [roleOpen, setRoleOpen]=useState(false);
@@ -50,6 +54,18 @@ const Member=()=>{
   const handleMailChange=(open)=>{
     setMailOpen(open);
   }
+  useEffect(()=>{
+    async function getData(){
+      companyId && await getMembersData(companyId)
+      .then(res=>{
+        if(res.status == '200') {
+          setMembers(res.data);
+        }
+      })
+    }
+    getData();
+  }, [])
+
   return(
     <div className="enterprise__container">
       <div className='enterprise__box text-default member'>
@@ -66,7 +82,7 @@ const Member=()=>{
               <th className='fs-12 text-center'>役割</th>
               <th className='fs-12 text-center'>解除</th>
             </tr>
-            {userList.map((user)=>(
+            {members.length>0 && members.map((user)=>(
               <tr key={user.id}>
                 <td>
                   <div className='enterprise__staff d-flex align-items-center'>
@@ -74,18 +90,24 @@ const Member=()=>{
                       {user.avatar? <img src={user.avatar} alt='avatar' />:
                       <img src={NoAvatar} alt='avatar' />}
                     </figure>
-                    <p className='mb-0 ml-2'>{user.name}</p>
+                    <p className='mb-0 ml-2'>{user.username}</p>
                   </div>
                 </td>
                 <td className='text-center'>
-                  <select name='role' className='select__role full-width' selected={user.role}>
-                    <option value='管理者'>管理者</option>
-                    <option value='採用担当者'>採用担当者</option>
-                  </select>
+                  {
+                    user.id == Auth.getUserId()
+                    ?<span>{user.role == 'administrator'? '管理者':'採用担当者'}</span>
+                    :<select name='role' className='select__role full-width' value={user.role} disabled={user.role == 'administrator'}>
+                      <option value='administrator'>管理者</option>
+                      <option value='recruiter'>採用担当者</option>
+                    </select>
+                  }
                 </td>
+                {( user.id !== Auth.getUserId() || user.role !== 'administrator' )&&
                 <td className='user__delete text-center' onClick={()=>handleConfirmChange(true)}>
                   <div className='delete__button'></div>
                 </td>
+                }
               </tr>
             ))}
           </table>
