@@ -1,4 +1,4 @@
 //use your secret
 module.exports = {
-  secret: "GachaGame"
+  secret: "WorkCanvasJWTConfig"
 }
