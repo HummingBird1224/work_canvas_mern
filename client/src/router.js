@@ -28,6 +28,8 @@ import Notification from './routes/Notification/Notification';
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
 import Step from './routes/Auth/Step';
+import InviteLogin from './routes/Auth/Login/InviteLogin';
+import InviteRegister from './routes/Auth/Register/InviteRegister';
 
 import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
 import Vacation from './routes/Feature/List/Vacation.jsx';
@@ -316,6 +318,18 @@ const AuthRoutes = [
     layout: AuthLayout,
     component: Register,
     register: true
+  },
+  {
+    path: '/invite/register',
+    exact: true,
+    layout: AuthLayout,
+    component: InviteRegister
+  },
+  {
+    path: '/invite/login',
+    exact: true,
+    layout: AuthLayout,
+    component: InviteLogin
   },
 ]
 

@@ -6,7 +6,9 @@ import './Layout.css';
 
 const AuthLayout = (props) => {
   const path = props.location.pathname;
-  const login = path.includes('login');
+  const invite = path.includes('invite');
+  const login = invite ? false : path.includes('login');
+
   return (
     <React.Fragment>
       {login && <Header />}
