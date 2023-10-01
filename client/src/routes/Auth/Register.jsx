@@ -10,7 +10,7 @@ const Register = () => {
   return (
     <div className="register__container">
       <div className="e--c enterprise_register">
-        <h1 className="title--lv1 tittle__register">担当者様情報の登録</h1>
+        <h1 className="title__lv1 mt-30 p-0">担当者様情報の登録</h1>
         <dl className="table--register">
 
           <input
