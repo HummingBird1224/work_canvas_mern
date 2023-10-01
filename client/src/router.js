@@ -27,6 +27,8 @@ import PaidTerm from './routes/Term/PaidTerm.jsx';
 import CampaignPaidTerm from './routes/Term/CampaignPaidTerm.jsx';
 
 import Login from './routes/Auth/Login.jsx';
+import Register from './routes/Auth/Register';
+import Step from './routes/Auth/Step';
 
 // import Point from './components/Account/Point/Point.js';
 // import Purchase from './components/Account/Point/Purchase.js';
@@ -188,7 +190,21 @@ const AuthRoutes = [
     path: '/enterprise/login',
     exact: true,
     layout: AuthLayout,
-    component: Login
+    component: Login,
+    register:false
+  },
+  {
+    path: '/enterprise/register',
+    exact: true,
+    layout: AuthLayout,
+    component: Register,
+    register:true
+  },
+  {
+    path: '/enterprise/step',
+    exact: true,
+    layout: AuthLayout,
+    component: Step
   },
 ]
 

@@ -7,6 +7,10 @@
   margin-left: 0;
 }
 
+.register__page {
+  padding-top: 52px;
+}
+
 @media screen and (max-width: 1092px) {
   .main__page  {
     margin-left: 0;
