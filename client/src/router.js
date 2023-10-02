@@ -55,12 +55,12 @@ import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
 
 const HomeRouter = ({ component, ...options }) => {
   const finalComponent =
-    // Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
-    //   <Route {...options} component={component} />
-    // ) : (
-    //   <Redirect to="/enterprise/login" />
-    // );
-    <Route {...options} component={component} />
+    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
+      <Route {...options} component={component} />
+    ) : (
+      <Redirect to="/enterprise/login" />
+    );
+  // <Route {...options} component={component} />
 
   return finalComponent;
 }
