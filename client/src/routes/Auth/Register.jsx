@@ -28,12 +28,23 @@ const Register = () => {
     password:'',
     phone:'',
   });
+  const  [alertOpen, setAlertOpen]=useState(false);
+  const [text, setText]=useState('');
   const handleChange=(e)=>{
     const {name, value}=e.target;
     setData({...data, [name]:value});
   }
   const registerUser=async()=>{
-    await register(data);
+    await register(data)
+    .then(res=>{
+      if (res.status == 400){
+        setAlertOpen(true);
+        setText(res.error.message);
+      }
+      else if (res == true) {
+        window.location.href='/enterprise'
+      }
+    })
   }
   const handleSubmit=async()=>{
     let newErrors={};
@@ -181,7 +192,7 @@ const Register = () => {
           <span className="u-fs-12 u-c-gray u-block u-mt-xs">※メールアドレス認証のため、記入いただいたアドレスに確認メールが送信されます</span>
         </div>
       </div>
-      {/* <Alert open={alertOpen} handleClose={handleAlertClose} text={text} error={true} /> */}
+      <Alert open={alertOpen} handleClose={(open)=>setAlertOpen(open)} text={text} error={true} />
     </div>
   );
 }

@@ -4,31 +4,79 @@ import Alert from '../../components/Alert/Alert';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 
-import Step1 from './../Auth/Register/Steps/Step1';
-import Step2 from './../Auth/Register/Steps/Step2';
-import Step3 from './../Auth/Register/Steps/Step3';
-import Step4 from './../Auth/Register/Steps/Step4';
+import Step1 from './Register/Steps/Step1';
+import Step2 from './Register/Steps/Step2';
+import Step3 from './Register/Steps/Step3';
+import Step4 from './Register/Steps/Step4';
 
 
 const Step = () => {
-
   const [step, setStep] = useState(1);
-
+  const [nextClicked, setNextClicked] = useState(false);
+  const [companyData, setCompanyData] = useState({
+    company_name:'',
+    representative_director_name:'',
+    phone_number:'',
+    postal_code:'',
+    prefecture_id:'',
+    address_main:'',
+    address_detail:'',
+    business_types:[]
+  });
+  const [billingData, setBillingData] = useState({
+    billing_company_name:'',
+    postal_code:'',
+    prefecture_id:'',
+    address_main:'',
+    address_detail:'',
+  });
+  const [companyErrors, setCompanyErrors] = useState({
+    company_name:'',
+    representative_director_name:'',
+    phone_number:'',
+    postal_code:'',
+    prefecture_id:'',
+    address_main:'',
+    business_types:'',
+  });
+  const [billingErrors, setBillingErrors] = useState({
+    billing_company_name:'',
+    postal_code:'',
+    prefecture_id:'',
+    address_main:'',
+  });
   const clickPrev = () => {
     if (step > 1) {
       setStep(step - 1);
     }
   }
-
   const clickNext = () => {
-    if (step < 4) {
-      setStep(step + 1);
-    }
+    setNextClicked(true);
+    // if (step < 4) {
+    //   setStep(step + 1);
+    // }
   }
-
+  // console.log(companyData);
   return (
     <div className="modal__body">
-      { step === 1 ? <Step1 /> : step === 2 ? <Step2 /> : step === 3 ? <Step3 /> : <Step4 />}
+      { step === 1 ? 
+        <Step1 
+          companyData={companyData}
+          billingData={billingData}
+          setCompanyData={setCompanyData}
+          setBillingData={setBillingData}
+          companyErrors={companyErrors}
+          billingErrors={billingErrors}
+          setCompanyErrors={setCompanyErrors}
+          setBillingErrors={setBillingErrors}
+          nextClicked={nextClicked}
+          setNextClicked={setNextClicked}
+          step={step}
+          setStep={setStep}
+        /> :
+       step === 2 ? <Step2 /> : 
+       step === 3 ? <Step3 /> : 
+       <Step4 />}
 
       <div className="wrapper--button">
         {/* <button className="button go-prev" onClick={() => clickPrev()}>戻る</button> */}

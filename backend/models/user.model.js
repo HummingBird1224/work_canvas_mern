@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     role: {
       type: Sequelize.ENUM(['admin', 'administrator', 'recruiter', 'user']),
-      defaultValue: 'user'
+      defaultValue: 'recruiter'
     },
     company_id: {
       type: Sequelize.STRING

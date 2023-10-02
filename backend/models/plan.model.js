@@ -1,27 +1,30 @@
+const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize, Sequelize) => {
 	const planList = sequelize.define("wc_plans", {
-		conpany_id: {
-			type: Sequelize.INTEGER,
-		},
 		business_type: {
-			type: Sequelize.ENUM(['美容師', 'アイリスト', 'ネイリスト/エステ'])
+			type: Sequelize.ENUM(['美容師', 'アイリスト', 'ネイリスト', 'エステティシャン'])
 		},
-		person_type: {
-			type: Sequelize.STRING,
+		plan1: {
+			type: DataTypes.JSON,
 		},
-		price: {
-			type: Sequelize.STRING,
+		plan2: {
+			type: DataTypes.JSON,
 		},
-		tax_included: {
-			type: Sequelize.ENUM(['0', '1']),
+		plan3: {
+			type: DataTypes.JSON,
 		},
-		license: {
-			type: Sequelize.STRING
-		}
+		plan4: {
+			type: DataTypes.JSON,
+		},
+		total_plan: {
+			type: DataTypes.JSON,
+			defaultValue: {}
+		},
 	},
-	{
-		timestamps: false
-	});
+		{
+			timestamps: false
+		});
 
 	return planList;
 };
