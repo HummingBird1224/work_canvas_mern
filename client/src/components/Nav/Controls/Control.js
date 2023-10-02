@@ -19,7 +19,7 @@ const Control = () => {
     <div className="control__bar__container">
       <div className="controls__container">
         <div className="control">
-          <Link to="/enteprise/notifications">
+          <Link to="/enterprise/notifications">
             {/* <Link to="#"> */}
             <NotificationsNoneIcon color="white" fontSize="large" />
           </Link>
