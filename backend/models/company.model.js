@@ -1,3 +1,5 @@
+const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize, Sequelize) => {
   const companyList = sequelize.define("wc_company", {
     corporate_name: {
@@ -44,11 +46,14 @@ module.exports = (sequelize, Sequelize) => {
     },
     postal_code: {
       type: Sequelize.STRING,
+    },
+    business_types: {
+      type: DataTypes.JSON,
     }
   },
-  {
-    timestamps: false
-  });
+    {
+      timestamps: false
+    });
 
   return companyList;
 };

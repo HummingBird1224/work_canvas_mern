@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Redirect, Outlet
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
@@ -10,7 +8,6 @@ import Auth from './utils/Auth';
 import HomeLayout from './layout/HomeLayout.js';
 import FeatureLayout from './layout/FeatureLayout.js';
 import AuthLayout from './layout/AuthLayout.js';
-// import AdminLayout from './layout/AdminLayout.js';
 
 import Home from './routes/Enterprise/Home.jsx';
 import Profile from './routes/Profile/Profile.jsx';
@@ -212,6 +209,12 @@ const HomeRoutes = [
     component: Home
   },
   {
+    path: '/enterprise/step',
+    exact: true,
+    layout: AuthLayout,
+    component: Step
+  },
+  {
     path: '/enterprise/profile',
     exact: true,
     layout: HomeLayout,
@@ -297,27 +300,15 @@ const AuthRoutes = [
     exact: true,
     layout: AuthLayout,
     component: Login,
-    register:false
+    register: false
   },
   {
     path: '/enterprise/register',
     exact: true,
     layout: AuthLayout,
     component: Register,
-    register:true
+    register: true
   },
-  {
-    path: '/enterprise/step',
-    exact: true,
-    layout: AuthLayout,
-    component: Step
-  },
-  // {
-  //   path: '/enterprise/register',
-  //   exact: true,
-  //   layout: AuthLayout,
-  //   component: Register
-  // },
 ]
 
 const Routes = () => {
