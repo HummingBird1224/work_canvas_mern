@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/Auth'
 import LineIcon from '../../asset/img/icon-line.svg'
 import './Sidebar.css'
+import LineModal from '../Modal/LineModal'
 
 const topMenu = [
   {
@@ -190,7 +191,7 @@ const MainMenu = ({ menu }) => {
   )
 }
 
-const LineMenu = () => (
+const LineMenu = (props) => (
   <Box className="line__container">
     <div className='d-flex align-items-start'>
       <h6>
@@ -202,11 +203,17 @@ const LineMenu = () => (
       LINE友達追加をすれば、求職者様から質問や応募があった際、
       紹介担当者から情報共有やご相談を、LINEにて迅速にお送りさせていただきます。
     </p>
-    <Link to='enterprise/feature/list' className='line__button d-flex align-items-center justify-content-center'>詳しくはこちら</Link>
+    <button
+      type='button'
+      className='line__button d-flex align-items-center justify-content-center'
+      onClick={()=>props.showModal(true)}
+    >
+      詳しくはこちら</button>
   </Box>
 )
 
 const Sidebar = ({ menu }) => {
+  const [alertOpen, setAlertOpen]=useState(false);
   return (
     <Box
       sx={{ zIndex: 100 }}
@@ -217,7 +224,7 @@ const Sidebar = ({ menu }) => {
       <TopMenu menu={menu ? menu : false} />
       {!menu && <Divider className='border-gray pt-10' />}
       <MainMenu menu={menu ? menu : false} />
-      {!menu && <LineMenu />}
+      {!menu && <LineMenu showModal={(open)=>setAlertOpen(open)}/>}
       <List>
         <ListItem disablePadding>
           {/* <Control /> */}
@@ -230,6 +237,7 @@ const Sidebar = ({ menu }) => {
           </div>
         </ListItem>
       </List>
+      <LineModal open={alertOpen} handleChange={(open)=>setAlertOpen(open)}/>
     </Box>
   );
 }

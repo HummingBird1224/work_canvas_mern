@@ -23,10 +23,13 @@ import Manual from './routes/Manual/Manual';
 import Term from './routes/Term/Term';
 import PaidTerm from './routes/Term/PaidTerm';
 import CampaignPaidTerm from './routes/Term/CampaignPaidTerm';
+import Notification from './routes/Notification/Notification';
 
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
 import Step from './routes/Auth/Step';
+import InviteLogin from './routes/Auth/Login/InviteLogin';
+import InviteRegister from './routes/Auth/Register/InviteRegister';
 
 import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
 import Vacation from './routes/Feature/List/Vacation.jsx';
@@ -52,11 +55,12 @@ import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
 
 const HomeRouter = ({ component, ...options }) => {
   const finalComponent =
-    Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
-      <Route {...options} component={component} />
-    ) : (
-      <Redirect to="/enterprise/login" />
-    );
+    // Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
+    //   <Route {...options} component={component} />
+    // ) : (
+    //   <Redirect to="/enterprise/login" />
+    // );
+    <Route {...options} component={component} />
 
   return finalComponent;
 }
@@ -292,6 +296,12 @@ const HomeRoutes = [
     layout: HomeLayout,
     component: CampaignPaidTerm
   },
+  {
+    path: '/enterprise/notifications',
+    exact: true,
+    layout: HomeLayout,
+    component: Notification
+  },
 ];
 
 const AuthRoutes = [
@@ -308,6 +318,18 @@ const AuthRoutes = [
     layout: AuthLayout,
     component: Register,
     register: true
+  },
+  {
+    path: '/invite/register',
+    exact: true,
+    layout: AuthLayout,
+    component: InviteRegister
+  },
+  {
+    path: '/invite/login',
+    exact: true,
+    layout: AuthLayout,
+    component: InviteLogin
   },
 ]
 

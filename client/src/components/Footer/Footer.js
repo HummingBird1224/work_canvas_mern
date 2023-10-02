@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
+import { useState, Fragment } from 'react';
+import LineModal from '../Modal/LineModal'
 
 import './Footer.css'
 
 const Footer = () => {
+  const [alertOpen, setAlertOpen]=useState(false);
+  const handleClick = () => {
+    setAlertOpen(true);
+  };
+
   return (
-    <footer className="footer__container">
+    <footer className="footer__container enterprise_footer">
       <div className='footer__wrapper'>
         <ul className='footer__navigation'>
           <li>
@@ -26,6 +33,19 @@ const Footer = () => {
         <p className='footer__copylight'>
           © Gramn Inc.
         </p>
+        <LineModal open={alertOpen} handleChange={(open)=>setAlertOpen(open)}/>
+        <div
+          class="line-sp"
+          id="openEnterpriseLiffModal"
+          onClick={handleClick}
+          style={{ right: '50px', bottom: '50px', cursor: 'pointer' }}>
+          <img
+            src="https://cdn1.work-canvas.com/assets/images/icons/line-icon-white.svg?14"
+            alt=""
+            decoding="async"
+            loading="lazy" />
+          <strong>LINE友達追加の<br />お願い</strong>
+        </div>
       </div>
     </footer>
   );
