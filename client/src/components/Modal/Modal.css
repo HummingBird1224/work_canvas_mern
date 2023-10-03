@@ -158,7 +158,7 @@ hr {
 }
 
 .w-80 {
-  width: 80%;
+  width: 80%!important;
 }
 
 .text-underline {

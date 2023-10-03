@@ -1,7 +1,22 @@
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 
-const Step4 = () => {
+import {getPlans} from '../../../../actions/action';
+import prefectures from '../../../../utils/tbl_prefecture_region.json';
 
+const Step4 = (props) => {
+  const [plans, setPlans] = useState([])
+  useEffect(()=>{
+    async function getData(){
+      await getPlans(props.companyData.business_types)
+        .then(async (res)=>{
+          if(res.status == '200'){
+            setPlans(res.data);
+          }
+        })
+    }
+    getData();
+  }, [props.companyData.business_types])
   return (
     // <>step 4</>
     <div className="modal__form__wrapper">
@@ -35,7 +50,7 @@ const Step4 = () => {
       </div>
       <div id="formApplyStep4">
         <div className="section">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">会社情報</h2>
             <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
           </div>
@@ -47,102 +62,89 @@ const Step4 = () => {
             <p>会社名 (または屋号)</p>
             <input
               type="text"
-              name="companyName"
+              name="company_name"
               className="form--type_text companyName readonly"
-              readonly="" />
+              readOnly 
+              value={props.companyData.company_name}
+              />
           </div>
           <div>
             <p>代表取締役名</p>
             <input
               type="text"
-              name="representativeDirectorName"
+              name="representative_director_name"
               className="form--type_text u-w-50 representativeDirectorName readonly"
-              readonly="" />
+              readOnly 
+              value={props.companyData.representative_director_name}/>
           </div>
           <div>
             <p>会社電話番号 (半角・ハイフンなし)</p>
             <input
               type="tel"
-              inputmode="numeric"
-              name="tel"
+              inputMode="numeric"
+              name="phone_number"
               className="form--type_text f-none-spin u-w-50 tel readonly"
-              readonly="" />
+              readOnly 
+              value={props.companyData.phone_number}/>
           </div>
           <div>
             <p>会社郵便番号 (半角・ハイフンなし)</p>
             <input
               type="text"
-              inputmode="numeric"
-              name="zipCode"
+              inputMode="numeric"
+              name="postal_code"
               className="form--type_text f-none-spin zipCode readonly"
-              onkeyup="AjaxZip3.zip2addr(this,'','prefecture','address1');"
-              readonly="" />
+              onKeyUp="AjaxZip3.zip2addr(this,'','prefecture','address1');"
+              readOnly 
+              value={props.companyData.postal_code}/>
           </div>
           <div>
             <p>会社都道府県</p>
             <input
               type="text"
               className="form--type_text readonly"
-              readonly="" />
+              readOnly 
+              value={prefectures[props.companyData.prefecture_id-1].jp_name}
+              />
           </div>
           <div>
             <p>会社住所 (番地まで)</p>
             <input
               type="text"
-              name="address1"
+              name="address_main"
               className="form--type_text address1 readonly"
-              readonly="" />
+              readOnly 
+              value={props.companyData.address_main}/>
           </div>
           <div>
             <p>会社住所 (ビル名・部屋番号)</p>
             <input
               type="text"
-              name="address2"
+              name="address_detail"
               className="form--type_text address2 readonly"
-              readonly="" />
+              readOnly 
+              value={props.companyData.address_detail}/>
           </div>
         </div>
         <div className="section">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">お申し込み業種</h2>
             <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
           </div>
-          <p>美容師</p>
-          <div className="u-ml-sm u-fs-md">
-            採用単価（成果報酬）
-            <p className="u-fw-n">・資格なし 16.5万円(税込)</p>
-            <p className="u-fw-n">・新卒(資格取得見込み) 22万円(税込)</p>
-            <p className="u-fw-n">・アシスタント(資格あり) 22万円(税込)</p>
-            <p className="u-fw-n">・スタイリスト(資格あり) 33万円(税込)</p>
-            <p className="u-fw-n">・管理美容師(資格あり) 38.5万円(税込)</p>
-          </div>
-          <p>アイリスト</p>
-          <div className="u-ml-sm u-fs-md">
-            採用単価（成果報酬）
-            <p className="u-fw-n">・資格なし 受付・未経験 16.5万円(税込)</p>
-            <p className="u-fw-n">・資格あり 実務経験なし(新卒・既卒) 22万円(税込)</p>
-            <p className="u-fw-n">・資格あり 実務経験あり(3年未満) 33万円(税込)</p>
-            <p className="u-fw-n">・資格あり 実務経験あり(3年以上) 38.5万円(税込)</p>
-          </div>
-          <p>ネイリスト</p>
-          <div className="u-ml-sm u-fs-md">
-            採用単価（成果報酬）
-            <p className="u-fw-n">・受付・未経験 16.5万円(税込)</p>
-            <p className="u-fw-n">・専門orスクール 在学中/新卒/既卒 22万円(税込)</p>
-            <p className="u-fw-n">・実務経験あり(3年未満) 27.5万円(税込)</p>
-            <p className="u-fw-n">・実務経験あり(3年以上) 33万円(税込)</p>
-          </div>
-          <p>エステティシャン</p>
-          <div className="u-ml-sm u-fs-md">
-            採用単価（成果報酬）
-            <p className="u-fw-n">・受付・未経験 16.5万円(税込)</p>
-            <p className="u-fw-n">・専門orスクール 在学中/新卒/既卒 22万円(税込)</p>
-            <p className="u-fw-n">・実務経験あり(3年未満) 27.5万円(税込)</p>
-            <p className="u-fw-n">・実務経験あり(3年以上) 33万円(税込)</p>
-          </div>
+          {plans.length>0 && plans.map(plan=>(
+            <div key={plans.id}>              
+              <p>{plan.business_type}</p>
+              <div className="u-ml-sm u-fs-md">
+                採用単価（成果報酬）
+                {plan.total_plan.map(t_plan=>(
+                    <p className="u-fw-n">{t_plan}</p>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="section">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">請求先情報</h2>
             <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
           </div>
@@ -151,56 +153,61 @@ const Step4 = () => {
             <p>請求先会社名</p>
             <input
               type="text"
-              name="billingCompanyName"
+              name="billing_company_name"
               className="form--type_text billingCompanyName readonly"
-              readonly="" />
+              readOnly 
+              value={props.billingData.billing_company_name}/>
           </div>
           <div>
             <p>請求先郵便番号(半角・ハイフンなし)</p>
             <input
               type="tel"
-              name="billingZipCode"
+              name="postal_code"
               className="form--type_text f-none-spin billingZipCode readonly"
-              onkeyup="AjaxZip3.zip2addr(this,'','billingPrefecture','billingAddress1');"
-              readonly="" />
+              onKeyUp="AjaxZip3.zip2addr(this,'','billingPrefecture','billingAddress1');"
+              readOnly 
+              value={props.billingData.postal_code}/>
           </div>
           <div>
             <p>請求先都道府県</p>
             <input
               type="text"
               className="form--type_text readonly"
-              readonly="" />
+              readOnly 
+              value={prefectures[props.billingData.prefecture_id-1].jp_name}/>
           </div>
           <div>
             <p>請求先会社住所 (番地まで)</p>
             <input
               type="text"
-              name="billingAddress1"
+              name="address_main"
               className="form--type_text billingAddress1 readonly"
-              readonly="" />
+              readOnly 
+              value={props.billingData.address_main}/>
           </div>
           <div>
             <p>請求先会社住所 (ビル名・部屋番号)</p>
             <input
               type="text"
-              name="billingAddress2"
+              name="address_detail"
               className="form--type_text billingAddress2 readonly"
-              readonly="" />
+              readOnly 
+              value={props.billingData.address_detail}/>
           </div>
         </div>
         <div className="section">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">お支払い方法</h2>
             <button className="button plan-modify backToEdit paymentMethod" data-applystep="2">変更する</button>
           </div>
           <input
             type="text"
             className="form--type_text readonly"
-            readonly=""
+            readOnly
             value="銀行振込" />
         </div>
         <div className="section">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">紹介手数料返金口座</h2>
             <button className="button plan-modify backToEdit" data-applystep="3">変更する</button>
           </div>
@@ -211,7 +218,8 @@ const Step4 = () => {
               name="bankName"
               className="form--type_text readonly"
               placeholder="銀行名を入力してください"
-              readonly="" />
+              readOnly 
+              value={props.bankData.bank_name}/>
             <input type="hidden" name="bankCode" value="0010" />
           </div>
           <div>
@@ -221,7 +229,8 @@ const Step4 = () => {
               name="bankBranch"
               className="form--type_text readonly"
               placeholder="支店名を入力してください"
-              readonly="" />
+              readOnly 
+              value={props.bankData.branch_name}/>
             <input type="hidden" name="branchCode" value="338" />
           </div>
           <div className="list--single--row u-mb-reset">
@@ -230,17 +239,18 @@ const Step4 = () => {
               <input
                 type="text"
                 className="form--type_text readonly"
-                readonly="" />
+                readOnly 
+                value={props.bankData.bank_name}/>
             </div>
             <div className="u-f-1 u-ml-xxs">
               <p>口座番号</p>
               <input
                 type="text"
-                inputmode="numeric"
+                inputMode="numeric"
                 name="accountNumber"
                 className="form--type_text accountNumber readonly"
                 placeholder="口座番号を入力してください"
-                readonly="" />
+                readOnly />
             </div>
           </div>
           <div>
@@ -250,12 +260,11 @@ const Step4 = () => {
               name="accountHolder"
               className="form--type_text accountHolder readonly"
               placeholder="口座名義を入力してください"
-              readonly="" />
+              readOnly />
           </div>
         </div>
-
         <div className="section confirmElements">
-          <div className="box_underline">
+          <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">確認事項</h2>
           </div>
           <p className="form--type_checkbox_group">
@@ -265,7 +274,7 @@ const Step4 = () => {
               className="required"
               name="confirm-element"
               value="1" />
-            <label for="confirm-element-1" className=" u-m-reset u-ml-xxs"><span
+            <label htmlFor="confirm-element-1" className=" u-m-reset u-ml-xxs"><span
                 className="u-fs-12">記入内容に誤りがないことを確認しました。</span></label>
           </p>
           <p className="form--type_checkbox_group">
@@ -275,7 +284,7 @@ const Step4 = () => {
               className="required"
               name="confirm-element"
               value="2" />
-            <label for="confirm-element-2" className=" u-m-reset u-ml-xxs"><span
+            <label htmlFor="confirm-element-2" className=" u-m-reset u-ml-xxs"><span
                 className="u-fs-12">申込権限があることを確認し、保証します。</span></label>
           </p>
           <p className="form--type_checkbox_group">
@@ -285,7 +294,7 @@ const Step4 = () => {
               className="required"
               name="confirm-element"
               value="3" />
-            <label for="confirm-element-3" className="u-m-reset u-ml-xxs">
+            <label htmlFor="confirm-element-3" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"
@@ -302,7 +311,7 @@ const Step4 = () => {
               className="required"
               name="confirm-element"
               value="4" />
-            <label for="confirm-element-4" className="u-m-reset u-ml-xxs">
+            <label htmlFor="confirm-element-4" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"
@@ -319,7 +328,7 @@ const Step4 = () => {
               className="required"
               name="confirm-element"
               value="5" />
-            <label for="confirm-element-5" className="u-m-reset u-ml-xxs">
+            <label htmlFor="confirm-element-5" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"

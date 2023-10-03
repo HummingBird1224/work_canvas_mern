@@ -19,7 +19,6 @@ module.exports = (sequelize, Sequelize) => {
 		},
 		total_plan: {
 			type: DataTypes.JSON,
-			defaultValue: {}
 		},
 	},
 		{

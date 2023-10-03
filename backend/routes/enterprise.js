@@ -301,6 +301,18 @@ router.get('/company/:companyId', ensureAuthenticated, async function (req, res,
     })
 })
 
+router.post('/company/edit', ensureAuthenticated, async function (req, res, next) {
+  const companyData = req.body;
+  const company = await Company.findOne({ where: { id: companyData.id } });
+  company.update(companyData)
+    .then(async (company) => {
+      return res.status(200).json(company);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
 router.get('/company/:companyId/members', ensureAuthenticated, async function (req, res, next) {
   const companyId = req.params.companyId;
   await getMembers(companyId)
@@ -330,17 +342,31 @@ router.post('/members/:userId/roleChange', ensureAuthenticated, async function (
     })
 })
 
-router.get('/members/:memberId/delete', ensureAuthenticated, async function (req, res, next) {
-  const { memberId } = req.params;
+router.get('/members/:memberId/delete/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const { memberId, companyId } = req.params;
   await User.update(
     {
-      role: role
+      company_id: 0
     },
-    { where: { id: userId } }
+    { where: { id: memberId } }
   );
   await getMembers(companyId)
     .then(async (members) => {
       res.status(200).json(members);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.post('/plans', ensureAuthenticated, async function (req, res, next) {
+  const planIds = req.body;
+  await Plan.findAll({
+    attributes: ['id', 'business_type', 'total_plan'],
+    where: { id: { [Op.in]: planIds } }
+  })
+    .then(async (plans) => {
+      res.status(200).json(plans)
     })
     .catch(err => {
       return next(err);

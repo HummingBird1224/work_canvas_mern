@@ -30,6 +30,13 @@ const Step = () => {
     address_main:'',
     address_detail:'',
   });
+  const [bankData, setBankData]=useState({
+    bank_name:'',
+    branch_name:'',
+    deposit_type:'',
+    account_number:'',
+    account_holder:'',
+  });
   const [companyErrors, setCompanyErrors] = useState({
     company_name:'',
     representative_director_name:'',
@@ -45,6 +52,13 @@ const Step = () => {
     prefecture_id:'',
     address_main:'',
   });
+  const [bankErrors, setBankErrors]=useState({
+    bank_name:'',
+    branch_name:'',
+    deposit_type:'',
+    account_number:'',
+    account_holder:'',
+  });
   const clickPrev = () => {
     if (step > 1) {
       setStep(step - 1);
@@ -52,6 +66,10 @@ const Step = () => {
   }
   const clickNext = () => {
     setNextClicked(true);
+    if(step == 2){
+      setStep(3);
+      setNextClicked(false);
+    }
     // if (step < 4) {
     //   setStep(step + 1);
     // }
@@ -74,17 +92,35 @@ const Step = () => {
           step={step}
           setStep={setStep}
         /> :
-       step === 2 ? <Step2 /> : 
-       step === 3 ? <Step3 /> : 
-       <Step4 />}
+       step === 2 ? 
+        <Step2 /> : 
+       step === 3 ? 
+        <Step3
+          bankData={bankData}
+          setBankData={setBankData}
+          nextClicked={nextClicked}
+          setNextClicked={setNextClicked}
+          bankErrors={bankErrors}
+          setBankErrors={setBankErrors}
+          step={step}
+          setStep={setStep}
+        /> : 
+       <Step4 
+          companyData={companyData}
+          billingData={billingData}
+          bankData={bankData}
+          paytype='bank'
+       />}
 
       <div className="wrapper--button">
         {/* <button className="button go-prev" onClick={() => clickPrev()}>戻る</button> */}
         {/* <button className={ step === 4 ? 'button button--type_primary button--state_disabled' : 'button button--type_primary go-next' } onClick={() => clickNext()}>次に進む</button> */}
         <button className={ step === 1 ? 'button go-prev button--state_disabled' : 'button go-prev' } onClick={() => clickPrev()}>戻る</button>
-        <button className="button button--type_primary go-next" onClick={() => clickNext()}>次に進む</button>
-      </div>
-
+        {step == 4?
+          <button className="button button--type_primary go-next" disabled style={{opacity:.8}}>申し込む</button>:
+          <button className="button button--type_primary go-next" onClick={() => clickNext()}>次に進む</button>
+        }
+        </div>
     </div>
   );
 }

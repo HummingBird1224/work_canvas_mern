@@ -94,8 +94,9 @@ const Step1 = (props) => {
     if(props.billingData.postal_code !== '' &&!phoneRegex.test(props.companyData.postal_code)){
       billingErrors={...billingErrors, postal_code:phoneError};
     }
-    if(Object.keys(props.companyErrors).length == 0 && Object.keys(props.billingErrors).length == 0){
+    if(Object.keys(companyErrors).length == 0 && Object.keys(billingErrors).length == 0){
       props.setStep(props.step+1);
+      props.setNextClicked(false);
     }
     props.setNextClicked(false);
     // setNextClicked(false);
