@@ -1,7 +1,8 @@
 const dbConfig = require("../configs/postgre-config_server");
 // const dbConfig = require("../configs/postgre-config");
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, dbConfig);
+const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig);
+sequelize.sync({ alter: true });
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;

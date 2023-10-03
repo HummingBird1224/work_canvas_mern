@@ -58,6 +58,21 @@ export const getCompanyData = async (companyId) => {
     });
 }
 
+export const editCompanyData = async (companyData) => {
+  console.log(companyData);
+  return await API({
+    method: 'post',
+    url: '/company/edit',
+    data: companyData
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
 export const getMembersData = async (companyId) => {
   return await API({
     method: 'get',
@@ -88,7 +103,21 @@ export const changeRole = async (userId, role) => {
 export const deleteMember = async (memberId) => {
   return await API({
     method: 'get',
-    url: '/members/' + memberId + '/delete'
+    url: '/members/' + memberId + '/delete/' + Auth.getCompanyId()
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getPlans = async (planIds) => {
+  return await API({
+    method: 'post',
+    url: '/plans',
+    data: planIds
   })
     .then((res) => {
       return { status: res.status, data: res.data };

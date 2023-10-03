@@ -27794,13 +27794,13 @@ hr {
     width: 90%
 }
 
-.form--type_radio_card li input:checked+label:after {
+/* .form--type_radio_card li input:checked+label:after {
     font-family: Material Icons Outlined;
     content: "\e837";
     position: absolute;
     right: 10px;
     color: #141f33
-}
+} */
 
 .form--type_radio_card li label {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
@@ -27828,7 +27828,7 @@ hr {
     width: 90%
 }
 
-.form--type_radio_card li label:after {
+/* .form--type_radio_card li label:after {
     font-family: Material Icons Outlined;
     content: "\e836";
     position: absolute;
@@ -27836,7 +27836,7 @@ hr {
     font-weight: 400;
     font-size: 20px;
     color: #e7e8ea
-}
+} */
 
 .form--type_radio_card.form--state_error li label {
     border: 2px solid #f33;

@@ -26,3 +26,17 @@
 .text__error {
   color: red;
 }
+
+.form--type_radio_card li input:checked+label>.checked__icon,
+.unchecked__icon {
+  display: block;
+}
+
+.unchecked__icon {
+  display: block;
+  margin-left: auto;
+}
+
+.form--type_radio_card li input:checked+label>.unchecked__icon {
+  display: none;
+}
