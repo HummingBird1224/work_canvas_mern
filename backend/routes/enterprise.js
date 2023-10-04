@@ -20,124 +20,124 @@ const getMembers = async (companyId) => {
   });
 }
 
-router.get('/', async function (req, res, next) {
-  var data = [
-    {
-      business_type: '美容師',
-      plan1: {
-        degree: "美容師免許なし",
-        price: 16.5,
-        license: "",
-        senior: 0
-      },
-      plan2: {
-        degree: "新卒／アシスタント",
-        price: 22,
-        license: "美容師免許有り",
-        senior: 0
-      },
-      plan3: {
-        degree: "スタイリスト",
-        price: 33,
-        license: "美容師免許有り",
-        senior: 1
-      },
-      plan4: {
-        degree: "管理美容師",
-        price: 38.5,
-        license: "美容師免許有り",
-        senior: 1
-      },
-      total_plan: [
-        "資格なし 16.5万円(税込)",
-        "新卒(資格取得見込み) 22万円(税込)",
-        "アシスタント(資格あり) 22万円(税込)",
-        "スタイリスト(資格あり) 33万円(税込)",
-        "管理美容師(資格あり) 38.5万円(税込)"
-      ]
-    },
-    {
-      business_type: 'アイリスト',
-      plan1: {
-        degree: "受付等",
-        price: 16.5,
-        license: "免許なし",
-        senior: 0
-      },
-      plan2: {
-        degree: "未経験者",
-        price: 22,
-        license: "免許あり（新卒・既卒）",
-        senior: 0
-      },
-      plan3: {
-        degree: "実務経験者",
-        price: 33,
-        license: "免許あり（3年未満）",
-        senior: 1
-      },
-      plan4: {
-        degree: "実務経験者",
-        price: 38.5,
-        license: "免許あり（3年以上）",
-        senior: 1
-      },
-      total_plan: [
-        "資格なし 受付・未経験 16.5万円(税込)",
-        "資格あり 実務経験なし(新卒・既卒) 22万円(税込)",
-        "資格あり 実務経験あり(3年未満) 33万円(税込)",
-        "資格あり 実務経験あり(3年以上) 38.5万円(税込)"
-      ]
-    },
-    {
-      business_type: 'ネイリスト/エステ',
-      plan1: {
-        degree: "受付・未経験",
-        price: 16.5,
-        license: "",
-        senior: 0
-      },
-      plan2: {
-        degree: "専門orスクール",
-        price: 22,
-        license: "在学中・新卒・既卒",
-        senior: 0
-      },
-      plan3: {
-        degree: "実務経験者",
-        price: 27.5,
-        license: "3年未満",
-        senior: 1
-      },
-      plan4: {
-        degree: "実務経験者",
-        price: 33,
-        license: "3年以上",
-        senior: 1
-      },
-      total_plan: [
-        "受付・未経験 16.5万円(税込)",
-        "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-        "実務経験あり(3年未満) 27.5万円(税込)",
-        "実務経験あり(3年以上) 33万円(税込)"
-      ]
-    },
-    {
-      business_type: '美容師',
-      total_plan: [
-        "受付・未経験 16.5万円(税込)",
-        "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-        "実務経験あり(3年未満) 27.5万円(税込)",
-        "実務経験あり(3年以上) 33万円(税込)"
-      ]
-    },
-  ];
+// router.get('/', async function (req, res, next) {
+//   var data = [
+//     {
+//       business_type: '美容師',
+//       plan1: {
+//         degree: "美容師免許なし",
+//         price: 16.5,
+//         license: "",
+//         senior: 0
+//       },
+//       plan2: {
+//         degree: "新卒／アシスタント",
+//         price: 22,
+//         license: "美容師免許有り",
+//         senior: 0
+//       },
+//       plan3: {
+//         degree: "スタイリスト",
+//         price: 33,
+//         license: "美容師免許有り",
+//         senior: 1
+//       },
+//       plan4: {
+//         degree: "管理美容師",
+//         price: 38.5,
+//         license: "美容師免許有り",
+//         senior: 1
+//       },
+//       total_plan: [
+//         "資格なし 16.5万円(税込)",
+//         "新卒(資格取得見込み) 22万円(税込)",
+//         "アシスタント(資格あり) 22万円(税込)",
+//         "スタイリスト(資格あり) 33万円(税込)",
+//         "管理美容師(資格あり) 38.5万円(税込)"
+//       ]
+//     },
+//     {
+//       business_type: 'アイリスト',
+//       plan1: {
+//         degree: "受付等",
+//         price: 16.5,
+//         license: "免許なし",
+//         senior: 0
+//       },
+//       plan2: {
+//         degree: "未経験者",
+//         price: 22,
+//         license: "免許あり（新卒・既卒）",
+//         senior: 0
+//       },
+//       plan3: {
+//         degree: "実務経験者",
+//         price: 33,
+//         license: "免許あり（3年未満）",
+//         senior: 1
+//       },
+//       plan4: {
+//         degree: "実務経験者",
+//         price: 38.5,
+//         license: "免許あり（3年以上）",
+//         senior: 1
+//       },
+//       total_plan: [
+//         "資格なし 受付・未経験 16.5万円(税込)",
+//         "資格あり 実務経験なし(新卒・既卒) 22万円(税込)",
+//         "資格あり 実務経験あり(3年未満) 33万円(税込)",
+//         "資格あり 実務経験あり(3年以上) 38.5万円(税込)"
+//       ]
+//     },
+//     {
+//       business_type: 'ネイリスト/エステ',
+//       plan1: {
+//         degree: "受付・未経験",
+//         price: 16.5,
+//         license: "",
+//         senior: 0
+//       },
+//       plan2: {
+//         degree: "専門orスクール",
+//         price: 22,
+//         license: "在学中・新卒・既卒",
+//         senior: 0
+//       },
+//       plan3: {
+//         degree: "実務経験者",
+//         price: 27.5,
+//         license: "3年未満",
+//         senior: 1
+//       },
+//       plan4: {
+//         degree: "実務経験者",
+//         price: 33,
+//         license: "3年以上",
+//         senior: 1
+//       },
+//       total_plan: [
+//         "受付・未経験 16.5万円(税込)",
+//         "専門orスクール 在学中/新卒/既卒 22万円(税込)",
+//         "実務経験あり(3年未満) 27.5万円(税込)",
+//         "実務経験あり(3年以上) 33万円(税込)"
+//       ]
+//     },
+//     {
+//       business_type: '美容師',
+//       total_plan: [
+//         "受付・未経験 16.5万円(税込)",
+//         "専門orスクール 在学中/新卒/既卒 22万円(税込)",
+//         "実務経験あり(3年未満) 27.5万円(税込)",
+//         "実務経験あり(3年以上) 33万円(税込)"
+//       ]
+//     },
+//   ];
 
-  await Plan.bulkCreate(data);
-  console.log('done');
-  const result = await emailVerificationService.sendVerificationEmail(1);
-  console.log(result);
-})
+//   await Plan.bulkCreate(data);
+//   console.log('done');
+//   const result = await emailVerificationService.sendVerificationEmail(1);
+//   console.log(result);
+// })
 
 //POST /signup
 router.post('/users/register', async function (req, res, next) {
