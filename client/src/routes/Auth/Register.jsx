@@ -42,7 +42,7 @@ const Register = () => {
         setText(res.error.message);
       }
       else if (res == true) {
-        window.location.href='/enterprise'
+        window.location.href='/enterprise/step'
       }
     })
   }

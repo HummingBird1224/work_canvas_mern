@@ -1,8 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const bankList = sequelize.define("wc_payment_bank", {
-    conpany_id: {
-			type: Sequelize.INTEGER,
-		},
+    company_id: {
+      type: Sequelize.INTEGER,
+    },
     bank_name: {
       type: Sequelize.STRING,
     },
@@ -10,18 +10,18 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     deposit_type: {
-			type: Sequelize.ENUM(['1', '2', '3'])
-		},
+      type: Sequelize.ENUM(['1', '2', '3'])
+    },
     account_number: {
-			type: Sequelize.STRING,
-		},
+      type: Sequelize.STRING,
+    },
     account_holder: {
-			type: Sequelize.STRING,
-		},
+      type: Sequelize.STRING,
+    },
   },
-  {
-    timestamps: false
-  });
+    {
+      timestamps: false
+    });
 
   return bankList;
 };

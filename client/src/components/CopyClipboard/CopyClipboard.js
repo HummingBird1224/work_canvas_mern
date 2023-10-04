@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Alert from '../Alert/Alert'
 
 const CopyToClipboard = (props) => {
-  console.log('clip');
   const [alertOpen, setAlertOpen] = useState(false)
   if (props.open && !alertOpen) {
     console.log('in')

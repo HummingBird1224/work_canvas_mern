@@ -158,3 +158,6 @@
 .bg-green {
   background-color: #06c755;
 }
+select:disabled {
+  opacity: .5;
+}

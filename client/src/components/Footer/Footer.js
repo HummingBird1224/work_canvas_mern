@@ -5,7 +5,7 @@ import LineModal from '../Modal/LineModal'
 import './Footer.css'
 
 const Footer = () => {
-  const [alertOpen, setAlertOpen]=useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   const handleClick = () => {
     setAlertOpen(true);
   };
@@ -33,9 +33,9 @@ const Footer = () => {
         <p className='footer__copylight'>
           © Gramn Inc.
         </p>
-        <LineModal open={alertOpen} handleChange={(open)=>setAlertOpen(open)}/>
+        <LineModal open={alertOpen} handleChange={(open) => setAlertOpen(open)} />
         <div
-          class="line-sp"
+          className="line-sp"
           id="openEnterpriseLiffModal"
           onClick={handleClick}
           style={{ right: '50px', bottom: '50px', cursor: 'pointer' }}>

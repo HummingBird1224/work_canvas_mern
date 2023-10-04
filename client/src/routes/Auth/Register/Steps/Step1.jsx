@@ -28,10 +28,20 @@ const Step1 = (props) => {
   const handleCompanyChange=(event)=>{
     const {name, value}=event.target;
     if(name == 'business_types'){
-      props.setCompanyData({
-        ...props.companyData, 
-        business_types:[...props.companyData.business_types,value]
-      });
+      if(event.target.checked){
+        props.setCompanyData({
+          ...props.companyData, 
+          business_types:[...props.companyData.business_types,value]
+        });
+      }
+      else {
+        const index = props.companyData.business_types.indexOf(value);
+        props.companyData.business_types.splice(index, 1);
+        index > -1 && props.setCompanyData({
+          ...props.companyData, 
+          business_types:props.companyData.business_types
+        });
+      }
     }
     else {props.setCompanyData({...props.companyData, [name]:value})}
   }
@@ -223,6 +233,7 @@ const Step1 = (props) => {
               name="business_types"
               className="sectors"
               id="sector-1" 
+              checked={props.companyData.business_types.includes('1')}
               onChange={handleCompanyChange}/>
             <label htmlFor="sector-1"><span>美容師</span></label>
           </div>
@@ -233,6 +244,7 @@ const Step1 = (props) => {
               name="business_types"
               className="sectors"
               id="sector-2" 
+              checked={props.companyData.business_types.includes('2')}
               onChange={handleCompanyChange}/>
             <label htmlFor="sector-2"><span>アイリスト</span></label>
           </div>
@@ -243,6 +255,7 @@ const Step1 = (props) => {
               name="business_types"
               className="sectors"
               id="sector-3" 
+              checked={props.companyData.business_types.includes('3')}
               onChange={handleCompanyChange}/>
             <label htmlFor="sector-3"><span>ネイリスト</span></label>
           </div>
@@ -253,6 +266,7 @@ const Step1 = (props) => {
               name="business_types"
               className="sectors"
               id="sector-4" 
+              checked={props.companyData.business_types.includes('4')}
               onChange={handleCompanyChange}/>
             <label htmlFor="sector-4"><span>エステティシャン</span></label>
           </div>

@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import {getPlans} from '../../../../actions/action';
 import prefectures from '../../../../utils/tbl_prefecture_region.json';
 
+const deposit_types=[
+  '普通預金',
+  '当座預金',
+  '貯蓄預金'
+]
 const Step4 = (props) => {
   const [plans, setPlans] = useState([])
   useEffect(()=>{
@@ -16,7 +21,11 @@ const Step4 = (props) => {
         })
     }
     getData();
-  }, [props.companyData.business_types])
+  }, [props.companyData.business_types]);
+  const confirmChange=(e)=>{
+    const {name, checked}=e.target;
+    props.setCheckedItems({...props.checkedItems, [name]:checked});
+  }
   return (
     // <>step 4</>
     <div className="modal__form__wrapper">
@@ -52,7 +61,13 @@ const Step4 = (props) => {
         <div className="section">
           <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">会社情報</h2>
-            <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
+            <button 
+              className="button plan-modify backToEdit" 
+              data-applystep="1" 
+              onClick={()=>props.setStep(1)}
+            >
+              変更する
+            </button>
           </div>
           <div id="script_div">
             <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
@@ -94,7 +109,7 @@ const Step4 = (props) => {
               inputMode="numeric"
               name="postal_code"
               className="form--type_text f-none-spin zipCode readonly"
-              onKeyUp="AjaxZip3.zip2addr(this,'','prefecture','address1');"
+              // onKeyUp="AjaxZip3.zip2addr(this,'','prefecture','address1');"
               readOnly 
               value={props.companyData.postal_code}/>
           </div>
@@ -129,15 +144,21 @@ const Step4 = (props) => {
         <div className="section">
           <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">お申し込み業種</h2>
-            <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
+            <button 
+              className="button plan-modify backToEdit" 
+              data-applystep="1" 
+              onClick={()=>props.setStep(1)}
+            >
+              変更する
+            </button>
           </div>
           {plans.length>0 && plans.map(plan=>(
-            <div key={plans.id}>              
+            <div key={plan.id}>              
               <p>{plan.business_type}</p>
               <div className="u-ml-sm u-fs-md">
                 採用単価（成果報酬）
                 {plan.total_plan.map(t_plan=>(
-                    <p className="u-fw-n">{t_plan}</p>
+                    <p className="u-fw-n" key={t_plan}>{t_plan}</p>
                 ))}
               </div>
             </div>
@@ -146,7 +167,13 @@ const Step4 = (props) => {
         <div className="section">
           <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">請求先情報</h2>
-            <button className="button plan-modify backToEdit" data-applystep="1">変更する</button>
+            <button 
+              className="button plan-modify backToEdit" 
+              data-applystep="1" 
+              onClick={()=>props.setStep(1)}
+            >
+              変更する
+            </button>
           </div>
           <div id="script_div"></div>
           <div>
@@ -164,7 +191,7 @@ const Step4 = (props) => {
               type="tel"
               name="postal_code"
               className="form--type_text f-none-spin billingZipCode readonly"
-              onKeyUp="AjaxZip3.zip2addr(this,'','billingPrefecture','billingAddress1');"
+              // onKeyUp="AjaxZip3.zip2addr(this,'','billingPrefecture','billingAddress1');"
               readOnly 
               value={props.billingData.postal_code}/>
           </div>
@@ -198,7 +225,13 @@ const Step4 = (props) => {
         <div className="section">
           <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">お支払い方法</h2>
-            <button className="button plan-modify backToEdit paymentMethod" data-applystep="2">変更する</button>
+            <button 
+              className="button plan-modify backToEdit" 
+              data-applystep="2" 
+              onClick={()=>props.setStep(2)}
+            >
+              変更する
+            </button>
           </div>
           <input
             type="text"
@@ -209,7 +242,13 @@ const Step4 = (props) => {
         <div className="section">
           <div className="box_underline display-flex justify-content-between">
             <h2 className="u-fs-lg">紹介手数料返金口座</h2>
-            <button className="button plan-modify backToEdit" data-applystep="3">変更する</button>
+            <button 
+              className="button plan-modify backToEdit" 
+              data-applystep="3" 
+              onClick={()=>props.setStep(3)}
+            >
+              変更する
+            </button>
           </div>
           <div>
             <p>銀行名</p>
@@ -240,27 +279,29 @@ const Step4 = (props) => {
                 type="text"
                 className="form--type_text readonly"
                 readOnly 
-                value={props.bankData.bank_name}/>
+                value={deposit_types[props.bankData.deposit_type-1]}/>
             </div>
             <div className="u-f-1 u-ml-xxs">
               <p>口座番号</p>
               <input
                 type="text"
                 inputMode="numeric"
-                name="accountNumber"
+                name="account_number"
                 className="form--type_text accountNumber readonly"
                 placeholder="口座番号を入力してください"
-                readOnly />
+                readOnly 
+                value={props.bankData.account_number}/>
             </div>
           </div>
           <div>
             <p>口座名義</p>
             <input
               type="text"
-              name="accountHolder"
+              name="account_holder"
               className="form--type_text accountHolder readonly"
               placeholder="口座名義を入力してください"
-              readOnly />
+              readOnly 
+              value={props.bankData.account_holder}/>
           </div>
         </div>
         <div className="section confirmElements">
@@ -272,8 +313,10 @@ const Step4 = (props) => {
               type="checkbox"
               id="confirm-element-1"
               className="required"
-              name="confirm-element"
-              value="1" />
+              name="confirm1"
+              value="1" 
+              onChange={confirmChange}
+              />
             <label htmlFor="confirm-element-1" className=" u-m-reset u-ml-xxs"><span
                 className="u-fs-12">記入内容に誤りがないことを確認しました。</span></label>
           </p>
@@ -282,8 +325,9 @@ const Step4 = (props) => {
               type="checkbox"
               id="confirm-element-2"
               className="required"
-              name="confirm-element"
-              value="2" />
+              name="confirm2"
+              value="2" 
+              onChange={confirmChange}/>
             <label htmlFor="confirm-element-2" className=" u-m-reset u-ml-xxs"><span
                 className="u-fs-12">申込権限があることを確認し、保証します。</span></label>
           </p>
@@ -292,13 +336,14 @@ const Step4 = (props) => {
               type="checkbox"
               id="confirm-element-3"
               className="required"
-              name="confirm-element"
-              value="3" />
+              name="confirm3"
+              value="3" 
+              onChange={confirmChange}/>
             <label htmlFor="confirm-element-3" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"
-                  href="/enterprise_terms"
+                  to="/enterprise/terms"
                   target="_blank"
                   rel="noopener">
                     サービス利用規約
@@ -309,13 +354,14 @@ const Step4 = (props) => {
               type="checkbox"
               id="confirm-element-4"
               className="required"
-              name="confirm-element"
-              value="4" />
+              name="confirm4"
+              value="4" 
+              onChange={confirmChange}/>
             <label htmlFor="confirm-element-4" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"
-                  href="/paid_terms"
+                  to="/enterprise/paid_terms"
                   target="_blank"
                   rel="noopener">
                     ご紹介プラン利用規約
@@ -326,13 +372,14 @@ const Step4 = (props) => {
               type="checkbox"
               id="confirm-element-5"
               className="required"
-              name="confirm-element"
-              value="5" />
+              name="confirm5"
+              value="5" 
+              onChange={confirmChange}/>
             <label htmlFor="confirm-element-5" className="u-m-reset u-ml-xxs">
               <span className="u-fs-12">
                 <Link
                   className="u-fs-12 textlink textlink--color_blue"
-                  href="/privacy"
+                  to="/enterprise/campaign_paid_terms"
                   target="_blank"
                   rel="noopener">
                     プライバシーポリシー

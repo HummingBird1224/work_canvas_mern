@@ -16,6 +16,21 @@ export const register = async (data) => {
     });
 }
 
+export const saveInitialData = async (data) => {
+  console.log(data);
+  return await API({
+    method: 'post',
+    url: '/initialData',
+    data: { ...data, companyId: Auth.getCompanyId() }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
 export const login = async (data) => {
   // console.log(data)
   return await API({

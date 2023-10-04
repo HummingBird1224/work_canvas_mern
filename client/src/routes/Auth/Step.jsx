@@ -1,7 +1,7 @@
 import {  useEffect, useState } from "react";
 
+import {saveInitialData} from '../../actions/action';
 import Alert from '../../components/Alert/Alert';
-import { Link } from 'react-router-dom';
 import './Auth.css';
 
 import Step1 from './Register/Steps/Step1';
@@ -9,9 +9,10 @@ import Step2 from './Register/Steps/Step2';
 import Step3 from './Register/Steps/Step3';
 import Step4 from './Register/Steps/Step4';
 
-
 const Step = () => {
   const [step, setStep] = useState(1);
+  const [disabled, setDisabled] = useState(true);
+  const [alertOpen, setAlertOpen] = useState(false);
   const [nextClicked, setNextClicked] = useState(false);
   const [companyData, setCompanyData] = useState({
     company_name:'',
@@ -59,6 +60,7 @@ const Step = () => {
     account_number:'',
     account_holder:'',
   });
+  const [checkedItems, setCheckedItems]=useState({});
   const clickPrev = () => {
     if (step > 1) {
       setStep(step - 1);
@@ -74,7 +76,21 @@ const Step = () => {
     //   setStep(step + 1);
     // }
   }
-  // console.log(companyData);
+  useEffect(()=>{
+    Object.values(checkedItems).filter(Boolean).length == 5?
+      setDisabled(false):setDisabled(true);    
+  }, [checkedItems]);
+  const handleSubmit=async()=>{
+    await saveInitialData({companyData, billingData, bankData})
+    .then(res=>{
+      if(res.status == '200'){
+        window.location.href='/enterprise'
+      }
+      else {
+        setAlertOpen(true);
+      }
+    })
+  }
   return (
     <div className="modal__body">
       { step === 1 ? 
@@ -110,6 +126,9 @@ const Step = () => {
           billingData={billingData}
           bankData={bankData}
           paytype='bank'
+          checkedItems={checkedItems}
+          setCheckedItems={setCheckedItems}
+          setStep={setStep}
        />}
 
       <div className="wrapper--button">
@@ -117,10 +136,14 @@ const Step = () => {
         {/* <button className={ step === 4 ? 'button button--type_primary button--state_disabled' : 'button button--type_primary go-next' } onClick={() => clickNext()}>次に進む</button> */}
         <button className={ step === 1 ? 'button go-prev button--state_disabled' : 'button go-prev' } onClick={() => clickPrev()}>戻る</button>
         {step == 4?
-          <button className="button button--type_primary go-next" disabled style={{opacity:.8}}>申し込む</button>:
+          <button 
+            className={`button button--type_primary go-next ${disabled && "opacity-8"}`} 
+            disabled={disabled} 
+            onClick={handleSubmit}>申し込む</button>:
           <button className="button button--type_primary go-next" onClick={() => clickNext()}>次に進む</button>
         }
         </div>
+        <Alert open={alertOpen} handleClose={(open)=>setAlertOpen(open)} text={'保存が失敗しました。'} error={true}/>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Logo = () => {
     return (
-        <h1 class="header__id">
+        <h1 className="header__id">
             <Link to="/enterprise">
                 <span className="enterprise_logo">WORKCANVAS</span>
                 <span className="logo_text">サロン管理</span>

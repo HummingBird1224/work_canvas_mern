@@ -38,7 +38,7 @@ const Notification = () => {
 
   return(
     // <>Notification</>
-    <div class="enterprise__container">
+    <div className="enterprise__container">
       <div className="enterprise__box d-flex flex-wrap justify-content-between">
         <div className="enterprise_contents e--c">
           <h1 className="title__lv1 mt-30">お知らせ</h1>
