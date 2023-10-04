@@ -181,7 +181,7 @@ const Step2 = () => {
         data-currency="jpy"
         data-size="large"
         data-text="注文手続きに進む>>"
-        data-class="btn btn-block btn-info text-white p-3"
+        data-className="btn btn-block btn-info text-white p-3"
         data-submit-button-text="決済"
         data-locale="ja-jp">
       </span> 

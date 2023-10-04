@@ -29,6 +29,7 @@ const initialUsersOrder = [
 ]
 
 const OrderModal = (props) => {
+  // console.log(props.members);
   const [usersOrder, setUsersOrder] = useState(initialUsersOrder)
   const [alertOpen, setAlertOpen] = useState(false)
   const handleClose = () => {
@@ -36,13 +37,16 @@ const OrderModal = (props) => {
   }
   const handleChange = (id, e) => {
     console.log(id, e.target.value)
-    usersOrder.map((uOrder) => {
-      if (uOrder.id == id) {
-        uOrder.order = parseInt(e.target.value);
+    const newMembers = props.members;
+    newMembers.map((member) => {
+      if (member.id == id) {
+        member.order = parseInt(e.target.value);
       }
-    })
-    const update = usersOrder;
-    setUsersOrder(update)
+    });
+    console.log(newMembers);
+    props.setMembers(newMembers);
+    // const update = usersOrder;
+    // setUsersOrder(update)
   }
   const handleUpdate = () => {
     setAlertOpen(true);
@@ -78,26 +82,26 @@ const OrderModal = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {usersOrder && usersOrder.map((uOrder) => (
-                  <tr key={uOrder.id}>
+                {props.members.length > 0 && props.members.map((member) => (
+                  <tr key={member.id}>
                     <td>
                       <div className='enterprise__staff d-flex align-items-center'>
                         <figure>
                           <img src={NoAvatar} alt='avatar' />
                         </figure>
-                        <p className='ml-2 mb-0'>{uOrder.name}</p>
+                        <p className='ml-2 mb-0'>{member.username}</p>
                       </div>
                     </td>
                     <td>
-                      {uOrder.role}
+                      {member.role == 'administrator' ? '管理者' : '採用担当者'}
                     </td>
                     <td>
                       <input type='number'
                         step='1'
                         placeholder='数字を入力してください'
-                        value={uOrder.order}
+                        value={member.order}
                         className='f__text__table'
-                        onChange={(e) => handleChange(uOrder.id, e)} />
+                        onChange={(e) => handleChange(member.id, e)} />
                     </td>
                   </tr>
                 ))}

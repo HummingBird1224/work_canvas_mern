@@ -6,7 +6,7 @@ const ensureAuthenticated = require('../modules/ensureAuthenticated')
 var bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
-const { User, Company, Feature, PayList, PaymentBank, PaymentCard, Plan, Store } = require("../models");
+const { User, Company, Billing, Feature, PayList, PaymentBank, PaymentCard, Plan, Store } = require("../models");
 const TypedError = require('../modules/ErrorHandler')
 const emailVerificationService = require('../modules/mailVerified');
 
@@ -228,6 +228,19 @@ router.post('/users/register', async function (req, res, next) {
     })
 });
 
+router.post('/initialData', ensureAuthenticated, async function (req, res, next) {
+  const { companyData, billingData, bankData, companyId } = req.body;
+  const company = await Company.findOne({ where: { id: companyId } });
+  await company.update(companyData);
+  const billing = await Billing.create({ ...billingData, company_id: companyId });
+  const bank = await PaymentBank.create({ ...bankData, company_id: companyId });
+  if (company && billing && bank) {
+    return res.status(200).json({
+      company, billing, bank
+    });
+  }
+})
+
 //POST /signin
 router.post('/users/login', async function (req, res, next) {
   const { email, password } = req.body || {};
@@ -346,7 +359,7 @@ router.get('/members/:memberId/delete/:companyId', ensureAuthenticated, async fu
   const { memberId, companyId } = req.params;
   await User.update(
     {
-      company_id: 0
+      company_id: null
     },
     { where: { id: memberId } }
   );

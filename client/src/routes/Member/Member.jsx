@@ -10,6 +10,7 @@ import OrderModal from '../../components/Modal/OrderModal';
 import RegisterModal from '../../components/Modal/RegisterModal';
 import MailModal from '../../components/Modal/MailModal';
 import CopyToClipboard from '../../components/CopyClipboard/CopyClipboard';
+import Alert from '../../components/Alert/Alert';
 import NoAvatar from '../../asset/img/default_profile.png'
 import './Member.css'
 
@@ -37,6 +38,7 @@ const Member=()=>{
   const [registerOpen, setRegisterOpen]=useState(false);
   const [clipboardOpen, setClipboardOpen]=useState(false);
   const [mailOpen, setMailOpen]=useState(false);
+  const [alertOpen, setAlertOpen]=useState(false);
   const roleChange= async (userId, e)=>{
     await changeRole(userId, e.target.value)
     .then(res=>{
@@ -55,22 +57,19 @@ const Member=()=>{
   const handleMemberDelete=async(del)=>{
     if(del){
       await deleteMember(memberId)
+      .then(res=>{
+        if(res.status == '200'){
+          setMembers(res.data);
+          setConfirmOpen(false);
+        }
+        else {
+
+        }
+      })
     }
-  }
-  const handleRoleChange=(open)=>{
-    setRoleOpen(open);
-  }
-  const handleOrderChange=(open)=>{
-    setOrderOpen(open);
-  }
-  const handleRegisterChange=(open)=>{
-    setRegisterOpen(open);
   }
   const handleCopy=(open)=>{
     setClipboardOpen(open);
-  }
-  const handleMailChange=(open)=>{
-    setMailOpen(open);
   }
   useEffect(()=>{
     async function getData(){
@@ -83,14 +82,14 @@ const Member=()=>{
     }
     getData();
   }, [])
-
+  console.log('......parent', members);
   return(
     <div className="enterprise__container">
       <div className='enterprise__box text-default member'>
         <h1 className='title__lv1 '>スタッフの管理</h1>
         <section>
           <h2 className='title__lv2 mt-50'>スタッフリスト</h2>
-          <p className='text-right ' onClick={()=>handleRoleChange(true)}>
+          <p className='text-right ' onClick={()=>setRoleOpen(true)}>
             <span className='info__sign' />
             役割とは？
           </p>
@@ -105,8 +104,9 @@ const Member=()=>{
                 <td>
                   <div className='enterprise__staff d-flex align-items-center'>
                     <figure>
-                      {user.avatar? <img src={user.avatar} alt='avatar' />:
-                      <img src={NoAvatar} alt='avatar' />}
+                      {/* {user.avatar? <img src={user.avatar} alt='avatar' />: */}
+                      <img src={NoAvatar} alt='avatar' />
+                      {/* } */}
                     </figure>
                     <p className='mb-0 ml-2'>{user.username}</p>
                   </div>
@@ -138,13 +138,13 @@ const Member=()=>{
               </tr>
             ))}
           </table>
-          <p className='text-right textlink mt-30' onClick={()=>handleOrderChange(true)}>
+          <p className='text-right textlink mt-30' onClick={()=>setOrderOpen(true)}>
             スタッフの並び順を変更する ▲▼
           </p>
         </section>
         <section className='mt-60'>
           <h2 className='title__lv2 fw-700'>スタッフを追加する</h2>
-          <p className='text-right ' onClick={()=>handleRegisterChange(true)}>
+          <p className='text-right ' onClick={()=>setRegisterOpen(true)}>
             <span className='info__sign' />
             スタッフ追加の流れについて
           </p>
@@ -180,20 +180,41 @@ const Member=()=>{
             </textarea>
             <div className='button__wrapper d-flex align-items-center justify-content-center mt-20'>
               <button className='line__button text-white modal__button w-45 p-2 bg-green' >LINEで送る</button>
-              <button className='ml-4 mail__button text-white modal__button w-45 p-2 bg-blackgray' onClick={()=>handleMailChange(true)}>Mailで送る</button>
+              <button className='ml-4 mail__button text-white modal__button w-45 p-2 bg-blackgray' onClick={()=>setMailOpen(true)}>Mailで送る</button>
             </div>
           </div>
         </section>
         <div className='mt-40 d-flex justify-content-center'>
           <Link to='/enterprise' className='modal__button text__default '>トップに戻る</Link>
         </div>
-        <ConfirmModal open={confirmOpen} handleChange={handleConfirmChange} handleDelete={handleMemberDelete}/>
-        <RoleModal open={roleOpen} handleChange={handleRoleChange}/>
-        <OrderModal open={orderOpen} handleChange={handleOrderChange}/>
-        <RegisterModal open={registerOpen} handleChange={handleRegisterChange}/>
-        <RegisterModal open={registerOpen} handleChange={handleRegisterChange}/>
-        <MailModal open={mailOpen} handleChange={handleMailChange}/>
-        <CopyToClipboard open={clipboardOpen} text={registerUrl}/>
+        <ConfirmModal 
+          open={confirmOpen} 
+          handleChange={(open)=>setConfirmOpen(open)} 
+          handleDelete={handleMemberDelete}
+        />
+        <RoleModal 
+          open={roleOpen} 
+          handleChange={(open)=>setRoleOpen(open)}
+        />
+        <OrderModal 
+          open={orderOpen} 
+          handleChange={(open)=>setOrderOpen(open)}
+          members={members}
+          setMembers={setMembers}
+        />
+        <RegisterModal 
+          open={registerOpen} 
+          handleChange={(open)=>setRegisterOpen(open)}
+        />
+        <MailModal 
+          open={mailOpen} 
+          handleChange={(open)=>setMailOpen(open)}
+        />
+        <CopyToClipboard 
+          open={clipboardOpen} 
+          text={registerUrl}
+        />
+        <Alert open={alertOpen} handleClose={(open)=>{setAlertOpen(open)}} text='削除に失敗しました!'  error={true}/>
       </div>
     </div>
   )
