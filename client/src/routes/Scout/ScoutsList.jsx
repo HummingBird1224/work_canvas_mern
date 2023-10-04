@@ -36,7 +36,7 @@ const ScoutsList = () => {
         <h1 className='title__lv1 '>スカウト機能（β版）</h1>
         <TabContainer categories={categories} categoryClick={categoryClick}/>
         {categories.map((category)=>(
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center" key={category.id}>
           {category.manual&&category.id == categoryId&&
           <a className="modal__button text__default" href={category.manual.link} target="_blank">
             <div>{category.manual.name}</div>

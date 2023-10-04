@@ -3,13 +3,15 @@ import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 
 import Auth from '../../utils/Auth';
-import {getMembersData, changeRole, deleteMember} from '../../actions/action';
+import {getMembersData, 
+        changeRole, 
+        deleteMember, 
+        getInviteId} from '../../actions/action';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import RoleModal from '../../components/Modal/RoleModal';
 import OrderModal from '../../components/Modal/OrderModal';
 import RegisterModal from '../../components/Modal/RegisterModal';
 import MailModal from '../../components/Modal/MailModal';
-import CopyToClipboard from '../../components/CopyClipboard/CopyClipboard';
 import Alert from '../../components/Alert/Alert';
 import NoAvatar from '../../asset/img/default_profile.png'
 import './Member.css'
@@ -31,14 +33,15 @@ const Member=()=>{
   const companyId=Auth.getCompanyId();
   const [members, setMembers] = useState([]);
   const [memberId, setMemberId] = useState('');
-  const registerUrl='https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4';
+  const [inviteUrl, setInviteUrl] = useState('');
   const [confirmOpen, setConfirmOpen]=useState(false);
   const [roleOpen, setRoleOpen]=useState(false);
   const [orderOpen, setOrderOpen]=useState(false);
   const [registerOpen, setRegisterOpen]=useState(false);
-  const [clipboardOpen, setClipboardOpen]=useState(false);
   const [mailOpen, setMailOpen]=useState(false);
   const [alertOpen, setAlertOpen]=useState(false);
+  const [text, setText]=useState('');
+  const [error, setError]=useState(false);
   const roleChange= async (userId, e)=>{
     await changeRole(userId, e.target.value)
     .then(res=>{
@@ -46,7 +49,9 @@ const Member=()=>{
         setMembers(res.data);
       }
       else {
-        console.log(res.error.message);
+        setAlertOpen(true);
+        setError(true);
+        setText('変更は失敗しました!');
       }
     })
   } 
@@ -60,16 +65,41 @@ const Member=()=>{
       .then(res=>{
         if(res.status == '200'){
           setMembers(res.data);
-          setConfirmOpen(false);
+          setError(false);
+          setText('削除された！');
         }
         else {
-
+          setError(true);
+          setText('削除に失敗しました！');
         }
       })
+      .catch(err=>{
+        setError(true);
+        setText('削除に失敗しました！');
+      })
+      setAlertOpen(true);
     }
   }
-  const handleCopy=(open)=>{
-    setClipboardOpen(open);
+  const handleCopy=()=>{
+    if(inviteUrl !== ''){
+      navigator.clipboard.writeText(inviteUrl)
+        .then(() => {
+          setAlertOpen(true);
+          setError(false);
+          setText('コピーされました');
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlertOpen(true);
+          setError(true);
+          setText('コピーに失敗しました。');
+        });
+    }
+    else {
+      setAlertOpen(true);
+      setError(true);
+      setText('登録URLが見つかりません。');
+    }
   }
   useEffect(()=>{
     async function getData(){
@@ -78,11 +108,17 @@ const Member=()=>{
         if(res.status == '200') {
           setMembers(res.data);
         }
+      });
+      companyId && await getInviteId(companyId)
+      .then(res=>{
+        if(res.status == '200') {
+          setInviteUrl('http://localhost:3000/invite/'+res.data.invite_id);
+          // setInviteUrl('https://work-canvas-mern.vercel.app/invite/'+res.data.invite_id);
+        }
       })
     }
     getData();
   }, [])
-  console.log('......parent', members);
   return(
     <div className="enterprise__container">
       <div className='enterprise__box text-default member'>
@@ -156,9 +192,9 @@ const Member=()=>{
           <div className='staff__url d-flex align-items-center justify-content-between'>
             <dl className='d-flex mb-0'>
               <dt>登録URL</dt>
-              <dd className='ml-4'>https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4</dd>
+              <dd className='ml-4'>{inviteUrl}</dd>
             </dl>
-            <Button className=' url__clipboard p-0' onClick={()=>handleCopy(true)}>
+            <Button className=' url__clipboard p-0' onClick={handleCopy}>
               <span className='bg-blackgray text-white modal__button p-2 height-auto'>コピーする</span>
             </Button>
           </div>
@@ -169,14 +205,13 @@ const Member=()=>{
             </p>
             <textarea className='f__textarea mt-10' cols='30' rows='5' 
                       placeholder='スタッフに送るメッセージを入力してください'
+                      defaultValue="《WORKCANVAS》という美容師・アイリスト・ネイリストの転職支援サービスを利用することにいたしました。
+            エージェントが当社の「想い」や「環境」を基にして、マッチした求職者を紹介してくれるサービスです。
+            求職者から当社の求人に応募がありましたら、当社スタッフが日程調整を行う必要があります。
+            つきましては、求職者と日程調整を行っていただくため、まずは下記のURLをクリックして会員登録をお願いいたします。
+            不安な点などあれば連絡ください！
+            是非よろしくお願いします。"
             >
-              《WORKCANVAS》という美容師・アイリスト・ネイリストの転職支援サービスを利用することにいたしました。
-              エージェントが当社の「想い」や「環境」を基にして、マッチした求職者を紹介してくれるサービスです。
-              求職者から当社の求人に応募がありましたら、当社スタッフが日程調整を行う必要があります。
-              つきましては、求職者と日程調整を行っていただくため、まずは下記のURLをクリックして会員登録をお願いいたします。
-              不安な点などあれば連絡ください！
-              是非よろしくお願いします。
-              https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4
             </textarea>
             <div className='button__wrapper d-flex align-items-center justify-content-center mt-20'>
               <button className='line__button text-white modal__button w-45 p-2 bg-green' >LINEで送る</button>
@@ -209,12 +244,16 @@ const Member=()=>{
         <MailModal 
           open={mailOpen} 
           handleChange={(open)=>setMailOpen(open)}
+          alertOpen={alertOpen}
+          setAlertOpen={setAlertOpen}
+          setText={setText}
+          setError={setError}
         />
-        <CopyToClipboard 
-          open={clipboardOpen} 
-          text={registerUrl}
-        />
-        <Alert open={alertOpen} handleClose={(open)=>{setAlertOpen(open)}} text='削除に失敗しました!'  error={true}/>
+        <Alert 
+          open={alertOpen} 
+          handleClose={(open)=>{setAlertOpen(open)}} 
+          text={text}  
+          error={error}/>
       </div>
     </div>
   )

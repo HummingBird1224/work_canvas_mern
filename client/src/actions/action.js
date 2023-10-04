@@ -101,11 +101,38 @@ export const getMembersData = async (companyId) => {
     });
 }
 
+export const getInviteId = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/company/' + companyId + '/inviteId',
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
 export const changeRole = async (userId, role) => {
   return await API({
     method: 'post',
     url: '/members/' + userId + '/roleChange',
     data: { role: role, companyId: Auth.getCompanyId() }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const updateMembersOrder = async (members) => {
+  return await API({
+    method: 'post',
+    url: '/members/orderChange',
+    data: { members: members }
   })
     .then((res) => {
       return { status: res.status, data: res.data };
@@ -133,6 +160,19 @@ export const getPlans = async (planIds) => {
     method: 'post',
     url: '/plans',
     data: planIds
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getAllPlans = async () => {
+  return await API({
+    method: 'get',
+    url: '/plans',
   })
     .then((res) => {
       return { status: res.status, data: res.data };
