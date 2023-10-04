@@ -3,39 +3,27 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
-import Alert from '../Alert/Alert'
-import NoAvatar from '../../asset/img/default_profile.png'
-import './Modal.css'
+import './Modal.css';
 
 const MailModal = (props) => {
-  const [alertOpen, setAlertOpen] = useState(false);
   const [mail, setMail] = useState('');
-  const [error, setError] = useState(false);
-  const [text, setText] = useState('success');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const handleClose = () => {
-    props.handleChange(false)
-  }
   const handleSend = () => {
     if (mail == '') {
-      setError(true);
-      setText('宛先アドレスを記入してください。');
+      props.setError(true);
+      props.setText('宛先アドレスを記入してください。');
     }
     else if (!emailRegex.test(mail)) {
-      setError(true);
-      setText('入力したメールアドレスが正しいことを確認ください。');
+      props.setError(true);
+      props.setText('入力したメールアドレスが正しいことを確認ください。');
     }
     else {
-      setText('メールを送信しました。');
-      setError(false);
+      props.setText('メールを送信しました。');
+      props.setError(false);
       props.handleChange(false);
+      setMail('');
     }
-    setAlertOpen(true);
-    // props.handleChange(false);
-  }
-  const handleAlertClose = (open) => {
-    console.log(open)
-    setAlertOpen(open);
+    props.setAlertOpen(true);
   }
   const changeMail = (e) => {
     setMail(e.target.value);
@@ -71,21 +59,21 @@ const MailModal = (props) => {
                     <textarea cols='30' rows='5'
                       className='f__textarea'
                       name='body'
-                    >
+                      defaultValue="
                       《WORKCANVAS》という美容師・アイリスト・ネイリストの転職支援サービスを利用することにいたしました。
                       エージェントが当社の「想い」や「環境」を基にして、マッチした求職者を紹介してくれるサービスです。
                       求職者から当社の求人に応募がありましたら、当社スタッフが日程調整を行う必要があります。
                       つきましては、求職者と日程調整を行っていただくため、まずは下記のURLをクリックして会員登録をお願いいたします。
                       不安な点などあれば連絡ください！
-                      是非よろしくお願いします。
-                      https://work-canvas.com/invite/ieu4wY6kHLcnCdyu4
+                      是非よろしくお願いします。"
+                    >
                     </textarea>
                   </td>
                 </tr>
               </tbody>
             </table>
             <div className='button_wrapper d-flex justify-content-center'>
-              <Button className=' mt-60  p-1 w-100 ' onClick={handleClose}>
+              <Button className=' mt-60  p-1 w-100 ' onClick={() => props.handleChange(false)}>
                 <span className='modal__button bg-white text-default'>キャンセル</span>
               </Button>
               <Button className=' mt-60  p-1 w-100 ' onClick={handleSend}>
@@ -95,7 +83,6 @@ const MailModal = (props) => {
           </Box>
         </Box>
       </Modal>
-      <Alert open={alertOpen} handleClose={handleAlertClose} text={text} error={error} />
     </>
   )
 }

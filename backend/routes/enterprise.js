@@ -15,127 +15,128 @@ const emailVerificationService = require('../modules/mailVerified');
 const getMembers = async (companyId) => {
   return await User.findAll({
     attributes: ['id', 'username', 'role', 'order'],
+    order: [['order', 'ASC']],
     where: { company_id: companyId }
   });
 }
 
 router.get('/', async function (req, res, next) {
-  // var data = [
-  //   {
-  //     business_type: '美容師',
-  //     plan1: {
-  //       degree: "美容師免許なし",
-  //       price: 16.5,
-  //       license: "",
-  //       senior: 0
-  //     },
-  //     plan2: {
-  //       degree: "新卒／アシスタント",
-  //       price: 22,
-  //       license: "美容師免許有り",
-  //       senior: 0
-  //     },
-  //     plan3: {
-  //       degree: "スタイリスト",
-  //       price: 33,
-  //       license: "美容師免許有り",
-  //       senior: 1
-  //     },
-  //     plan4: {
-  //       degree: "管理美容師",
-  //       price: 38.5,
-  //       license: "美容師免許有り",
-  //       senior: 1
-  //     },
-  //     total_plan: [
-  //       "資格なし 16.5万円(税込)",
-  //       "新卒(資格取得見込み) 22万円(税込)",
-  //       "アシスタント(資格あり) 22万円(税込)",
-  //       "スタイリスト(資格あり) 33万円(税込)",
-  //       "管理美容師(資格あり) 38.5万円(税込)"
-  //     ]
-  //   },
-  //   {
-  //     business_type: 'アイリスト',
-  //     plan1: {
-  //       degree: "受付等",
-  //       price: 16.5,
-  //       license: "免許なし",
-  //       senior: 0
-  //     },
-  //     plan2: {
-  //       degree: "未経験者",
-  //       price: 22,
-  //       license: "免許あり（新卒・既卒）",
-  //       senior: 0
-  //     },
-  //     plan3: {
-  //       degree: "実務経験者",
-  //       price: 33,
-  //       license: "免許あり（3年未満）",
-  //       senior: 1
-  //     },
-  //     plan4: {
-  //       degree: "実務経験者",
-  //       price: 38.5,
-  //       license: "免許あり（3年以上）",
-  //       senior: 1
-  //     },
-  //     total_plan: [
-  //       "資格なし 受付・未経験 16.5万円(税込)",
-  //       "資格あり 実務経験なし(新卒・既卒) 22万円(税込)",
-  //       "資格あり 実務経験あり(3年未満) 33万円(税込)",
-  //       "資格あり 実務経験あり(3年以上) 38.5万円(税込)"
-  //     ]
-  //   },
-  //   {
-  //     business_type: 'ネイリスト/エステ',
-  //     plan1: {
-  //       degree: "受付・未経験",
-  //       price: 16.5,
-  //       license: "",
-  //       senior: 0
-  //     },
-  //     plan2: {
-  //       degree: "専門orスクール",
-  //       price: 22,
-  //       license: "在学中・新卒・既卒",
-  //       senior: 0
-  //     },
-  //     plan3: {
-  //       degree: "実務経験者",
-  //       price: 27.5,
-  //       license: "3年未満",
-  //       senior: 1
-  //     },
-  //     plan4: {
-  //       degree: "実務経験者",
-  //       price: 33,
-  //       license: "3年以上",
-  //       senior: 1
-  //     },
-  //     total_plan: [
-  //       "受付・未経験 16.5万円(税込)",
-  //       "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-  //       "実務経験あり(3年未満) 27.5万円(税込)",
-  //       "実務経験あり(3年以上) 33万円(税込)"
-  //     ]
-  //   },
-  //   {
-  //     business_type: '美容師',
-  //     total_plan: [
-  //       "受付・未経験 16.5万円(税込)",
-  //       "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-  //       "実務経験あり(3年未満) 27.5万円(税込)",
-  //       "実務経験あり(3年以上) 33万円(税込)"
-  //     ]
-  //   },
-  // ];
+  var data = [
+    {
+      business_type: '美容師',
+      plan1: {
+        degree: "美容師免許なし",
+        price: 16.5,
+        license: "",
+        senior: 0
+      },
+      plan2: {
+        degree: "新卒／アシスタント",
+        price: 22,
+        license: "美容師免許有り",
+        senior: 0
+      },
+      plan3: {
+        degree: "スタイリスト",
+        price: 33,
+        license: "美容師免許有り",
+        senior: 1
+      },
+      plan4: {
+        degree: "管理美容師",
+        price: 38.5,
+        license: "美容師免許有り",
+        senior: 1
+      },
+      total_plan: [
+        "資格なし 16.5万円(税込)",
+        "新卒(資格取得見込み) 22万円(税込)",
+        "アシスタント(資格あり) 22万円(税込)",
+        "スタイリスト(資格あり) 33万円(税込)",
+        "管理美容師(資格あり) 38.5万円(税込)"
+      ]
+    },
+    {
+      business_type: 'アイリスト',
+      plan1: {
+        degree: "受付等",
+        price: 16.5,
+        license: "免許なし",
+        senior: 0
+      },
+      plan2: {
+        degree: "未経験者",
+        price: 22,
+        license: "免許あり（新卒・既卒）",
+        senior: 0
+      },
+      plan3: {
+        degree: "実務経験者",
+        price: 33,
+        license: "免許あり（3年未満）",
+        senior: 1
+      },
+      plan4: {
+        degree: "実務経験者",
+        price: 38.5,
+        license: "免許あり（3年以上）",
+        senior: 1
+      },
+      total_plan: [
+        "資格なし 受付・未経験 16.5万円(税込)",
+        "資格あり 実務経験なし(新卒・既卒) 22万円(税込)",
+        "資格あり 実務経験あり(3年未満) 33万円(税込)",
+        "資格あり 実務経験あり(3年以上) 38.5万円(税込)"
+      ]
+    },
+    {
+      business_type: 'ネイリスト/エステ',
+      plan1: {
+        degree: "受付・未経験",
+        price: 16.5,
+        license: "",
+        senior: 0
+      },
+      plan2: {
+        degree: "専門orスクール",
+        price: 22,
+        license: "在学中・新卒・既卒",
+        senior: 0
+      },
+      plan3: {
+        degree: "実務経験者",
+        price: 27.5,
+        license: "3年未満",
+        senior: 1
+      },
+      plan4: {
+        degree: "実務経験者",
+        price: 33,
+        license: "3年以上",
+        senior: 1
+      },
+      total_plan: [
+        "受付・未経験 16.5万円(税込)",
+        "専門orスクール 在学中/新卒/既卒 22万円(税込)",
+        "実務経験あり(3年未満) 27.5万円(税込)",
+        "実務経験あり(3年以上) 33万円(税込)"
+      ]
+    },
+    {
+      business_type: '美容師',
+      total_plan: [
+        "受付・未経験 16.5万円(税込)",
+        "専門orスクール 在学中/新卒/既卒 22万円(税込)",
+        "実務経験あり(3年未満) 27.5万円(税込)",
+        "実務経験あり(3年以上) 33万円(税込)"
+      ]
+    },
+  ];
 
-  // await Plan.bulkCreate(data);
-  // console.log('done');
-  // const result = await emailVerificationService.sendVerificationEmail(1);
-  // console.log(result);
+  await Plan.bulkCreate(data);
+  console.log('done');
+  const result = await emailVerificationService.sendVerificationEmail(1);
+  console.log(result);
 })
 
 //POST /signup
@@ -333,6 +334,20 @@ router.get('/company/:companyId/members', ensureAuthenticated, async function (r
       res.status(200).json(members);
     })
     .catch(err => {
+      // return next(err);
+      throw err;
+    })
+})
+
+router.get('/company/:companyId/inviteId', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await Company.findOne({
+    attributes: ['invite_id'],
+    where: { id: companyId }
+  }).then(company => {
+    return res.status(200).json(company);
+  })
+    .catch(err => {
       return next(err);
     })
 })
@@ -353,6 +368,30 @@ router.post('/members/:userId/roleChange', ensureAuthenticated, async function (
     .catch(err => {
       return next(err);
     })
+})
+
+router.post('/members/orderChange', ensureAuthenticated, async function (req, res, next) {
+  const { members } = req.body;
+  let newMembers = [];
+  for (let i = 0; i < members.length; i++) {
+    try {
+      const newMember = await User.findOne(
+        { where: { id: members[i].id } }
+      );
+      newMember.update({ order: members[i].order });
+      newMembers = [...newMembers, {
+        id: newMember.id,
+        order: newMember.order,
+        role: newMember.role,
+        username: newMember.username
+      }]
+    }
+    catch (err) {
+      // throw err;
+      return next(err);
+    }
+  }
+  return res.status(200).json(newMembers);
 })
 
 router.get('/members/:memberId/delete/:companyId', ensureAuthenticated, async function (req, res, next) {
@@ -380,6 +419,16 @@ router.post('/plans', ensureAuthenticated, async function (req, res, next) {
   })
     .then(async (plans) => {
       res.status(200).json(plans)
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.get('/plans', ensureAuthenticated, async function (req, res, next) {
+  await Plan.findAll()
+    .then(async (plans) => {
+      res.status(200).json(plans);
     })
     .catch(err => {
       return next(err);

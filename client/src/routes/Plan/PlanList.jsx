@@ -3,6 +3,7 @@ import CardGiftcardOutlinedIcon from '@mui/icons-material/CardGiftcardOutlined';
 
 import PlanListWrapper from '../../components/PlanList/PlanListWrapper';
 import Faq from '../../components/Faq/Faq';
+import {getAllPlans} from '../../actions/action';
 import './Plan.css'
 
 const initialPlanList=[
@@ -109,7 +110,18 @@ const initialPlanList=[
 ]
 
 const PlanList = () => {
-  const [plansList, setPlansList]=useState(initialPlanList);
+  const [plans, setPlans]=useState([]);
+  useEffect(()=>{
+    async function getData(){
+      await getAllPlans()
+      .then(res=>{
+        if(res.status == '200'){
+          setPlans(res.data);
+        }
+      })
+    }
+    getData();
+  })
   return ( 
     <div className="enterprise__box ">
       <h1 className='title__lv1 pb-0'>料金プラン</h1>
@@ -135,8 +147,8 @@ const PlanList = () => {
         <p className="fc-gray fs-14 mt-10">
           ※成果報酬の区分は、採用業種の前職の区分に応じて判断します。（複数の区分に該当する場合には、最も金額が高い区分が適用されます。）
         </p>
-        {plansList.map((planList)=>(
-          <PlanListWrapper key={planList.id} props={planList}/>
+        {plans.length>0&&plans.map((plan)=>(
+          plan.plan1&&<PlanListWrapper key={plan.id} props={plan}/>
         ))}
       </section>
       <div className="button__wrapper text-center d-flex w-100 justify-content-center fw-700">

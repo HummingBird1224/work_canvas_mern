@@ -3,58 +3,50 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
+import { updateMembersOrder } from '../../actions/action';
 import Alert from '../Alert/Alert'
 import NoAvatar from '../../asset/img/default_profile.png'
 import './Modal.css'
 
-const initialUsersOrder = [
-  {
-    name: '星川豊',
-    role: '管理者',
-    order: 1,
-    id: 1
-  },
-  {
-    name: '谷本 和優',
-    role: '採用担当者',
-    order: 2,
-    id: 2
-  },
-  {
-    name: 'nonaka',
-    role: '管理者',
-    order: 3,
-    id: 3
-  },
-]
-
 const OrderModal = (props) => {
-  // console.log(props.members);
-  const [usersOrder, setUsersOrder] = useState(initialUsersOrder)
-  const [alertOpen, setAlertOpen] = useState(false)
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [error, setError] = useState(false);
   const handleClose = () => {
     props.handleChange(false)
   }
   const handleChange = (id, e) => {
-    console.log(id, e.target.value)
-    const newMembers = props.members;
+    const newMembers = [...props.members];
     newMembers.map((member) => {
       if (member.id == id) {
         member.order = parseInt(e.target.value);
       }
     });
-    console.log(newMembers);
-    props.setMembers(newMembers);
-    // const update = usersOrder;
-    // setUsersOrder(update)
+    props.setMembers([...newMembers]);
   }
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
+    const newMembers = [...props.members.map(member => (
+      { id: member.id, order: member.order }
+    ))];
+    await updateMembersOrder(newMembers)
+      .then(res => {
+        if (res.status == '200') {
+          props.setMembers(res.data);
+          setText('更新しました!');
+          setError(false);
+          props.handleChange(false);
+        }
+        else {
+          setText('更新が失敗しました!');
+          setError(false);
+        }
+      })
+      .catch(err => {
+        setText('更新が失敗しました!');
+        setError(false);
+      })
     setAlertOpen(true);
-    props.handleChange(false);
-  }
-  const handleAlertClose = (open) => {
-    console.log(open)
-    setAlertOpen(open);
+
   }
   return (
     <>
@@ -101,6 +93,7 @@ const OrderModal = (props) => {
                         placeholder='数字を入力してください'
                         value={member.order}
                         className='f__text__table'
+                        max='9999'
                         onChange={(e) => handleChange(member.id, e)} />
                     </td>
                   </tr>
@@ -118,7 +111,7 @@ const OrderModal = (props) => {
           </Box>
         </Box>
       </Modal>
-      <Alert open={alertOpen} handleClose={handleAlertClose} text='更新しました!' />
+      <Alert open={alertOpen} handleClose={(open) => setAlertOpen(open)} text={text} error={error} />
     </>
   )
 }
