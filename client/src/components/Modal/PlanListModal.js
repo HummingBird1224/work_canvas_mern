@@ -110,9 +110,6 @@ const initialPlanList = [
 ]
 
 const PlanListModal = (props) => {
-  const handleClose = () => {
-    props.handleChange(false);
-  }
   return (
     <>
       <Modal
@@ -124,11 +121,11 @@ const PlanListModal = (props) => {
           className='modal__background plan__modal text-black'
         >
           <Box className='modal__body'>
-            <div className='modal__close text-right' onClick={handleClose}>
+            <div className='modal__close text-right' onClick={() => props.handleChange(false)}>
               <CloseOutlinedIcon />
             </div>
-            {initialPlanList.map((planList) => (
-              <PlanListWrapper key={planList.id} props={planList} />
+            {props.allPlans.length > 0 && props.allPlans.map((plan) => (
+              plan.plan1 && <PlanListWrapper key={plan.id} props={plan} />
             ))}
           </Box>
         </Box>

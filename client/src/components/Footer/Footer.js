@@ -18,10 +18,10 @@ const Footer = () => {
             <a href='https://gramn.com/' target='_blank' className='text-default'>運営会社</a>
           </li>
           <li>
-            <Link to='content/t' target='_blank' className='text-default'>お役立ち情報</Link>
+            <Link to='/content/t' target='_blank' className='text-default'>お役立ち情報</Link>
           </li>
           <li>
-            <Link to='enterprise/manual' target='_blank' className='text-default'>マニュアル・規約</Link>
+            <Link to='/enterprise/manual' target='_blank' className='text-default'>マニュアル・規約</Link>
           </li>
           <li>
             <a href='https://gramn.notion.site/a338552b675442ec91dc78e90abe700b' target='_blank' className='text-default'>募集記事クオリティガイドライン</a>

@@ -73,12 +73,65 @@ export const getCompanyData = async (companyId) => {
     });
 }
 
+export const getBillingData = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/billing/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getBankData = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/bank/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
 export const editCompanyData = async (companyData) => {
-  console.log(companyData);
   return await API({
     method: 'post',
     url: '/company/edit',
     data: companyData
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const editBillingData = async (billingData) => {
+  return await API({
+    method: 'post',
+    url: '/billing/edit',
+    data: billingData
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const editBankData = async (bankData) => {
+  return await API({
+    method: 'post',
+    url: '/bank/edit',
+    data: bankData
   })
     .then((res) => {
       return { status: res.status, data: res.data };
@@ -173,6 +226,33 @@ export const getAllPlans = async () => {
   return await API({
     method: 'get',
     url: '/plans',
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getAppliedPlans = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/plans/applied/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const changePlans = async (addedPlanIds) => {
+  return await API({
+    method: 'post',
+    url: '/plans/change/' + Auth.getCompanyId(),
+    data: addedPlanIds
   })
     .then((res) => {
       return { status: res.status, data: res.data };

@@ -27,6 +27,11 @@ class Auth {
       JSON.parse(localStorage.getItem('auth')).company_id : null;
   }
 
+  getCorporateName() {
+    return JSON.parse(localStorage.getItem('auth')) ?
+      JSON.parse(localStorage.getItem('auth')).corporate_name : null;
+  }
+
   getUserDetails() {
     return JSON.parse(localStorage.getItem("auth")) ?
       JSON.parse(localStorage.getItem("auth")) : null;

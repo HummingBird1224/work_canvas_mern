@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -108,7 +108,7 @@ const mainMenu = [
 ]
 
 const TopMenu = ({ menu }) => (
-  <List className='py-0 pb-10 w-100 top__menu'>
+  <List className={`py-0 pb-10 w-100 top__menu ${menu ? '' : 'ml-3'}`}>
     <div className='dropdown__profile'>
       {topMenu.map((tMenu) => (
         <ListItem key={tMenu.path} disablePadding>
@@ -206,25 +206,25 @@ const LineMenu = (props) => (
     <button
       type='button'
       className='line__button d-flex align-items-center justify-content-center'
-      onClick={()=>props.showModal(true)}
+      onClick={() => props.showModal(true)}
     >
       詳しくはこちら</button>
   </Box>
 )
 
 const Sidebar = ({ menu }) => {
-  const [alertOpen, setAlertOpen]=useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   return (
     <Box
       sx={{ zIndex: 100 }}
       role="presentation"
       className={menu ? 'menubar' : 'sidebar'}
     >
-      <h6 className={menu ? 'brand' : 'px-20 pt-20 pb-10 mb-0'}>C・crew</h6>
+      <h6 className={menu ? 'brand' : 'px-20 pt-20 pb-10 mb-0'} style={{ fontSize: 14 }}>{Auth.getCorporateName()}</h6>
       <TopMenu menu={menu ? menu : false} />
       {!menu && <Divider className='border-gray pt-10' />}
       <MainMenu menu={menu ? menu : false} />
-      {!menu && <LineMenu showModal={(open)=>setAlertOpen(open)}/>}
+      {!menu && <LineMenu showModal={(open) => setAlertOpen(open)} />}
       <List>
         <ListItem disablePadding>
           {/* <Control /> */}
@@ -237,7 +237,7 @@ const Sidebar = ({ menu }) => {
           </div>
         </ListItem>
       </List>
-      <LineModal open={alertOpen} handleChange={(open)=>setAlertOpen(open)}/>
+      <LineModal open={alertOpen} handleChange={(open) => setAlertOpen(open)} />
     </Box>
   );
 }
