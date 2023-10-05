@@ -47,19 +47,34 @@ const emailVerificationService = {
     }
 
     const token = generateVerificationToken(user);
+    // const transport = nodemailer.createTransport({
+    //   host: config.mailHost,
+    //   port: config.mailPort,
+    //   auth: {
+    //     user: config.mailUser,
+    //     pass: config.mailPassword,
+    //   },
+    // });
+    // await transport.sendMail({
+    //   from: config.mailFrom,
+    //   to: 'faster1224@outlook.com',
+    //   subject: 'Test',
+    //   html: generateWelcomeMail(user.name, token),
+    // });
     const transport = nodemailer.createTransport({
-      host: config.mailHost,
-      port: config.mailPort,
+      host: 'smtp.sv14216.xserver.jp',
+      port: 587,
       auth: {
-        user: config.mailUser,
-        pass: config.mailPassword,
+        user: 'xs469962@metalpro.jp',
+        pass: 'gs888888',
       },
     });
+    console.log(transport);
     await transport.sendMail({
-      from: config.mailFrom,
+      from: "WORKCANVAS < manager@work - canvas.com >",
       to: 'faster1224@outlook.com',
       subject: 'Test',
-      html: generateWelcomeMail(user.name, token),
+      html: 'Hello world',
     });
 
     return { confirmation: 'Verification email sent' };
