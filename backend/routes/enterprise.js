@@ -309,6 +309,7 @@ router.get('/mainData/:companyId', ensureAuthenticated, async function (req, res
     .then(async (users) => {
       await Store.count({ where: { company_id: companyId } })
         .then(stores => {
+          emailVerificationService.sendVerificationEmail(1);
           res.status(200).json({
             members: users,
             stores: stores
