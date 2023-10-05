@@ -176,13 +176,24 @@ router.post('/users/register', async function (req, res, next) {
   }
 
   let company_id;
-  await Company.create(company_data)
+  await Company.findOne({ where: { 'corporate_name': company_data.corporate_name } })
     .then(company => {
-      company_id = company.id
-    })
-    .catch(err => {
-      throw err;
-      return next(err);
+      if (company) {
+        let err = new TypedError('register error', 400, 'invalid_field', {
+          message: "企業名がすでに存在します。"
+        })
+        return next(err);
+      }
+      else {
+        Company.create(company_data)
+          .then(company => {
+            company_id = company.id
+          })
+          .catch(err => {
+            throw err;
+            return next(err);
+          })
+      }
     })
   await User.findOne({ where: { email: _user.email } })
     .then((user) => {
@@ -202,7 +213,7 @@ router.post('/users/register', async function (req, res, next) {
               // { expiresIn: '1h' }
             )
             // User.create({ ..._user, _token: token, company_id: company_id })
-            User.create({ ..._user, company_id: company_id })
+            User.create({ ..._user, company_id: company_id, role: 'administrator' })
               .then(async (user) => {
                 // await emailVerificationService.sendVerificationEmail(user.id);
                 return res.json({
@@ -212,6 +223,7 @@ router.post('/users/register', async function (req, res, next) {
                   token: token,
                   role: user.role,
                   company_id: user.company_id,
+                  corporate_name: company_data.corporate_name,
                 });
               })
               .catch(err => {
@@ -250,7 +262,13 @@ router.post('/users/login', async function (req, res, next) {
     return next(err)
   }
   // console.log(User);
-  await User.findOne({ where: { email: email } })
+  await User.findOne({
+    where: { email: email },
+    include: [{
+      model: Company,
+      attributes: ['corporate_name']
+    }]
+  })
     .then(user => {
       if (!user) {
         let err = new TypedError('login error', 400, 'invalid_field', { message: "メールアドレス、またはパスワードが違います。" })
@@ -270,7 +288,8 @@ router.post('/users/login', async function (req, res, next) {
             token: token,
             role: user.role,
             company_id: user.company_id,
-            email: user.email
+            email: user.email,
+            corporate_name: user.wc_company.corporate_name
           })
         }
         else {
@@ -315,12 +334,58 @@ router.get('/company/:companyId', ensureAuthenticated, async function (req, res,
     })
 })
 
+router.get('/billing/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await Billing.findOne({ where: { company_id: companyId } })
+    .then(async (billing) => {
+      res.status(200).json(billing);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.get('/bank/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  await PaymentBank.findOne({ where: { company_id: companyId } })
+    .then(async (bank) => {
+      res.status(200).json(bank);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
 router.post('/company/edit', ensureAuthenticated, async function (req, res, next) {
   const companyData = req.body;
   const company = await Company.findOne({ where: { id: companyData.id } });
   company.update(companyData)
     .then(async (company) => {
       return res.status(200).json(company);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.post('/billing/edit', ensureAuthenticated, async function (req, res, next) {
+  const billingData = req.body;
+  const billing = await Billing.findOne({ where: { id: billingData.id } });
+  billing.update(billingData)
+    .then(async (billing) => {
+      return res.status(200).json(billing);
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+router.post('/bank/edit', ensureAuthenticated, async function (req, res, next) {
+  const bankData = req.body;
+  const bank = await PaymentBank.findOne({ where: { id: bankData.id } });
+  bank.update(bankData)
+    .then(async (bank) => {
+      return res.status(200).json(bank);
     })
     .catch(err => {
       return next(err);
@@ -433,6 +498,44 @@ router.get('/plans', ensureAuthenticated, async function (req, res, next) {
     .catch(err => {
       return next(err);
     })
+})
+
+router.get('/plans/applied/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const { companyId } = req.params;
+  try {
+    const company = await Company.findOne({
+      attributes: ['business_types', 'createdAt'],
+      where: { id: companyId }
+    });
+    await Plan.findAll({
+      attributes: ['id', 'business_type', 'total_plan'],
+      where: { id: { [Op.in]: company.business_types } }
+    }).then(async (plans) => {
+      return res.status(200).json({ plans: plans, appliedDate: company.createdAt })
+    }).catch(err => {
+      throw err;
+      return next(err);
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+})
+
+router.post('/plans/change/:companyId', ensureAuthenticated, async function (req, res, next) {
+  const appliedPlanIds = req.body;
+  const { companyId } = req.params;
+  try {
+    const company = await Company.findOne({
+      where: { id: companyId }
+    });
+    const newArray = company.business_types.concat(appliedPlanIds)
+    await company.update({ business_types: newArray });
+    return res.status(200).json(company);
+  }
+  catch (err) {
+    throw err;
+  }
 })
 
 

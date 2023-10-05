@@ -6,25 +6,6 @@ const Step1 = (props) => {
   const missingError='*必須項目の未回答があります。';
   const phoneError='*使用出来ない文字が含まれています。';
   const phoneRegex = /^\d+$/;
-  // const [nextClicked, setNextClicked]=useState(props.nextClicked);
-  // useEffect(()=>{
-  //   setNextClicked(props.nextClicked);
-  // }, [props.nextClicked]);
-  // const [companyErrors, setCompanyErrors] = useState({
-  //   company_name:'',
-  //   representative_director_name:'',
-  //   phone_number:'',
-  //   postal_code:'',
-  //   prefecture_id:'',
-  //   address_main:'',
-  //   business_types:'',
-  // });
-  // const [billingErrors, setBillingErrors] = useState({
-  //   billing_company_name:'',
-  //   postal_code:'',
-  //   prefecture_id:'',
-  //   address_main:'',
-  // });
   const handleCompanyChange=(event)=>{
     const {name, value}=event.target;
     if(name == 'business_types'){
@@ -70,10 +51,10 @@ const Step1 = (props) => {
       companyErrors={...companyErrors, phone_number:missingError};
     }
     if(props.companyData.prefecture_id == ''){
-      companyErrors={...companyErrors, postal_code:missingError};
+      companyErrors={...companyErrors, prefecture_id:missingError};
     }
     if(props.companyData.postal_code == ''){
-      companyErrors={...companyErrors, prefecture_id:missingError};
+      companyErrors={...companyErrors, postal_code:missingError};
     }
     if(props.companyData.address_main == ''){
       companyErrors={...companyErrors, address_main:missingError};
@@ -93,10 +74,10 @@ const Step1 = (props) => {
       billingErrors={...billingErrors, billing_company_name:missingError};
     }
     if(props.billingData.postal_code == ''){
-      billingErrors={...billingErrors, prefecture_id:missingError};
+      billingErrors={...billingErrors, postal_code:missingError};
     }
     if(props.billingData.prefecture_id == ''){
-      billingErrors={...billingErrors, postal_code:missingError};
+      billingErrors={...billingErrors, prefecture_id:missingError};
     }
     if(props.billingData.address_main == ''){
       billingErrors={...billingErrors, address_main:missingError};

@@ -18,6 +18,8 @@ db.Plan = require("./plan.model.js")(sequelize, Sequelize);
 db.Billing = require("./billing.model.js")(sequelize, Sequelize);
 db.Store = require("./store.model.js")(sequelize, Sequelize);
 
+db.Company.hasMany(db.User, { foreignKey: 'company_id' });
+db.User.belongsTo(db.Company, { foreignKey: 'company_id' });
 db.Company.hasMany(db.Store, { foreignKey: 'company_id' });
 db.Store.belongsTo(db.Company, { foreignKey: 'company_id' });
 db.Company.hasOne(db.Billing, { foreignKey: 'company_id' });
