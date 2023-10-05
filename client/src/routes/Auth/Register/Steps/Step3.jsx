@@ -68,8 +68,8 @@ const Step3 = (props) => {
         <div className="u-mb-md">
           <div className="tag tag--type_primary">必須</div>
           <p><small>※５０音検索で、金融機関や支店を選択してください。</small></p>
-          <button
-            className="button button--size_small button--icon_type_back button--icon_type_back_search chooseBank">金融機関・支店を選択</button>
+          {/* <button
+            className="button button--size_small button--icon_type_back button--icon_type_back_search chooseBank">金融機関・支店を選択</button> */}
         </div>
         <div>
           <p>銀行名</p>

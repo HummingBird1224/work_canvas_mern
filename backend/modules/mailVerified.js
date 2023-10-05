@@ -10,6 +10,7 @@ const generateVerificationToken = (user) => {
   const payload = {
     user: {
       id: user.id,
+      email: user.email
     },
   };
   return jwt.sign(payload, jwtConfig.secret, { expiresIn: '1h' });
