@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const config = require('../configs/jwt-config')
@@ -6,7 +7,7 @@ const ensureAuthenticated = require('../modules/ensureAuthenticated')
 var bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
-const { User, Company, Billing, Feature, PayList, PaymentBank, PaymentCard, Plan, Store } = require("../models");
+const { User, Company, Billing, Feature, PayList, PaymentBank, PaymentCard, Plan, Store, sequelize } = require("../models");
 const TypedError = require('../modules/ErrorHandler')
 const emailVerificationService = require('../modules/mailVerified');
 
@@ -16,8 +17,22 @@ const getMembers = async (companyId) => {
   return await User.findAll({
     attributes: ['id', 'username', 'role', 'order'],
     order: [['order', 'ASC']],
-    where: { company_id: companyId }
+    where: sequelize.literal(`"wc_users"."company_ids"::jsonb @> '[${companyId}]'::jsonb`)
   });
+}
+
+const getAcceptedMembers = async (accepted) => {
+  let members = [];
+  if (accepted.length > 0) {
+    for (let i = 0; i < accepted.length; i++) {
+      const member = await User.findOne({
+        attributes: ['id', 'username'],
+        where: { id: accepted[i] }
+      });
+      members = [...members, member]
+    }
+  }
+  return members;
 }
 
 // router.get('/', async function (req, res, next) {
@@ -213,7 +228,7 @@ router.post('/users/register', async function (req, res, next) {
               // { expiresIn: '1h' }
             )
             // User.create({ ..._user, _token: token, company_id: company_id })
-            User.create({ ..._user, company_id: company_id, role: 'administrator' })
+            User.create({ ..._user, company_ids: [company_id], role: 'administrator' })
               .then(async (user) => {
                 // await emailVerificationService.sendVerificationEmail(user.id);
                 return res.json({
@@ -222,7 +237,7 @@ router.post('/users/register', async function (req, res, next) {
                   email: user.email,
                   token: token,
                   role: user.role,
-                  company_id: user.company_id,
+                  company_id: company_id,
                   corporate_name: company_data.corporate_name,
                 });
               })
@@ -244,7 +259,7 @@ router.post('/users/register', async function (req, res, next) {
 router.post('/initialData', ensureAuthenticated, async function (req, res, next) {
   const { companyData, billingData, bankData, companyId } = req.body;
   const company = await Company.findOne({ where: { id: companyId } });
-  await company.update(companyData);
+  await company.update({ ...companyData, applied_date: new Date() });
   const billing = await Billing.create({ ...billingData, company_id: companyId });
   const bank = await PaymentBank.create({ ...bankData, company_id: companyId });
   if (company && billing && bank) {
@@ -263,18 +278,14 @@ router.post('/users/login', async function (req, res, next) {
   }
   // console.log(User);
   await User.findOne({
-    where: { email: email },
-    include: [{
-      model: Company,
-      attributes: ['corporate_name']
-    }]
+    where: { email: email }
   })
     .then(user => {
       if (!user) {
         let err = new TypedError('login error', 400, 'invalid_field', { message: "メールアドレス、またはパスワードが違います。" })
         return next(err)
       }
-      bcrypt.compare(password, user.password, function (err, isMatch) {
+      bcrypt.compare(password, user.password, async function (err, isMatch) {
         if (err) throw err;
         if (isMatch) {
           let token = jwt.sign(
@@ -282,15 +293,45 @@ router.post('/users/login', async function (req, res, next) {
             config.secret,
             // { expiresIn: '1h' }
           )
-          res.status(200).json({
-            user_id: user.id,
-            username: user.username,
-            token: token,
-            role: user.role,
-            company_id: user.company_id,
-            email: user.email,
-            corporate_name: user.wc_company.corporate_name
-          })
+          if (user.role == 'administrator') {
+            const { corporate_name } = await Company.findOne({
+              attributes: ['corporate_name'],
+              where: { id: user.company_ids[0] }
+            });
+            res.status(200).json({
+              user_id: user.id,
+              username: user.username,
+              token: token,
+              role: user.role,
+              company_id: user.company_ids[0],
+              email: user.email,
+              corporate_name: corporate_name
+            })
+          }
+          else if (user.role == 'recruiter') {
+            let corporates = [];
+            for (let i = 0; i < user.company_ids.length; i++) {
+              const { corporate_name } = await Company.findOne({
+                attributes: ['corporate_name'],
+                where: { id: user.company_ids[i] }
+              });
+              // console.log(corporate_name)
+              corporates = [...corporates, { company_id: user.company_ids[i], corporate_name: corporate_name }];
+            }
+            res.status(200).json({
+              user_id: user.id,
+              username: user.username,
+              token: token,
+              role: user.role,
+              email: user.email,
+              corporates: corporates
+            })
+          }
+          else {
+            let err = new TypedError('login error', 400, 'invalid_user', { message: "登録された企業がいないか招待されていないユーザー。" })
+            return next(err)
+          }
+          // const corporate_name = await Company.findOne({where:})
         }
         else {
           let err = new TypedError('login error', 400, 'password_not_match', { message: "パスワードが正しくありません。" })
@@ -305,23 +346,20 @@ router.post('/users/login', async function (req, res, next) {
 
 router.get('/mainData/:companyId', ensureAuthenticated, async function (req, res, next) {
   const companyId = req.params.companyId;
-  await User.count({ where: { company_id: companyId } })
-    .then(async (users) => {
-      await Store.count({ where: { company_id: companyId } })
-        .then(stores => {
-          emailVerificationService.sendVerificationEmail(1);
-          res.status(200).json({
-            members: users,
-            stores: stores
-          })
-        })
-        .catch(err => {
-          throw err;
-        })
+  try {
+    const stores = await Store.count({ where: { company_id: companyId } })
+    const users = await User.count({
+      where: sequelize.literal(`"wc_users"."company_ids"::jsonb @> '[${companyId}]'::jsonb`)
     })
-    .catch(err => {
-      return next(err);
+    res.status(200).json({
+      members: users,
+      stores: stores
     })
+  }
+  catch (err) {
+    throw err;
+    return next(err);
+  }
 })
 
 router.get('/company/:companyId', ensureAuthenticated, async function (req, res, next) {
@@ -405,6 +443,40 @@ router.get('/company/:companyId/members', ensureAuthenticated, async function (r
     })
 })
 
+router.get('/company/:companyId/acceptedMembers', ensureAuthenticated, async function (req, res, next) {
+  const companyId = req.params.companyId;
+  const company = await Company.findOne({
+    where: { id: companyId }
+  });
+  const accepted = company.accepted;
+  const members = await getAcceptedMembers(accepted);
+  res.status(200).json(members);
+})
+
+router.get('/company/:companyId/accept/:status/:userId', ensureAuthenticated, async function (req, res, next) {
+  const { companyId, userId, status } = req.params;
+  const company = await Company.findOne({
+    where: { id: companyId }
+  });
+  let newAccpeted = [...company.accepted];
+  const index = newAccpeted.indexOf(parseInt(userId));
+  newAccpeted.splice(index, 1);
+  await company.update({
+    accepted: [...newAccpeted]
+  })
+  const user = await User.findOne({
+    where: { id: userId }
+  })
+  if (status) {
+    await user.update({
+      role: 'user' ? 'recruiter' : user.role,
+      company_ids: [...user.company_ids, parseInt(companyId)]
+    })
+  }
+  const members = await getAcceptedMembers(company.accepted)
+  res.status(200).json(members);
+})
+
 router.get('/company/:companyId/inviteId', ensureAuthenticated, async function (req, res, next) {
   const companyId = req.params.companyId;
   await Company.findOne({
@@ -462,12 +534,13 @@ router.post('/members/orderChange', ensureAuthenticated, async function (req, re
 
 router.get('/members/:memberId/delete/:companyId', ensureAuthenticated, async function (req, res, next) {
   const { memberId, companyId } = req.params;
-  await User.update(
-    {
-      company_id: null
-    },
-    { where: { id: memberId } }
-  );
+  const user = await User.findOne({ where: { id: memberId } });
+  let newArray = [...user.company_ids];
+  const index = newArray.indexOf(parseInt(companyId));
+  newArray.splice(index, 1)
+  await user.update({
+    company_ids: [...newArray]
+  })
   await getMembers(companyId)
     .then(async (members) => {
       res.status(200).json(members);
@@ -505,14 +578,14 @@ router.get('/plans/applied/:companyId', ensureAuthenticated, async function (req
   const { companyId } = req.params;
   try {
     const company = await Company.findOne({
-      attributes: ['business_types', 'createdAt'],
+      attributes: ['business_types', 'applied_date'],
       where: { id: companyId }
     });
     await Plan.findAll({
       attributes: ['id', 'business_type', 'total_plan'],
       where: { id: { [Op.in]: company.business_types } }
     }).then(async (plans) => {
-      return res.status(200).json({ plans: plans, appliedDate: company.createdAt })
+      return res.status(200).json({ plans: plans, appliedDate: company.applied_date })
     }).catch(err => {
       throw err;
       return next(err);
@@ -539,6 +612,172 @@ router.post('/plans/change/:companyId', ensureAuthenticated, async function (req
   }
 })
 
+router.get('/mail/check/:inviteId', ensureAuthenticated, async function (req, res, next) {
+  const { inviteId } = req.params;
+  await Company.findOne({ where: { invite_id: inviteId } })
+    .then(company => {
+      if (company) {
+        return res.status(200).json(company.id)
+      }
+      else {
+        let err = new TypedError('invited error', 400, 'invalid_field', {
+          message: "会社は存在しません。"
+        })
+        return next(err);
+      }
+    })
+    .catch(err => {
+      throw err;
+    })
+})
+
+router.post('/mail/send', ensureAuthenticated, async function (req, res, next) {
+  const { mail } = req.body;
+  console.log(mail);
+  axios.get('https://metalpro.jp/api/v1/invite?email=' + mail)
+    .then(async (res) => {
+      // console.log(res.data);
+    })
+})
+
+router.post('/invite/accept', async function (req, res, next) {
+  const { email, companyId } = req.body;
+  try {
+    const user = await User.findOne({ where: { email: email } });
+    const company = await Company.findOne({ where: { id: companyId } });
+    await company.update({
+      accepted: [...company.accepted, user.id]
+    });
+    res.status(200).json(company);
+  }
+  catch (err) {
+    throw err;
+  }
+})
+
+router.post('/invite/register', async function (req, res, next) {
+  // console.log('---------------------- test1 -----------------\n', req.body);
+  const { _user, companyId } = req.body;
+
+  req.checkBody('username', 'User Name is required').notEmpty();
+  req.checkBody('email', 'Email is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+
+  let missingFieldErrors = req.validationErrors();
+  if (missingFieldErrors) {
+    let err = new TypedError('register error', 400, 'missing_field', {
+      errors: missingFieldErrors,
+    })
+    throw err;
+    return next(err)
+  }
+
+  req.checkBody('email', 'Email is not valid').isEmail();
+  let invalidFieldErrors = req.validationErrors()
+  if (invalidFieldErrors) {
+    let err = new TypedError('register error', 403, 'invalid_field', {
+      errors: invalidFieldErrors,
+    })
+    throw err;
+    return next(err)
+  }
+
+  await Company.findOne({
+    where: { id: companyId }
+  })
+    .then(async (company) => {
+      if (company) {
+        await User.findOne({ where: { email: _user.email } })
+          .then((user) => {
+            if (user) {
+              let err = new TypedError('register error', 400, 'invalid_field', {
+                message: "メールアドレスが既に存在します。"
+              })
+              return next(err);
+            }
+            else {
+              bcrypt.genSalt(10, async function (err, salt) {
+                await bcrypt.hash(_user.password, salt, function (err, hash) {
+                  _user.password = hash;
+                  let token = jwt.sign(
+                    { email: _user.email },
+                    config.secret,
+                    // { expiresIn: '1h' }
+                  )
+                  // User.create({ ..._user, _token: token, company_id: company_id })
+                  User.create({ ..._user, role: 'user' })
+                    .then(async (user) => {
+                      // await emailVerificationService.sendVerificationEmail(user.id);
+                      return res.json({
+                        email: user.email,
+                        company_id: companyId
+                      });
+                    })
+                    .catch(err => {
+                      console.error(err);
+                      throw err;
+                      return next(err);
+                    })
+                });
+              });
+            }
+          })
+          .catch(err => {
+            throw err;
+            return next(err);
+          })
+      }
+      else {
+        let err = new TypedError('register error', 400, 'invalid_field', {
+          message: "企業が見つかりません。"
+        })
+        return next(err);
+      }
+    })
+    .catch(err => {
+      throw err;
+      return next(err);
+    })
+});
+
+router.post('/invite/login', async function (req, res, next) {
+  const { userData, companyId } = req.body || {};
+  if (!userData.email || !userData.password) {
+    let err = new TypedError('login error', 400, 'missing_field', { message: "メールアドレス、またはパスワードはありません。" })
+    return next(err)
+  }
+  // console.log(User);
+  await User.findOne({
+    where: { email: userData.email }
+  })
+    .then(user => {
+      if (!user) {
+        let err = new TypedError('login error', 400, 'invalid_field', { message: "メールアドレス、またはパスワードが違います。" })
+        return next(err)
+      }
+      bcrypt.compare(userData.password, user.password, async function (err, isMatch) {
+        if (err) throw err;
+        if (isMatch) {
+          let token = jwt.sign(
+            { email: userData.email },
+            config.secret,
+            // { expiresIn: '1h' }
+          )
+          res.status(200).json({
+            email: user.email,
+            company_id: companyId
+          })
+        }
+        else {
+          let err = new TypedError('login error', 400, 'password_not_match', { message: "パスワードが正しくありません。" })
+          return next(err)
+        }
+      });
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
 
 
 

@@ -1,3 +1,5 @@
+const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize, Sequelize) => {
   const userList = sequelize.define("wc_users", {
     username: {
@@ -13,8 +15,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.ENUM(['admin', 'administrator', 'recruiter', 'user']),
       defaultValue: 'recruiter'
     },
-    company_id: {
-      type: Sequelize.INTEGER
+    company_ids: {
+      type: DataTypes.JSON,
+      defaultValue: []
     },
     order: {
       type: Sequelize.INTEGER,

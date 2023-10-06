@@ -6,7 +6,10 @@ import Auth from '../../utils/Auth';
 import {getMembersData, 
         changeRole, 
         deleteMember, 
-        getInviteId} from '../../actions/action';
+        getInviteId,
+        getAcceptedMembers,
+        acceptMember
+      } from '../../actions/action';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import RoleModal from '../../components/Modal/RoleModal';
 import OrderModal from '../../components/Modal/OrderModal';
@@ -16,22 +19,10 @@ import Alert from '../../components/Alert/Alert';
 import NoAvatar from '../../asset/img/default_profile.png'
 import './Member.css'
 
-const userList=[
-  {
-    id:1,
-    name:'星川豊',
-    role:'管理者'
-  },
-  {
-    id:2,
-    name:'大盛 勇気',
-    role:'採用担当者'
-  },
-]
-
 const Member=()=>{
   const companyId=Auth.getCompanyId();
   const [members, setMembers] = useState([]);
+  const [acceptedMembers, setAcceptedMembers] = useState([]);
   const [memberId, setMemberId] = useState('');
   const [inviteUrl, setInviteUrl] = useState('');
   const [confirmOpen, setConfirmOpen]=useState(false);
@@ -67,6 +58,7 @@ const Member=()=>{
           setMembers(res.data);
           setError(false);
           setText('削除された！');
+          setConfirmOpen(false);
         }
         else {
           setError(true);
@@ -101,6 +93,22 @@ const Member=()=>{
       setText('登録URLが見つかりません。');
     }
   }
+  const acceptClick=async(userId)=>{
+    await acceptMember(userId, companyId, true)
+      .then(res=>{
+        if(res.status == '200') {
+          setAcceptedMembers(res.data);
+        }
+      });
+  }
+  const rejectClick=async(userId)=>{
+    await acceptMember(userId, companyId, false)
+      .then(res=>{
+        if(res.status == '200') {
+          setAcceptedMembers(res.data);
+        }
+      });
+  }
   useEffect(()=>{
     async function getData(){
       companyId && await getMembersData(companyId)
@@ -109,13 +117,24 @@ const Member=()=>{
           setMembers(res.data);
         }
       });
+    }
+    getData();
+  }, [acceptedMembers])
+  useEffect(()=>{
+    async function getData(){
       companyId && await getInviteId(companyId)
-      .then(res=>{
-        if(res.status == '200') {
-          setInviteUrl('http://localhost:3000/invite/'+res.data.invite_id);
-          // setInviteUrl('https://work-canvas-mern.vercel.app/invite/'+res.data.invite_id);
-        }
-      })
+        .then(res=>{
+          if(res.status == '200') {
+            setInviteUrl('http://localhost:3000/invite/'+res.data.invite_id);
+            // setInviteUrl('https://work-canvas-mern.vercel.app/invite/'+res.data.invite_id);
+          }
+        })
+      companyId && await getAcceptedMembers(companyId)
+        .then(res=>{
+          if(res.status == '200') {
+            setAcceptedMembers(res.data);
+          }
+        })
     }
     getData();
   }, [])
@@ -123,6 +142,51 @@ const Member=()=>{
     <div className="enterprise__container">
       <div className='enterprise__box text-default member'>
         <h1 className='title__lv1 '>スタッフの管理</h1>
+        {acceptedMembers.length>0&&
+          <div className="guide is-green u-mb-xl">
+            <p>以下のスタッフが登録申請しています。承認してください。</p>
+            <p className='text-right cursor-pointer' onClick={()=>setRoleOpen(true)}>
+              <span className='info__sign' />
+              役割とは？
+            </p>
+            <table className="table--addStaff">
+              <tr>
+                <th className="u-fs-12 u-ta-l">スタッフ</th>
+                <th className="u-fs-12 u-ta-c">承認</th>
+                <th className="u-fs-12 u-ta-c">拒否</th>
+              </tr>
+              {acceptedMembers.map(aMem=>(
+                <tr key={aMem.id}> 
+                  <td>
+                    <div className="enterprise-staff u-ma-xs">
+                      <figure>
+                        <img src={NoAvatar} alt=""/>
+                      </figure>
+                      <p>{aMem.username}</p>
+                    </div>
+                  </td>
+                  <td className="u-ta-c">
+                    <button 
+                      className="button u-fs-12 u-ma-xs authToRecruiter" 
+                      style={{maxWidth: 135}}
+                      onClick={()=>acceptClick(aMem.id)}
+                      >
+                      採用担当者で承認
+                    </button>
+                  </td>
+                  <td className="u-ta-c">
+                    <button 
+                      className="button u-fs-12 u-ma-xs releaseMember"
+                      onClick={()=>rejectClick(aMem.id)}
+                      >
+                      承認しない
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </div>
+        }
         <section>
           <h2 className='title__lv2 mt-50'>スタッフリスト</h2>
           <p className='text-right ' onClick={()=>setRoleOpen(true)}>
@@ -248,6 +312,7 @@ const Member=()=>{
           setAlertOpen={setAlertOpen}
           setText={setText}
           setError={setError}
+          inviteUrl={inviteUrl}
         />
         <Alert 
           open={alertOpen} 

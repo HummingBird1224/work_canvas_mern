@@ -27,8 +27,11 @@ const Login = () => {
         setAlertOpen(true);
         setText(res.error.message);
       }
-      else if (res == true) {
-        window.location.href='/enterprise'
+      else if (res == 'administrator') {
+        window.location.href='/enterprise';
+      }
+      else if(res == 'recruiter'){
+        window.location.href='/select';
       }
     })
   }

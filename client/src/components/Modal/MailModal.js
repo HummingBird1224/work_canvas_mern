@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
+import { mailSend } from '../../actions/action';
 import './Modal.css';
 
 const MailModal = (props) => {
   const [mail, setMail] = useState('');
+  const [textValue, setTextValue] = useState('');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const handleSend = () => {
+  const handleSend = async () => {
     if (mail == '') {
       props.setError(true);
       props.setText('宛先アドレスを記入してください。');
@@ -18,6 +20,7 @@ const MailModal = (props) => {
       props.setText('入力したメールアドレスが正しいことを確認ください。');
     }
     else {
+      await mailSend(mail);
       props.setText('メールを送信しました。');
       props.setError(false);
       props.handleChange(false);
@@ -28,6 +31,16 @@ const MailModal = (props) => {
   const changeMail = (e) => {
     setMail(e.target.value);
   }
+  const textChange = (e) => {
+    setTextValue(e.target.value);
+  }
+  useEffect(() => {
+    setTextValue('《WORKCANVAS》という美容師・アイリスト・ネイリストの転職支援サービスを利用することにいたしました' +
+      'エージェントが当社の「想い」や「環境」を基にして、マッチした求職者を紹介してくれるサービスです。' +
+      '求職者から当社の求人に応募がありましたら、当社スタッフが日程調整を行う必要があります。' +
+      'つきましては、求職者と日程調整を行っていただくため、まずは下記のURLをクリックして会員登録をお願いいたします。' +
+      '不安な点などあれば連絡ください！是非よろしくお願いします。\n' + props.inviteUrl)
+  }, [props.inviteUrl])
   return (
     <>
       <Modal
@@ -59,13 +72,8 @@ const MailModal = (props) => {
                     <textarea cols='30' rows='5'
                       className='f__textarea'
                       name='body'
-                      defaultValue="
-                      《WORKCANVAS》という美容師・アイリスト・ネイリストの転職支援サービスを利用することにいたしました。
-                      エージェントが当社の「想い」や「環境」を基にして、マッチした求職者を紹介してくれるサービスです。
-                      求職者から当社の求人に応募がありましたら、当社スタッフが日程調整を行う必要があります。
-                      つきましては、求職者と日程調整を行っていただくため、まずは下記のURLをクリックして会員登録をお願いいたします。
-                      不安な点などあれば連絡ください！
-                      是非よろしくお願いします。"
+                      onChange={textChange}
+                      value={textValue}
                     >
                     </textarea>
                   </td>

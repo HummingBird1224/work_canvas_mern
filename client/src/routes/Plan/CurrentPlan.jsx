@@ -1,4 +1,5 @@
 import {  useEffect, useState } from "react";
+import moment from 'moment';
 
 import Auth from '../../utils/Auth';
 import {getAppliedPlans, getAllPlans} from '../../actions/action';
@@ -19,7 +20,7 @@ const CurrentPlan = () => {
           if(res.status == '200'){
             setPlans(res.data.plans);
             setPlanIds(res.data.plans.map(plan=>plan.id));
-            setAppliedDate(res.data.appliedDate);
+            setAppliedDate(moment(res.data.appliedDate).format('YYYY-MM-DD'));
           }
         })
       await getAllPlans()
