@@ -12,6 +12,8 @@ const TypedError = require('../modules/ErrorHandler')
 const emailVerificationService = require('../modules/mailVerified');
 
 // const User = db.User;
+const clientUrl = 'https://work-canvas-mern.vercel.app/enterprise';
+const mailUrl = 'https://metalpro.jp/api/v1/invite?email=';
 
 const getMembers = async (companyId) => {
   return await User.findAll({
@@ -33,6 +35,27 @@ const getAcceptedMembers = async (accepted) => {
     }
   }
   return members;
+}
+
+const generateWelcomeMail = (name, token) => `
+  <p>${name}様</p>
+  <p>WORKCANVASにお申し込みいただき誠にありがとうございます。<br>
+  本メールは担当者様にご登録いただいたメールアドレスの認証のためお送りしております。</p>
+  <p>下記の「認証を完了する」ボタンを押して認証を完了してください。</p>
+  <div style="text-align:center; margin-top:30px; margin-bottom:30px">
+    <a href="${clientUrl}/verify-email/${token}"
+    style="background:rgb(20, 31, 51), color:#fff", border-radius:4px; border:0; font-size:14px; text-decoration:none; padding:10px 45px">
+    認証を完了する
+    </a>
+  </div>
+  <p>認証後、本登録に進むことが可能となります。<br>
+  引き続きWORKCANVASをよろしくお願いいたします。<br>
+  ※こちらのメールに覚えがない場合、「support@gramn.com」にお問い合わせください。</p>
+  `;
+
+const sendVerificationEmail = async (user, token) => {
+  const content = generateWelcomeMail(user.name, token);
+  axios.get(mailUrl + user.email + '&content=' + content);
 }
 
 // router.get('/', async function (req, res, next) {
@@ -230,7 +253,8 @@ router.post('/users/register', async function (req, res, next) {
             // User.create({ ..._user, _token: token, company_id: company_id })
             User.create({ ..._user, company_ids: [company_id], role: 'administrator' })
               .then(async (user) => {
-                // await emailVerificationService.sendVerificationEmail(user.id);
+
+                await sendVerificationEmail(user, token);
                 return res.json({
                   user_id: user.id,
                   user_name: user.username,
@@ -634,7 +658,7 @@ router.get('/mail/check/:inviteId', async function (req, res, next) {
 router.post('/mail/send', ensureAuthenticated, async function (req, res, next) {
   const { mail, content } = req.body;
   console.log(mail, content);
-  axios.get('https://metalpro.jp/api/v1/invite?email=' + mail + '&content=' + content);
+  axios.get(mailUrl + mail + '&content=' + content);
   res.status(200).json(true);
 })
 

@@ -125,8 +125,8 @@ const Member=()=>{
       companyId && await getInviteId(companyId)
         .then(res=>{
           if(res.status == '200') {
-            setInviteUrl('http://localhost:3000/invite/'+res.data.invite_id);
-            // setInviteUrl('https://work-canvas-mern.vercel.app/invite/'+res.data.invite_id);
+            // setInviteUrl('http://localhost:3000/invite/'+res.data.invite_id);
+            setInviteUrl('https://work-canvas-mern.vercel.app/invite/'+res.data.invite_id);
           }
         })
       companyId && await getAcceptedMembers(companyId)
