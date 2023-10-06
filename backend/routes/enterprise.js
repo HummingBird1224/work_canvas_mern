@@ -43,8 +43,7 @@ const generateWelcomeMail = (name, token) => `
   本メールは担当者様にご登録いただいたメールアドレスの認証のためお送りしております。</p>
   <p>下記の「認証を完了する」ボタンを押して認証を完了してください。</p>
   <div style="text-align:center; margin-top:30px; margin-bottom:30px">
-    <a href="${clientUrl}/verify-email/${token}"
-    style="background:rgb(20, 31, 51), color:#fff", border-radius:4px; border:0; font-size:14px; text-decoration:none; padding:10px 45px">
+    <a href="${clientUrl}/verify-email/${token}" style="background:rgb(20, 31, 51), color:#fff", border-radius:4px; border:0; font-size:14px; text-decoration:none; padding:10px 45px">
     認証を完了する
     </a>
   </div>
@@ -54,7 +53,7 @@ const generateWelcomeMail = (name, token) => `
   `;
 
 const sendVerificationEmail = async (user, token) => {
-  const content = generateWelcomeMail(user.name, token);
+  const content = generateWelcomeMail(user.username, token);
   axios.get(mailUrl + user.email + '&content=' + content);
 }
 
