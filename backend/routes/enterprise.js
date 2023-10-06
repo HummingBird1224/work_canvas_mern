@@ -612,7 +612,7 @@ router.post('/plans/change/:companyId', ensureAuthenticated, async function (req
   }
 })
 
-router.get('/mail/check/:inviteId', ensureAuthenticated, async function (req, res, next) {
+router.get('/mail/check/:inviteId', async function (req, res, next) {
   const { inviteId } = req.params;
   await Company.findOne({ where: { invite_id: inviteId } })
     .then(company => {
@@ -632,12 +632,10 @@ router.get('/mail/check/:inviteId', ensureAuthenticated, async function (req, re
 })
 
 router.post('/mail/send', ensureAuthenticated, async function (req, res, next) {
-  const { mail } = req.body;
-  console.log(mail);
-  axios.get('https://metalpro.jp/api/v1/invite?email=' + mail)
-    .then(async (res) => {
-      // console.log(res.data);
-    })
+  const { mail, content } = req.body;
+  console.log(mail, content);
+  axios.get('https://metalpro.jp/api/v1/invite?email=' + mail + '&content=' + content);
+  res.status(200).json(true);
 })
 
 router.post('/invite/accept', async function (req, res, next) {
@@ -657,11 +655,11 @@ router.post('/invite/accept', async function (req, res, next) {
 
 router.post('/invite/register', async function (req, res, next) {
   // console.log('---------------------- test1 -----------------\n', req.body);
-  const { _user, companyId } = req.body;
+  const { userData, companyId } = req.body;
 
-  req.checkBody('username', 'User Name is required').notEmpty();
-  req.checkBody('email', 'Email is required').notEmpty();
-  req.checkBody('password', 'Password is required').notEmpty();
+  req.checkBody('userData.username', 'User Name is required').notEmpty();
+  req.checkBody('userData.email', 'Email is required').notEmpty();
+  req.checkBody('userData.password', 'Password is required').notEmpty();
 
   let missingFieldErrors = req.validationErrors();
   if (missingFieldErrors) {
@@ -672,7 +670,7 @@ router.post('/invite/register', async function (req, res, next) {
     return next(err)
   }
 
-  req.checkBody('email', 'Email is not valid').isEmail();
+  req.checkBody('userData.email', 'Email is not valid').isEmail();
   let invalidFieldErrors = req.validationErrors()
   if (invalidFieldErrors) {
     let err = new TypedError('register error', 403, 'invalid_field', {
@@ -687,7 +685,7 @@ router.post('/invite/register', async function (req, res, next) {
   })
     .then(async (company) => {
       if (company) {
-        await User.findOne({ where: { email: _user.email } })
+        await User.findOne({ where: { email: userData.email } })
           .then((user) => {
             if (user) {
               let err = new TypedError('register error', 400, 'invalid_field', {
@@ -697,15 +695,15 @@ router.post('/invite/register', async function (req, res, next) {
             }
             else {
               bcrypt.genSalt(10, async function (err, salt) {
-                await bcrypt.hash(_user.password, salt, function (err, hash) {
-                  _user.password = hash;
+                await bcrypt.hash(userData.password, salt, function (err, hash) {
+                  userData.password = hash;
                   let token = jwt.sign(
-                    { email: _user.email },
+                    { email: userData.email },
                     config.secret,
                     // { expiresIn: '1h' }
                   )
                   // User.create({ ..._user, _token: token, company_id: company_id })
-                  User.create({ ..._user, role: 'user' })
+                  User.create({ ...userData, role: 'user' })
                     .then(async (user) => {
                       // await emailVerificationService.sendVerificationEmail(user.id);
                       return res.json({

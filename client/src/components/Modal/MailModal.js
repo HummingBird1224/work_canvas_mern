@@ -20,11 +20,15 @@ const MailModal = (props) => {
       props.setText('入力したメールアドレスが正しいことを確認ください。');
     }
     else {
-      await mailSend(mail);
-      props.setText('メールを送信しました。');
-      props.setError(false);
-      props.handleChange(false);
-      setMail('');
+      await mailSend(mail, textValue)
+        .then(async (res) => {
+          if (res.status == '200') {
+            props.setText('メールを送信しました。');
+            props.setError(false);
+            props.handleChange(false);
+            setMail('');
+          }
+        })
     }
     props.setAlertOpen(true);
   }

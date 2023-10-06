@@ -24,7 +24,7 @@ const InviteLogin = () => {
           setAlertOpen(true);
           setText(res.error.message);
         }
-        else if (res == true) {
+        else if (res.status == '200') {
           await acceptInvite(res.data.email, res.data.company_id)
             .then(res=>{
               if(res.status == '200'){
@@ -53,7 +53,7 @@ const InviteLogin = () => {
         <div className="modal__background" style={{overflowY: 'auto'}}>
           <div className="modal__body" style={{padding: '0px 30px', margin: '20px auto 0'}}>
             <h2 className="title--lv2 u-mt-reset u-ta-c">会員登録・ログイン</h2>
-            <form className="modal__form">
+            <form className="modal__form" onSubmit={handleSubmit}>
               <label>メールアドレス</label>
               <input
                 type="email"
@@ -77,7 +77,7 @@ const InviteLogin = () => {
                   type="submit"
                   className="button button--type_primary emailSignIn"
                   value="ログイン" 
-                  onSubmit={handleSubmit}/>
+                  />
               </p>
             </form>
             <hr />

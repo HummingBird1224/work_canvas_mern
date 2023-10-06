@@ -23,7 +23,7 @@ const InviteRegister = () => {
           setAlertOpen(true);
           setText(res.error.message);
         }
-        else if (res == true) {
+        else if (res.status == '200') {
           await acceptInvite(res.data.email, res.data.company_id)
             .then(res=>{
               if(res.status == '200'){
@@ -52,7 +52,7 @@ const InviteRegister = () => {
         <div className="modal__background" style={{overflowY: 'auto'}}>
           <div className="modal__body" style={{padding: '0px 30px', margin: '20px auto 0'}}>
             <h2 className="title--lv2 u-mt-reset u-ta-c">会員登録</h2>
-            <form className="modal__form ordinaryRegisterInfoForm">
+            <form className="modal__form ordinaryRegisterInfoForm" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label className="u-mt-sm">お名前</label>
                 <p>漢字</p>
@@ -99,9 +99,8 @@ const InviteRegister = () => {
                     id="checkbox-agree"
                     className="agree u-mr-xs"
                     name="agreed"
-                    value="1" 
                     required/>
-                  <label for="checkbox-agree">
+                  <label htmlFor="checkbox-agree">
                     {/* <Link 
                       to="/terms"
                       target="_blank"
@@ -124,7 +123,7 @@ const InviteRegister = () => {
                   type="submit"
                   className="button button--type_primary userSignUp"
                   value="登録する" 
-                  onSubmit={handleSubmit}/>
+                  />
               </p>
             </form>
             <hr />
