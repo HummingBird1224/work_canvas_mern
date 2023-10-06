@@ -29,6 +29,7 @@ import Notification from './routes/Notification/Notification';
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
 import Step from './routes/Auth/Step';
+import MailSended from './routes/Auth/MailSended';
 import MailVerify from './routes/Auth/MailVerify';
 import InviteLogin from './routes/Auth/Invite/InviteLogin';
 import InviteRegister from './routes/Auth/Invite/InviteRegister';
@@ -73,6 +74,17 @@ const AuthRouter = ({ component, ...options }) => {
   const finalComponent =
     Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
       <Redirect to="/enterprise" />
+    ) : (
+      <Route {...options} component={component} />
+    );
+
+  return finalComponent;
+}
+
+const StepRouter = ({ component, ...options }) => {
+  const finalComponent =
+    localStorage.getItem('user_id') == undefined || localStorage.getItem('company_id') == undefined ? (
+      <Redirect to="/enterprise/login" />
     ) : (
       <Route {...options} component={component} />
     );
@@ -223,18 +235,6 @@ const HomeRoutes = [
     component: SelectEnterprise
   },
   {
-    path: '/enterprise/step',
-    exact: true,
-    layout: AuthLayout,
-    component: Step
-  },
-  {
-    path: '/enterprise/mailverify',
-    exact: true,
-    layout: AuthLayout,
-    component: MailVerify
-  },
-  {
     path: '/enterprise/profile',
     exact: true,
     layout: HomeLayout,
@@ -335,18 +335,18 @@ const AuthRoutes = [
     component: Register,
     register: true
   },
-  // {
-  //   path: '/invite/register',
-  //   exact: true,
-  //   layout: AuthLayout,
-  //   component: InviteRegister
-  // },
-  // {
-  //   path: '/invite/login',
-  //   exact: true,
-  //   layout: AuthLayout,
-  //   component: InviteLogin
-  // },
+  {
+    path: '/enterprise/mailsended',
+    exact: true,
+    layout: AuthLayout,
+    component: MailSended
+  },
+  {
+    path: '/enterprise/verify-email/:token',
+    exact: true,
+    layout: AuthLayout,
+    component: MailVerify
+  },
 ]
 
 const InviteRoutes = [
@@ -411,6 +411,17 @@ const Routes = () => {
             />
           );
         })}
+        <StepRouter
+          path={'/enterprise/step'}
+          exact={true}
+          component={props => {
+            return (
+              <AuthLayout {...props}>
+                <Step {...props} />
+              </AuthLayout>
+            );
+          }}
+        />
         {FeatureRoutes.map((homeRoute, index) => {
           return (
             <Route

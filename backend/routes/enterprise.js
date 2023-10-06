@@ -43,7 +43,7 @@ const generateWelcomeMail = (name, token) => `
   本メールは担当者様にご登録いただいたメールアドレスの認証のためお送りしております。</p>
   <p>下記の「認証を完了する」ボタンを押して認証を完了してください。</p>
   <div style="text-align:center; margin-top:30px; margin-bottom:30px">
-    <a href="${clientUrl}/verify-email/${token}" style="background:rgb(20, 31, 51), color:#fff, border-radius:4px; border:0; font-size:14px; text-decoration:none; padding:10px 45px">
+    <a href="${clientUrl}/verify-email/${token}" style="background:rgb(20, 31, 51); color:white; border-radius:4px; border:none; font-size:14px; text-decoration:none; padding:10px 45px">
     認証を完了する
     </a>
   </div>
@@ -250,18 +250,12 @@ router.post('/users/register', async function (req, res, next) {
               // { expiresIn: '1h' }
             )
             // User.create({ ..._user, _token: token, company_id: company_id })
-            User.create({ ..._user, company_ids: [company_id], role: 'administrator' })
+            User.create({ ..._user, company_ids: [company_id], role: 'administrator', token: token })
               .then(async (user) => {
 
                 await sendVerificationEmail(user, token);
                 return res.json({
-                  user_id: user.id,
-                  user_name: user.username,
-                  email: user.email,
-                  token: token,
-                  role: user.role,
-                  company_id: company_id,
-                  corporate_name: company_data.corporate_name,
+                  email: user.email
                 });
               })
               .catch(err => {
@@ -280,14 +274,21 @@ router.post('/users/register', async function (req, res, next) {
 });
 
 router.post('/initialData', ensureAuthenticated, async function (req, res, next) {
-  const { companyData, billingData, bankData, companyId } = req.body;
+  const { companyData, billingData, bankData, companyId, userId } = req.body;
   const company = await Company.findOne({ where: { id: companyId } });
   await company.update({ ...companyData, applied_date: new Date() });
   const billing = await Billing.create({ ...billingData, company_id: companyId });
   const bank = await PaymentBank.create({ ...bankData, company_id: companyId });
+  const user = await User.findOne({ where: { id: userId } });
   if (company && billing && bank) {
     return res.status(200).json({
-      company, billing, bank
+      user_id: user.id,
+      username: user.username,
+      token: user.token,
+      role: user.role,
+      company_id: user.company_ids[0],
+      email: user.email,
+      corporate_name: company.corporate_name
     });
   }
 })
@@ -316,6 +317,7 @@ router.post('/users/login', async function (req, res, next) {
             config.secret,
             // { expiresIn: '1h' }
           )
+          // await user.update({ token: token });
           if (user.role == 'administrator') {
             const { corporate_name } = await Company.findOne({
               attributes: ['corporate_name'],
@@ -656,8 +658,40 @@ router.get('/mail/check/:inviteId', async function (req, res, next) {
 
 router.post('/mail/send', ensureAuthenticated, async function (req, res, next) {
   const { mail, content } = req.body;
-  console.log(mail, content);
   axios.get(mailUrl + mail + '&content=' + content);
+  res.status(200).json(true);
+})
+
+router.post('/mail/verify', async function (req, res, next) {
+  try {
+    const { token } = req.body;
+    const decoded = jwt.verify(token, config.secret);
+    const email = decoded.email;
+    const user = await User.findOne({ where: { email: email } });
+    if (user && user.is_verified == 'false') {
+      await user.update({ is_verified: true });
+      res.status(200).json({
+        user_id: user.id,
+        company_id: user.company_ids[0],
+        token: user.token
+      });
+    }
+    else {
+      let err = new TypedError('verify error', 400, 'invalid_user', {
+        message: "ユーザーが存在しません。"
+      })
+      return next(err);
+    }
+  }
+  catch (err) {
+    throw err;
+  }
+})
+
+router.post('/mail/resend', async function (req, res, next) {
+  const { email } = req.body;
+  const user = await User.findOne({ where: { email: email } });
+  await sendVerificationEmail(user, user.token);
   res.status(200).json(true);
 })
 

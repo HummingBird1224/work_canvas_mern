@@ -1,38 +1,36 @@
-import React, {useEffect} from 'react';
-import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import React, {useEffect, useState} from 'react';
+import {useParams, Redirect} from 'react-router-dom';
 
-import Auth from '../../utils/Auth';
+import Alert from '../../components/Alert/Alert';
 import {mailVerify} from '../../actions/action';
 
 const MailVerify=()=>{
-  const email=Auth.getUserEmail();
-  const resendMail=async()=>{
-    await mailVerify(email)
-  }
-  useEffect(async()=>{
-    await mailVerify(email)
-  }, [])
+  const {token} = useParams();
+  const [verified, setVerified]=useState(false);
+  const [text, setText]=useState('');
+  const [alertOpen, setAlertOpen]=useState(false);
+  useEffect(()=>{
+    async function getData(){
+      await mailVerify(token)
+        .then(async (res)=>{
+          if(res.status == '200'){
+            setVerified(true);
+          }
+          else {
+            setAlertOpen(true);
+            setText(res.error.message);
+          }
+        })
+    }
+    getData();
+  }, [token])
   return(
-    <div className="modal__body">                    
-      <div className="confirm--mail_check">
-        <span className="material-icons">
-          <ErrorOutlineOutlinedIcon fontSize='100'/>
-        </span>
-        <h2>まだ登録は完了していません。</h2>
-        <p>
-          {email}に、<br/>
-          確認メールを送信しました。
-        </p>
-        <p>メール内の「認証を完了する」ボタンを押して申込みを進めてください。</p>
-        <hr/>
-        <h2>認証メールが届かない場合</h2>
-        <div>
-          <button className="button button--type_secondary button--size_small reSendEmail" onClick={resendMail}>
-            認証メールを再送する
-          </button>
-        </div>
-      </div>
-    </div>
+    <>
+    {verified?
+      <Redirect to='/enterprise/step'/>:
+      <Alert open={alertOpen} handleClose={(open)=>setAlertOpen(open)} text={text} error={true} /> 
+    }
+    </>
   )
 }
 
