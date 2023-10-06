@@ -8,7 +8,7 @@ export const register = async (data) => {
     data: data
   })
     .then(({ data }) => {
-      Auth.setUserToken(data);
+      localStorage.setItem('email', data.email);
       return true;
     })
     .catch(error => {
@@ -16,15 +16,32 @@ export const register = async (data) => {
     });
 }//complete
 
-export const mailVerify = async (data) => {
+export const resendMail = async (email) => {
+  return await API({
+    method: 'post',
+    url: '/mail/resend',
+    data: { email: email }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const mailVerify = async (token) => {
   return await API({
     method: 'post',
     url: '/mail/verify',
-    data: data
+    data: { token: token }
   })
-    .then(({ data }) => {
-      Auth.setUserToken(data);
-      return true;
+    .then((res) => {
+      localStorage.setItem('user_id', res.data.user_id);
+      localStorage.setItem('company_id', res.data.company_id);
+      localStorage.setItem('token', res.data.token);
+      localStorage.removeItem('email');
+      return { status: res.status, data: res.data };
     })
     .catch(error => {
       return error.response.data;
@@ -59,13 +76,16 @@ export const mailSend = async (mail, content) => {
 }
 
 export const saveInitialData = async (data) => {
-  console.log(data);
   return await API({
     method: 'post',
     url: '/initialData',
-    data: { ...data, companyId: Auth.getCompanyId() }
+    data: { ...data, companyId: localStorage.getItem('company_id'), userId: localStorage.getItem('user_id') }
   })
     .then((res) => {
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('company_id');
+      localStorage.removeItem('token');
+      Auth.setUserToken(res.data);
       return { status: res.status, data: res.data };
     })
     .catch(error => {
@@ -81,7 +101,6 @@ export const login = async (data) => {
     data: data
   })
     .then(({ data }) => {
-      console.log(data);
       Auth.setUserToken(data);
       return data.role;
     })

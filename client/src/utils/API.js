@@ -18,6 +18,13 @@ const API = (config) => {
       authorization: token,
     };
   }
+  if (localStorage.getItem('token')) {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    config.headers = {
+      authorization: token,
+    };
+  }
   //interceptors handle network error
   axios.interceptors.response.use(
     (response) => {

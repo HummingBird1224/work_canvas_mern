@@ -33,6 +33,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       defaultValue: false
     },
+    token: {
+      type: Sequelize.STRING
+    }
   },
     {
       timestamps: true
