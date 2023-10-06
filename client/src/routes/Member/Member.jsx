@@ -142,7 +142,7 @@ const Member=()=>{
     <div className="enterprise__container">
       <div className='enterprise__box text-default member'>
         <h1 className='title__lv1 '>スタッフの管理</h1>
-        {acceptedMembers.length>0&&
+        {acceptedMembers.length>0&&Auth.getUserRole() == 'administrator'&&
           <div className="guide is-green u-mb-xl">
             <p>以下のスタッフが登録申請しています。承認してください。</p>
             <p className='text-right cursor-pointer' onClick={()=>setRoleOpen(true)}>

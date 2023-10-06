@@ -44,11 +44,11 @@ export const checkMail = async (inviteId) => {
     });
 }
 
-export const mailSend = async (mail) => {
+export const mailSend = async (mail, content) => {
   return await API({
     method: 'post',
     url: '/mail/send/',
-    data: { mail: mail }
+    data: { mail: mail, content: content }
   })
     .then((res) => {
       return { status: res.status, data: res.data };
@@ -346,10 +346,11 @@ export const acceptInvite = async (email, companyId) => {
 }
 
 export const inviteRegister = async (userData, inviteCompany) => {
+  console.log(userData, inviteCompany);
   return await API({
     method: 'post',
     url: '/invite/register',
-    data: { _user: userData, companyId: inviteCompany }
+    data: { userData, companyId: inviteCompany }
   })
     .then((res) => {
       return { status: res.status, data: res.data };
