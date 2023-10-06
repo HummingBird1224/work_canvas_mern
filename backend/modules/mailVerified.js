@@ -9,7 +9,6 @@ const { User } = require("../models");
 const generateVerificationToken = (user) => {
   const payload = {
     user: {
-      id: user.id,
       email: user.email
     },
   };
@@ -69,7 +68,7 @@ const emailVerificationService = {
         pass: 'gs888888',
       },
     });
-    console.log(transport);
+    // console.log(transport);
     await transport.sendMail({
       from: "WORKCANVAS < manager@work - canvas.com >",
       to: 'faster1224@outlook.com',

@@ -49,10 +49,17 @@ module.exports = (sequelize, Sequelize) => {
     },
     business_types: {
       type: DataTypes.JSON,
+    },
+    accepted: {
+      type: DataTypes.JSON,
+      defaultValue: []
+    },
+    applied_date: {
+      type: DataTypes.DATE,
     }
   },
     {
-      timestamps: true,
+      timestamps: false,
     });
 
   return companyList;

@@ -21,13 +21,13 @@ const Control = () => {
         <div className="control">
           <Link to="/enterprise/notifications">
             {/* <Link to="#"> */}
-            <NotificationsNoneIcon color="white" fontSize="large" />
+            <NotificationsNoneIcon color="white" fontSize="medium" />
           </Link>
         </div>
         <div className="control text-white">
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: 'white' }}>
-              <MenuIcon color="white" fontSize="large" />
+              <MenuIcon color="white" fontSize="medium" />
             </IconButton>
             <Menu
               sx={{ mt: '45px', position: 'relative' }}

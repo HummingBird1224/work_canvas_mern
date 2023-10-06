@@ -10,6 +10,7 @@ import FeatureLayout from './layout/FeatureLayout.js';
 import AuthLayout from './layout/AuthLayout.js';
 
 import Home from './routes/Enterprise/Home.jsx';
+import SelectEnterprise from './routes/Enterprise/SelectEnterprise.jsx';
 import Profile from './routes/Profile/Profile.jsx';
 import Member from './routes/Member/Member.jsx';
 import Store from './routes/Store/Store.jsx';
@@ -28,8 +29,11 @@ import Notification from './routes/Notification/Notification';
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
 import Step from './routes/Auth/Step';
-import InviteLogin from './routes/Auth/Login/InviteLogin';
-import InviteRegister from './routes/Auth/Register/InviteRegister';
+import MailVerify from './routes/Auth/MailVerify';
+import InviteLogin from './routes/Auth/Invite/InviteLogin';
+import InviteRegister from './routes/Auth/Invite/InviteRegister';
+import Invite from './routes/Auth/Invite/Invite';
+import InviteConfirm from './routes/Auth/Invite/InviteConfirm';
 
 import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
 import Vacation from './routes/Feature/List/Vacation.jsx';
@@ -213,10 +217,22 @@ const HomeRoutes = [
     component: Home
   },
   {
+    path: '/select',
+    exact: true,
+    layout: AuthLayout,
+    component: SelectEnterprise
+  },
+  {
     path: '/enterprise/step',
     exact: true,
     layout: AuthLayout,
     component: Step
+  },
+  {
+    path: '/enterprise/mailverify',
+    exact: true,
+    layout: AuthLayout,
+    component: MailVerify
   },
   {
     path: '/enterprise/profile',
@@ -319,17 +335,40 @@ const AuthRoutes = [
     component: Register,
     register: true
   },
+  // {
+  //   path: '/invite/register',
+  //   exact: true,
+  //   layout: AuthLayout,
+  //   component: InviteRegister
+  // },
+  // {
+  //   path: '/invite/login',
+  //   exact: true,
+  //   layout: AuthLayout,
+  //   component: InviteLogin
+  // },
+]
+
+const InviteRoutes = [
   {
     path: '/invite/register',
     exact: true,
-    layout: AuthLayout,
     component: InviteRegister
   },
   {
     path: '/invite/login',
     exact: true,
-    layout: AuthLayout,
     component: InviteLogin
+  },
+  {
+    path: '/invite/confirm',
+    exact: true,
+    component: InviteConfirm
+  },
+  {
+    path: '/invite/:inviteId',
+    exact: true,
+    component: Invite
   },
 ]
 
@@ -385,6 +424,16 @@ const Routes = () => {
                   </homeRoute.layout>
                 );
               }}
+            />
+          );
+        })}
+        {InviteRoutes.map((inviteRoute, index) => {
+          return (
+            <Route
+              key={index}
+              path={inviteRoute.path}
+              exact={inviteRoute.exact}
+              component={inviteRoute.component}
             />
           );
         })}

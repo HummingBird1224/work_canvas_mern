@@ -14,6 +14,48 @@ export const register = async (data) => {
     .catch(error => {
       return error.response.data;
     });
+}//complete
+
+export const mailVerify = async (data) => {
+  return await API({
+    method: 'post',
+    url: '/mail/verify',
+    data: data
+  })
+    .then(({ data }) => {
+      Auth.setUserToken(data);
+      return true;
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const checkMail = async (inviteId) => {
+  return await API({
+    method: 'get',
+    url: '/mail/check/' + inviteId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const mailSend = async (mail) => {
+  return await API({
+    method: 'post',
+    url: '/mail/send/',
+    data: { mail: mail }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
 }
 
 export const saveInitialData = async (data) => {
@@ -29,7 +71,7 @@ export const saveInitialData = async (data) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const login = async (data) => {
   // console.log(data)
@@ -39,13 +81,14 @@ export const login = async (data) => {
     data: data
   })
     .then(({ data }) => {
+      console.log(data);
       Auth.setUserToken(data);
-      return true;
+      return data.role;
     })
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const getMainData = async (companyId) => {
   return await API({
@@ -58,7 +101,7 @@ export const getMainData = async (companyId) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const getCompanyData = async (companyId) => {
   return await API({
@@ -71,7 +114,7 @@ export const getCompanyData = async (companyId) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const getBillingData = async (companyId) => {
   return await API({
@@ -152,7 +195,33 @@ export const getMembersData = async (companyId) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
+
+export const getAcceptedMembers = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/company/' + companyId + '/acceptedMembers',
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}//complete
+
+export const acceptMember = async (userId, companyId, status) => {
+  return await API({
+    method: 'get',
+    url: '/company/' + companyId + '/accept/' + status + '/' + userId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}//complete
 
 export const getInviteId = async (companyId) => {
   return await API({
@@ -165,7 +234,7 @@ export const getInviteId = async (companyId) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const changeRole = async (userId, role) => {
   return await API({
@@ -179,7 +248,7 @@ export const changeRole = async (userId, role) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const updateMembersOrder = async (members) => {
   return await API({
@@ -193,7 +262,7 @@ export const updateMembersOrder = async (members) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const deleteMember = async (memberId) => {
   return await API({
@@ -206,7 +275,7 @@ export const deleteMember = async (memberId) => {
     .catch(error => {
       return error.response.data;
     });
-}
+}//complete
 
 export const getPlans = async (planIds) => {
   return await API({
@@ -253,6 +322,48 @@ export const changePlans = async (addedPlanIds) => {
     method: 'post',
     url: '/plans/change/' + Auth.getCompanyId(),
     data: addedPlanIds
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const acceptInvite = async (email, companyId) => {
+  return await API({
+    method: 'post',
+    url: '/invite/accept',
+    data: { email: email, companyId: companyId }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error;
+    });
+}
+
+export const inviteRegister = async (userData, inviteCompany) => {
+  return await API({
+    method: 'post',
+    url: '/invite/register',
+    data: { _user: userData, companyId: inviteCompany }
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const inviteLogin = async (userData, inviteCompany) => {
+  return await API({
+    method: 'post',
+    url: '/invite/login',
+    data: { userData: userData, companyId: inviteCompany }
   })
     .then((res) => {
       return { status: res.status, data: res.data };

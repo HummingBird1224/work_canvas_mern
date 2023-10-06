@@ -22,6 +22,11 @@ class Auth {
       JSON.parse(localStorage.getItem("auth")).role : null;
   }
 
+  getUserEmail() {
+    return JSON.parse(localStorage.getItem("auth")) ?
+      JSON.parse(localStorage.getItem("auth")).email : null;
+  }
+
   getCompanyId() {
     return JSON.parse(localStorage.getItem('auth')) ?
       JSON.parse(localStorage.getItem('auth')).company_id : null;
