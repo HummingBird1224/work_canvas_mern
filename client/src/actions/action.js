@@ -393,6 +393,21 @@ export const inviteLogin = async (userData, inviteCompany) => {
     });
 }
 
+// --------------------------------------- actions for feature list by fatty ---------------------------------------
+export const answer = async () => {
+  var companyId = 1;
+  return await API({
+    method: 'post',
+    url: '/traffic_insurance/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+};
+
 
 
 
