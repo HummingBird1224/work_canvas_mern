@@ -41,12 +41,12 @@ const IlistArbeitTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_uBYCsajDZZrxx2wEe" value="1" id="radiobutton0-uBYCsajDZZrxx2wEe" />
-                            <label for="radiobutton0-uBYCsajDZZrxx2wEe">はい</label>
+                            <label htmlFor="radiobutton0-uBYCsajDZZrxx2wEe">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_uBYCsajDZZrxx2wEe" value="0" id="radiobutton1-uBYCsajDZZrxx2wEe" />
-                            <label for="radiobutton1-uBYCsajDZZrxx2wEe">いいえ</label>
+                            <label htmlFor="radiobutton1-uBYCsajDZZrxx2wEe">いいえ</label>
                         </li>
                       </ul>
 

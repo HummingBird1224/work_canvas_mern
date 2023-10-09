@@ -27161,12 +27161,12 @@ hr {
     width: 90%
 }
 
-.form--type_checkbox_card li input:checked+label:after {
+/* .form--type_checkbox_card li input:checked+label:after {
     font-family: Material Icons Outlined;
     content: "\e5ca";
     position: absolute;
     right: 8px
-}
+} */
 
 .form--type_checkbox_card li label {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
@@ -45127,7 +45127,7 @@ select:focus {
     }
 }
 
-.enterprise_main:not(.hide-menu):before {
+/* .enterprise_main:not(.hide-menu):before {
     position: fixed;
     top: 0;
     left: 0;
@@ -45137,7 +45137,7 @@ select:focus {
     background-color: #fff;
     border-right: 1px solid #e7e8ea;
     content: ""
-}
+} */
 
 .enterprise_main.hide-menu {
     padding: 0

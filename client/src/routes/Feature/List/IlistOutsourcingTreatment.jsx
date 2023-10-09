@@ -40,12 +40,12 @@ const IlistOutsourcingTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_AhFcwFRSkryo9m2ST" value="1" id="radiobutton0-AhFcwFRSkryo9m2ST" />
-                            <label for="radiobutton0-AhFcwFRSkryo9m2ST">はい</label>
+                            <label htmlFor="radiobutton0-AhFcwFRSkryo9m2ST">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_AhFcwFRSkryo9m2ST" value="0" id="radiobutton1-AhFcwFRSkryo9m2ST" />
-                            <label for="radiobutton1-AhFcwFRSkryo9m2ST">いいえ</label>
+                            <label htmlFor="radiobutton1-AhFcwFRSkryo9m2ST">いいえ</label>
                         </li>
                       </ul>
 

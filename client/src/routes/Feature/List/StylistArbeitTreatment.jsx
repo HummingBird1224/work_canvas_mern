@@ -37,13 +37,13 @@ const StylistArbeitTreatment = () => {
 
                       <ul className="form--type_checkbox_card">
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_k2BBnuN8PiDFPjiAJ" value="1" id="radiobutton0-k2BBnuN8PiDFPjiAJ" />
-                            <label for="radiobutton0-k2BBnuN8PiDFPjiAJ">はい</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_k2BBnuN8PiDFPjiAJ" value="1" id="radiobutton0-k2BBnuN8PiDFPjiAJ" />
+                            <label htmlFor="radiobutton0-k2BBnuN8PiDFPjiAJ">はい</label>
                         </li>
 
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_k2BBnuN8PiDFPjiAJ" value="0" id="radiobutton1-k2BBnuN8PiDFPjiAJ" />
-                            <label for="radiobutton1-k2BBnuN8PiDFPjiAJ">いいえ</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_k2BBnuN8PiDFPjiAJ" value="0" id="radiobutton1-k2BBnuN8PiDFPjiAJ" />
+                            <label htmlFor="radiobutton1-k2BBnuN8PiDFPjiAJ">いいえ</label>
                         </li>
                       </ul>
 
@@ -58,9 +58,9 @@ const StylistArbeitTreatment = () => {
                     <div className="u-mt-sm">
                       <h4>スタイリストの時給を教えて下さい。(アルバイト)</h4>
 
-                      <div className="u-d-flex">
-                        <input type="number" className="form--type_text formPart" name="4_rCnYHJRPFbnxYhEQg" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                      <div class="u-d-flex">
+                        <input type="number" class="form--type_text formPart" name="4_rCnYHJRPFbnxYhEQg" min="0" />
+                          <span style={{ margin: 'auto 0' }} class="u-pl-xs">円</span>
                       </div>
                     </div>
 
@@ -73,9 +73,9 @@ const StylistArbeitTreatment = () => {
                     <div className="u-mt-sm">
                       <h4>アシスタントの時給を教えて下さい。(アルバイト)</h4>
 
-                      <div className="u-d-flex">
-                        <input type="number" className="form--type_text formPart" name="4_gSYnJJMCgFrCv6KFP" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                      <div class="u-d-flex">
+                        <input type="number" class="form--type_text formPart" name="4_gSYnJJMCgFrCv6KFP" min="0" />
+                          <span style={{ margin: 'auto 0' }} class="u-pl-xs">円</span>
                       </div>
                     </div>
 
@@ -90,13 +90,13 @@ const StylistArbeitTreatment = () => {
 
                       <ul className="form--type_checkbox_card">
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_XeicQBvwWdNxu72Pd" value="1" id="radiobutton0-XeicQBvwWdNxu72Pd" />
-                            <label for="radiobutton0-XeicQBvwWdNxu72Pd">はい</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_XeicQBvwWdNxu72Pd" value="1" id="radiobutton0-XeicQBvwWdNxu72Pd" />
+                            <label htmlFor="radiobutton0-XeicQBvwWdNxu72Pd">はい</label>
                         </li>
 
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_XeicQBvwWdNxu72Pd" value="0" id="radiobutton1-XeicQBvwWdNxu72Pd" />
-                            <label for="radiobutton1-XeicQBvwWdNxu72Pd">いいえ</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_XeicQBvwWdNxu72Pd" value="0" id="radiobutton1-XeicQBvwWdNxu72Pd" />
+                            <label htmlFor="radiobutton1-XeicQBvwWdNxu72Pd">いいえ</label>
                         </li>
                       </ul>
                     </div>
@@ -110,9 +110,9 @@ const StylistArbeitTreatment = () => {
                     <div className="u-mt-sm">
                       <h4>試用期間は何ヶ月ですか？ (アルバイト)</h4>
 
-                      <div className="u-d-flex">
-                        <input type="number" className="form--type_text formPart" name="4_29pXbwL4NJdiQgNAX" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">ヶ月</span>
+                      <div class="u-d-flex">
+                        <input type="number" class="form--type_text formPart" name="4_29pXbwL4NJdiQgNAX" min="0" />
+                          <span style={{ margin: 'auto 0' }} class="u-pl-xs">ヶ月</span>
                       </div>
 
                     </div>
@@ -128,13 +128,13 @@ const StylistArbeitTreatment = () => {
 
                       <ul className="form--type_checkbox_card">
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_zK3ts9iHRwAXsYb5F" value="1" id="radiobutton0-zK3ts9iHRwAXsYb5F" />
-                            <label for="radiobutton0-zK3ts9iHRwAXsYb5F">はい</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_zK3ts9iHRwAXsYb5F" value="1" id="radiobutton0-zK3ts9iHRwAXsYb5F" />
+                            <label htmlFor="radiobutton0-zK3ts9iHRwAXsYb5F">はい</label>
                         </li>
 
                         <li>
-                          <input type="radio" className="form--type_radio_card formPart" name="2_zK3ts9iHRwAXsYb5F" value="0" id="radiobutton1-zK3ts9iHRwAXsYb5F" />
-                            <label for="radiobutton1-zK3ts9iHRwAXsYb5F">いいえ</label>
+                          <input type="radio" class="form--type_radio_card formPart" name="2_zK3ts9iHRwAXsYb5F" value="0" id="radiobutton1-zK3ts9iHRwAXsYb5F" />
+                            <label htmlFor="radiobutton1-zK3ts9iHRwAXsYb5F">いいえ</label>
                         </li>
                       </ul>
 

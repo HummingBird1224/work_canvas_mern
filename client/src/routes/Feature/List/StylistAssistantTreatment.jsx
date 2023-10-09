@@ -42,12 +42,12 @@ const StylistAssistantTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_mz8cDmtXfRTQMCM8x" value="1" id="radiobutton0-mz8cDmtXfRTQMCM8x" />
-                          <label for="radiobutton0-mz8cDmtXfRTQMCM8x">はい</label>
+                          <label htmlFor="radiobutton0-mz8cDmtXfRTQMCM8x">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_mz8cDmtXfRTQMCM8x" value="0" id="radiobutton1-mz8cDmtXfRTQMCM8x" />
-                          <label for="radiobutton1-mz8cDmtXfRTQMCM8x">いいえ</label>
+                          <label htmlFor="radiobutton1-mz8cDmtXfRTQMCM8x">いいえ</label>
                         </li>
                       </ul>
 
@@ -73,7 +73,7 @@ const StylistAssistantTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_52TeZ7xNufTbf24ee" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 
@@ -95,12 +95,12 @@ const StylistAssistantTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_wJ7YeMCtnkGMCF3vp" value="1" id="radiobutton0-wJ7YeMCtnkGMCF3vp" />
-                          <label for="radiobutton0-wJ7YeMCtnkGMCF3vp">はい</label>
+                          <label htmlFor="radiobutton0-wJ7YeMCtnkGMCF3vp">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_wJ7YeMCtnkGMCF3vp" value="0" id="radiobutton1-wJ7YeMCtnkGMCF3vp" />
-                          <label for="radiobutton1-wJ7YeMCtnkGMCF3vp">いいえ</label>
+                          <label htmlFor="radiobutton1-wJ7YeMCtnkGMCF3vp">いいえ</label>
                         </li>
                       </ul>
 
@@ -126,7 +126,7 @@ const StylistAssistantTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_vpK9s2zWNe7Xnr9mu" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">ヶ月</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">ヶ月</span>
                       </div>
 
 
@@ -148,12 +148,12 @@ const StylistAssistantTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_auybfRKwdfEJBgZeS" value="1" id="radiobutton0-auybfRKwdfEJBgZeS" />
-                          <label for="radiobutton0-auybfRKwdfEJBgZeS">はい</label>
+                          <label htmlFor="radiobutton0-auybfRKwdfEJBgZeS">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_auybfRKwdfEJBgZeS" value="0" id="radiobutton1-auybfRKwdfEJBgZeS" />
-                          <label for="radiobutton1-auybfRKwdfEJBgZeS">いいえ</label>
+                          <label htmlFor="radiobutton1-auybfRKwdfEJBgZeS">いいえ</label>
                         </li>
                       </ul>
 
@@ -180,12 +180,12 @@ const StylistAssistantTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_YTx5jnRyQwDyQRd88" value="1" id="radiobutton0-YTx5jnRyQwDyQRd88" />
-                          <label for="radiobutton0-YTx5jnRyQwDyQRd88">はい</label>
+                          <label htmlFor="radiobutton0-YTx5jnRyQwDyQRd88">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_YTx5jnRyQwDyQRd88" value="0" id="radiobutton1-YTx5jnRyQwDyQRd88" />
-                          <label for="radiobutton1-YTx5jnRyQwDyQRd88">いいえ</label>
+                          <label htmlFor="radiobutton1-YTx5jnRyQwDyQRd88">いいえ</label>
                         </li>
                       </ul>
 
@@ -251,7 +251,7 @@ const StylistAssistantTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_2FM6i2HJWesnpKXzT" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 
@@ -272,7 +272,7 @@ const StylistAssistantTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_WGy89ZdkzDeW3SxzF" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 

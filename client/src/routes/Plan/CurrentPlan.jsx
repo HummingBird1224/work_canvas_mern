@@ -19,7 +19,7 @@ const CurrentPlan = () => {
         .then(res=>{
           if(res.status == '200'){
             setPlans(res.data.plans);
-            setPlanIds(res.data.plans.map(plan=>plan.id));
+            setPlanIds(res.data.plans.map(plan=>plan.id.toString()));
             setAppliedDate(moment(res.data.appliedDate).format('YYYY-MM-DD'));
           }
         })
@@ -65,7 +65,7 @@ const CurrentPlan = () => {
         open={open} 
         handleChange={(open)=>setOpen(open)} 
         allPlans={allPlans} 
-        setPlanIds={setPlanIds}
+        // setPlanIds={setPlanIds}
         planIds={planIds}
         setChanged={setChanged}/>
     </div>

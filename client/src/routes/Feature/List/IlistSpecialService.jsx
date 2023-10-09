@@ -42,12 +42,12 @@ const IlistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_ie783hqeraCxzgxuh" value="1" id="radiobutton0-ie783hqeraCxzgxuh" />
-                            <label for="radiobutton0-ie783hqeraCxzgxuh">はい</label>
+                            <label htmlFor="radiobutton0-ie783hqeraCxzgxuh">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_ie783hqeraCxzgxuh" value="0" id="radiobutton1-ie783hqeraCxzgxuh" />
-                            <label for="radiobutton1-ie783hqeraCxzgxuh">いいえ</label>
+                            <label htmlFor="radiobutton1-ie783hqeraCxzgxuh">いいえ</label>
                         </li>
                       </ul>
 
@@ -83,12 +83,12 @@ const IlistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_iB6TKRWbGgG8MitKa" value="1" id="radiobutton0-iB6TKRWbGgG8MitKa" />
-                            <label for="radiobutton0-iB6TKRWbGgG8MitKa">はい</label>
+                            <label htmlFor="radiobutton0-iB6TKRWbGgG8MitKa">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_iB6TKRWbGgG8MitKa" value="0" id="radiobutton1-iB6TKRWbGgG8MitKa" />
-                            <label for="radiobutton1-iB6TKRWbGgG8MitKa">いいえ</label>
+                            <label htmlFor="radiobutton1-iB6TKRWbGgG8MitKa">いいえ</label>
                         </li>
                       </ul>
 

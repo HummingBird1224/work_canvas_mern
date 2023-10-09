@@ -42,12 +42,12 @@ const IlistEducation = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_u3PSZehbPuKA2rfj6" value="1" id="radiobutton0-u3PSZehbPuKA2rfj6" />
-                            <label for="radiobutton0-u3PSZehbPuKA2rfj6">はい</label>
+                            <label htmlFor="radiobutton0-u3PSZehbPuKA2rfj6">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_u3PSZehbPuKA2rfj6" value="0" id="radiobutton1-u3PSZehbPuKA2rfj6" />
-                            <label for="radiobutton1-u3PSZehbPuKA2rfj6">いいえ</label>
+                            <label htmlFor="radiobutton1-u3PSZehbPuKA2rfj6">いいえ</label>
                         </li>
                       </ul>
 
@@ -71,12 +71,12 @@ const IlistEducation = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_n5XDpGKEfmEZtkkSH" value="1" id="radiobutton0-n5XDpGKEfmEZtkkSH" />
-                            <label for="radiobutton0-n5XDpGKEfmEZtkkSH">はい</label>
+                            <label htmlFor="radiobutton0-n5XDpGKEfmEZtkkSH">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_n5XDpGKEfmEZtkkSH" value="0" id="radiobutton1-n5XDpGKEfmEZtkkSH" />
-                            <label for="radiobutton1-n5XDpGKEfmEZtkkSH">いいえ</label>
+                            <label htmlFor="radiobutton1-n5XDpGKEfmEZtkkSH">いいえ</label>
                         </li>
                       </ul>
 
@@ -139,12 +139,12 @@ const IlistEducation = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_eF6hGft8MYwGEpzQm" value="1" id="radiobutton0-eF6hGft8MYwGEpzQm" />
-                            <label for="radiobutton0-eF6hGft8MYwGEpzQm">はい</label>
+                            <label htmlFor="radiobutton0-eF6hGft8MYwGEpzQm">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_eF6hGft8MYwGEpzQm" value="0" id="radiobutton1-eF6hGft8MYwGEpzQm" />
-                            <label for="radiobutton1-eF6hGft8MYwGEpzQm">いいえ</label>
+                            <label htmlFor="radiobutton1-eF6hGft8MYwGEpzQm">いいえ</label>
                         </li>
                       </ul>
 
@@ -168,12 +168,12 @@ const IlistEducation = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_5FJdts8Ks9EWQQPib" value="1" id="radiobutton0-5FJdts8Ks9EWQQPib" />
-                            <label for="radiobutton0-5FJdts8Ks9EWQQPib">はい</label>
+                            <label htmlFor="radiobutton0-5FJdts8Ks9EWQQPib">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_5FJdts8Ks9EWQQPib" value="0" id="radiobutton1-5FJdts8Ks9EWQQPib" />
-                            <label for="radiobutton1-5FJdts8Ks9EWQQPib">いいえ</label>
+                            <label htmlFor="radiobutton1-5FJdts8Ks9EWQQPib">いいえ</label>
                         </li>
                       </ul>
 
@@ -208,28 +208,28 @@ const IlistEducation = () => {
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_9rcFtguaD5fCMSA8R_1" name="6_9rcFtguaD5fCMSA8R" value="1" />
-                            <label for="checkbox_9rcFtguaD5fCMSA8R_1">
+                            <label htmlFor="checkbox_9rcFtguaD5fCMSA8R_1">
                               <span>時短正社員</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_9rcFtguaD5fCMSA8R_2" name="6_9rcFtguaD5fCMSA8R" value="2" />
-                            <label for="checkbox_9rcFtguaD5fCMSA8R_2">
+                            <label htmlFor="checkbox_9rcFtguaD5fCMSA8R_2">
                               <span>パート/アルバイト</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_9rcFtguaD5fCMSA8R_3" name="6_9rcFtguaD5fCMSA8R" value="3" />
-                            <label for="checkbox_9rcFtguaD5fCMSA8R_3">
+                            <label htmlFor="checkbox_9rcFtguaD5fCMSA8R_3">
                               <span>業務委託</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_9rcFtguaD5fCMSA8R_4" name="6_9rcFtguaD5fCMSA8R" value="4" />
-                            <label for="checkbox_9rcFtguaD5fCMSA8R_4">
+                            <label htmlFor="checkbox_9rcFtguaD5fCMSA8R_4">
                               <span>その他</span>
                             </label>
                         </div>
@@ -291,7 +291,7 @@ const IlistEducation = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_5hZuktti68g9cmnWb" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">人</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">人</span>
                       </div>
 
 

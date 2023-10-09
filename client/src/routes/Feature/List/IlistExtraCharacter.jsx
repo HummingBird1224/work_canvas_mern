@@ -41,7 +41,7 @@ const IlistExtraCharacter = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_S7CszBdL9wF5trtC2" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 

@@ -42,12 +42,12 @@ const StylistOutsourcingTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_MQyPkd9skTNJTEFr3" value="1" id="radiobutton0-MQyPkd9skTNJTEFr3" />
-                          <label for="radiobutton0-MQyPkd9skTNJTEFr3">はい</label>
+                          <label htmlFor="radiobutton0-MQyPkd9skTNJTEFr3">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_MQyPkd9skTNJTEFr3" value="0" id="radiobutton1-MQyPkd9skTNJTEFr3" />
-                          <label for="radiobutton1-MQyPkd9skTNJTEFr3">いいえ</label>
+                          <label htmlFor="radiobutton1-MQyPkd9skTNJTEFr3">いいえ</label>
                         </li>
                       </ul>
 
@@ -77,7 +77,7 @@ const StylistOutsourcingTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_XoMHscezAYboSrAX3" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">％</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">％</span>
                       </div>
 
 
@@ -102,7 +102,7 @@ const StylistOutsourcingTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_fGSWbipRyQjpy4wEE" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">％</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">％</span>
                       </div>
 
 
@@ -124,12 +124,12 @@ const StylistOutsourcingTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_NBhhdH6kKauhB3KfT" value="1" id="radiobutton0-NBhhdH6kKauhB3KfT" />
-                          <label for="radiobutton0-NBhhdH6kKauhB3KfT">はい</label>
+                          <label htmlFor="radiobutton0-NBhhdH6kKauhB3KfT">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_NBhhdH6kKauhB3KfT" value="0" id="radiobutton1-NBhhdH6kKauhB3KfT" />
-                          <label for="radiobutton1-NBhhdH6kKauhB3KfT">いいえ</label>
+                          <label htmlFor="radiobutton1-NBhhdH6kKauhB3KfT">いいえ</label>
                         </li>
                       </ul>
 
@@ -201,7 +201,7 @@ const StylistOutsourcingTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_EzqLFLWfD9oh54RKN" min="0" />
-                        <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                        <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 
@@ -223,12 +223,12 @@ const StylistOutsourcingTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_AouHZKkmLE4wr2oNG" value="1" id="radiobutton0-AouHZKkmLE4wr2oNG" />
-                          <label for="radiobutton0-AouHZKkmLE4wr2oNG">はい</label>
+                          <label htmlFor="radiobutton0-AouHZKkmLE4wr2oNG">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_AouHZKkmLE4wr2oNG" value="0" id="radiobutton1-AouHZKkmLE4wr2oNG" />
-                          <label for="radiobutton1-AouHZKkmLE4wr2oNG">いいえ</label>
+                          <label htmlFor="radiobutton1-AouHZKkmLE4wr2oNG">いいえ</label>
                         </li>
                       </ul>
 
@@ -255,12 +255,12 @@ const StylistOutsourcingTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_dtDAZTFS22yGjrxGW" value="1" id="radiobutton0-dtDAZTFS22yGjrxGW" />
-                          <label for="radiobutton0-dtDAZTFS22yGjrxGW">はい</label>
+                          <label htmlFor="radiobutton0-dtDAZTFS22yGjrxGW">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_dtDAZTFS22yGjrxGW" value="0" id="radiobutton1-dtDAZTFS22yGjrxGW" />
-                          <label for="radiobutton1-dtDAZTFS22yGjrxGW">いいえ</label>
+                          <label htmlFor="radiobutton1-dtDAZTFS22yGjrxGW">いいえ</label>
                         </li>
                       </ul>
 
