@@ -37,12 +37,12 @@ const IlistUnexperiencedTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_W2tns57qB7DC7fwFL" value="1" id="radiobutton0-W2tns57qB7DC7fwFL" />
-                          <label for="radiobutton0-W2tns57qB7DC7fwFL">はい</label>
+                          <label htmlFor="radiobutton0-W2tns57qB7DC7fwFL">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_W2tns57qB7DC7fwFL" value="0" id="radiobutton1-W2tns57qB7DC7fwFL" />
-                          <label for="radiobutton1-W2tns57qB7DC7fwFL">いいえ</label>
+                          <label htmlFor="radiobutton1-W2tns57qB7DC7fwFL">いいえ</label>
                         </li>
                       </ul>
 
@@ -57,7 +57,7 @@ const IlistUnexperiencedTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_LEZf2TtJCiLBaASqT" min="0" />
-                        <span style="margin: auto 0;" className="u-pl-xs">円</span>
+                        <span style={{margin: 'auto 0px'}} className="u-pl-xs">円</span>
                       </div>
 
 

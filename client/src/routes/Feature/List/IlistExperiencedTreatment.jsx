@@ -41,12 +41,12 @@ const IlistExperiencedTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_qnjpRtD4iv6a53BSb" value="1" id="radiobutton0-qnjpRtD4iv6a53BSb" />
-                            <label for="radiobutton0-qnjpRtD4iv6a53BSb">はい</label>
+                            <label htmlFor="radiobutton0-qnjpRtD4iv6a53BSb">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_qnjpRtD4iv6a53BSb" value="0" id="radiobutton1-qnjpRtD4iv6a53BSb" />
-                            <label for="radiobutton1-qnjpRtD4iv6a53BSb">いいえ</label>
+                            <label htmlFor="radiobutton1-qnjpRtD4iv6a53BSb">いいえ</label>
                         </li>
                       </ul>
 

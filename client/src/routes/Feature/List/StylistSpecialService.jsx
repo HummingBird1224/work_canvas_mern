@@ -39,12 +39,12 @@ const StylistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_oFjYJ39dMmDeLquvT" value="1" id="radiobutton0-oFjYJ39dMmDeLquvT" />
-                            <label for="radiobutton0-oFjYJ39dMmDeLquvT">はい</label>
+                            <label htmlFor="radiobutton0-oFjYJ39dMmDeLquvT">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_oFjYJ39dMmDeLquvT" value="0" id="radiobutton1-oFjYJ39dMmDeLquvT" />
-                            <label for="radiobutton1-oFjYJ39dMmDeLquvT">いいえ</label>
+                            <label htmlFor="radiobutton1-oFjYJ39dMmDeLquvT">いいえ</label>
                         </li>
                       </ul>
 
@@ -64,12 +64,12 @@ const StylistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_ZaKwJeHhkoaJQuAEA" value="1" id="radiobutton0-ZaKwJeHhkoaJQuAEA" />
-                            <label for="radiobutton0-ZaKwJeHhkoaJQuAEA">はい</label>
+                            <label htmlFor="radiobutton0-ZaKwJeHhkoaJQuAEA">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_ZaKwJeHhkoaJQuAEA" value="0" id="radiobutton1-ZaKwJeHhkoaJQuAEA" />
-                            <label for="radiobutton1-ZaKwJeHhkoaJQuAEA">いいえ</label>
+                            <label htmlFor="radiobutton1-ZaKwJeHhkoaJQuAEA">いいえ</label>
                         </li>
                       </ul>
 
@@ -88,12 +88,12 @@ const StylistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_HMnxHtKecFLc6GNid" value="1" id="radiobutton0-HMnxHtKecFLc6GNid" />
-                            <label for="radiobutton0-HMnxHtKecFLc6GNid">はい</label>
+                            <label htmlFor="radiobutton0-HMnxHtKecFLc6GNid">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_HMnxHtKecFLc6GNid" value="0" id="radiobutton1-HMnxHtKecFLc6GNid" />
-                            <label for="radiobutton1-HMnxHtKecFLc6GNid">いいえ</label>
+                            <label htmlFor="radiobutton1-HMnxHtKecFLc6GNid">いいえ</label>
                         </li>
                       </ul>
                     </div>
@@ -104,12 +104,12 @@ const StylistSpecialService = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_TuhwqtJbivLwjrztb" value="1" id="radiobutton0-TuhwqtJbivLwjrztb" />
-                            <label for="radiobutton0-TuhwqtJbivLwjrztb">はい</label>
+                            <label htmlFor="radiobutton0-TuhwqtJbivLwjrztb">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_TuhwqtJbivLwjrztb" value="0" id="radiobutton1-TuhwqtJbivLwjrztb" />
-                            <label for="radiobutton1-TuhwqtJbivLwjrztb">いいえ</label>
+                            <label htmlFor="radiobutton1-TuhwqtJbivLwjrztb">いいえ</label>
                         </li>
                       </ul>
 

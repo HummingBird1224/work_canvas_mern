@@ -5,12 +5,12 @@ import './FeatureCard.css'
 
 const FeatureCard = ({ props }) => {
   return (
-    <div className={`feature__card cursor-pointer bl-pink ${props.status && 'bl-gray'}`}>
+    <div className={`feature__card cursor-pointer bl-pink ${props.status == '1' && 'bl-gray'}`}>
       <Link to={'/enterprise/basicSurveyEnquete/' + props.id}>
         <dl className='d-flex align-items-center mb-0'>
           <dt>
             <div>
-              {props.status ?
+              {props.status == '1' ?
                 <TaskOutlined sx={{ color: '#ff6c8a' }} /> :
                 <StickyNote2Outlined sx={{ color: '#ff6c8a' }} />
               }
@@ -19,7 +19,7 @@ const FeatureCard = ({ props }) => {
           <dd className='text-default mb-0 ml-3'>
             <p className='font-800 fs-14 mb-0'>{props.title}</p>
             <p className=' mb-0'>
-              {props.status ?
+              {props.status == '1' ?
                 <span className='fc-pink font-800 fs-10 mb-0 fc-gray'>回答完了</span> :
                 <span className='fc-pink font-800 fs-10 mb-0'>未回答</span>
               }

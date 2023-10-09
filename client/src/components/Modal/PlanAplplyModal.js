@@ -32,7 +32,6 @@ const PlanApplyModal = (props) => {
   const [addedPlanIds, setAddedPlanIds] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [mail, setMail] = useState('');
   const [error, setError] = useState(false);
   const [text, setText] = useState('');
   const selectorChange = (id, e) => {
@@ -96,13 +95,13 @@ const PlanApplyModal = (props) => {
                     className="required"
                     name="selectors"
                     value={plan.id}
-                    disabled={props.planIds.includes(plan.id)}
-                    checked={props.planIds.includes(plan.id) || addedPlanIds.includes(plan.id)}
-                    onChange={(e) => selectorChange(plan.id, e)} />
+                    disabled={props.planIds.includes(plan.id.toString())}
+                    checked={props.planIds.includes(plan.id.toString()) || addedPlanIds.includes(plan.id.toString())}
+                    onChange={(e) => selectorChange(plan.id.toString(), e)} />
                   <label htmlFor={'job' + plan.id} className="u-m-reset u-ml-xxs">
                     <span className="u-fs-12">
                       {plan.name}<br />
-                      {props.planIds.includes(plan.id) && <span>（現在お申し込みの業種です）</span>}
+                      {props.planIds.includes(plan.id.toString()) && <span>（現在お申し込みの業種です）</span>}
                     </span>
                   </label>
                 </p>

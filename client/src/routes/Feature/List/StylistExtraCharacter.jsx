@@ -41,28 +41,28 @@ const StylistExtraCharacter = () => {
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_8nSfjE2XybCpsLbEm_1" name="6_8nSfjE2XybCpsLbEm" value="1" />
-                            <label for="checkbox_8nSfjE2XybCpsLbEm_1">
+                            <label htmlFor="checkbox_8nSfjE2XybCpsLbEm_1">
                               <span>バックシャンプー</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_8nSfjE2XybCpsLbEm_2" name="6_8nSfjE2XybCpsLbEm" value="2" />
-                            <label for="checkbox_8nSfjE2XybCpsLbEm_2">
+                            <label htmlFor="checkbox_8nSfjE2XybCpsLbEm_2">
                               <span>サイドシャンプー</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_8nSfjE2XybCpsLbEm_3" name="6_8nSfjE2XybCpsLbEm" value="3" />
-                            <label for="checkbox_8nSfjE2XybCpsLbEm_3">
+                            <label htmlFor="checkbox_8nSfjE2XybCpsLbEm_3">
                               <span>フルフラット</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_8nSfjE2XybCpsLbEm_4" name="6_8nSfjE2XybCpsLbEm" value="4" />
-                            <label for="checkbox_8nSfjE2XybCpsLbEm_4">
+                            <label htmlFor="checkbox_8nSfjE2XybCpsLbEm_4">
                               <span>その他</span>
                             </label>
                         </div>
@@ -78,12 +78,12 @@ const StylistExtraCharacter = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_c4YRYxnvgwyTfbLZA" value="1" id="radiobutton0-c4YRYxnvgwyTfbLZA" />
-                            <label for="radiobutton0-c4YRYxnvgwyTfbLZA">はい</label>
+                            <label htmlFor="radiobutton0-c4YRYxnvgwyTfbLZA">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_c4YRYxnvgwyTfbLZA" value="0" id="radiobutton1-c4YRYxnvgwyTfbLZA" />
-                            <label for="radiobutton1-c4YRYxnvgwyTfbLZA">いいえ</label>
+                            <label htmlFor="radiobutton1-c4YRYxnvgwyTfbLZA">いいえ</label>
                         </li>
                       </ul>
 

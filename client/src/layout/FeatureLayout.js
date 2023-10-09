@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from '../components/Feature/Header.jsx';
-import Sidebar from '../components/Feature/Sidebar.jsx';
-import Footer from '../components/Feature/Footer.jsx';
+import Header from '../components/Header/Header.js';
+import Sidebar from '../components/Sidebar/Sidebar.js';
+import Footer from '../components/Footer/Footer.js';
 
 import '../asset/main.css';
 

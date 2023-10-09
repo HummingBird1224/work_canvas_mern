@@ -42,12 +42,12 @@ const StylistFulltimeTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_aYR8iNbRoYTRL4tHN" value="1" id="radiobutton0-aYR8iNbRoYTRL4tHN" />
-                            <label for="radiobutton0-aYR8iNbRoYTRL4tHN">はい</label>
+                            <label htmlFor="radiobutton0-aYR8iNbRoYTRL4tHN">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_aYR8iNbRoYTRL4tHN" value="0" id="radiobutton1-aYR8iNbRoYTRL4tHN" />
-                            <label for="radiobutton1-aYR8iNbRoYTRL4tHN">いいえ</label>
+                            <label htmlFor="radiobutton1-aYR8iNbRoYTRL4tHN">いいえ</label>
                         </li>
                       </ul>
 
@@ -74,7 +74,7 @@ const StylistFulltimeTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_8R3WpBhhzG78a8TTC" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 
@@ -99,7 +99,7 @@ const StylistFulltimeTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_SEHEfyfHnHYaHs8LW" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">％</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">％</span>
                       </div>
 
 
@@ -124,7 +124,7 @@ const StylistFulltimeTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_cg5y22z4wXXcJpHPX" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">％</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">％</span>
                       </div>
 
 
@@ -146,12 +146,12 @@ const StylistFulltimeTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_fKb8XGCZvfF46TXpC" value="1" id="radiobutton0-fKb8XGCZvfF46TXpC" />
-                            <label for="radiobutton0-fKb8XGCZvfF46TXpC">はい</label>
+                            <label htmlFor="radiobutton0-fKb8XGCZvfF46TXpC">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_fKb8XGCZvfF46TXpC" value="0" id="radiobutton1-fKb8XGCZvfF46TXpC" />
-                            <label for="radiobutton1-fKb8XGCZvfF46TXpC">いいえ</label>
+                            <label htmlFor="radiobutton1-fKb8XGCZvfF46TXpC">いいえ</label>
                         </li>
                       </ul>
 
@@ -178,7 +178,7 @@ const StylistFulltimeTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_kuDQXmzPkawRGL5iv" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">ヶ月</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">ヶ月</span>
                       </div>
 
 
@@ -200,12 +200,12 @@ const StylistFulltimeTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_CTiy8dzP6cmxb5PTv" value="1" id="radiobutton0-CTiy8dzP6cmxb5PTv" />
-                            <label for="radiobutton0-CTiy8dzP6cmxb5PTv">はい</label>
+                            <label htmlFor="radiobutton0-CTiy8dzP6cmxb5PTv">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_CTiy8dzP6cmxb5PTv" value="0" id="radiobutton1-CTiy8dzP6cmxb5PTv" />
-                            <label for="radiobutton1-CTiy8dzP6cmxb5PTv">いいえ</label>
+                            <label htmlFor="radiobutton1-CTiy8dzP6cmxb5PTv">いいえ</label>
                         </li>
                       </ul>
 
@@ -229,12 +229,12 @@ const StylistFulltimeTreatment = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_4LHukiKwnkJRPXZtm" value="1" id="radiobutton0-4LHukiKwnkJRPXZtm" />
-                            <label for="radiobutton0-4LHukiKwnkJRPXZtm">はい</label>
+                            <label htmlFor="radiobutton0-4LHukiKwnkJRPXZtm">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_4LHukiKwnkJRPXZtm" value="0" id="radiobutton1-4LHukiKwnkJRPXZtm" />
-                            <label for="radiobutton1-4LHukiKwnkJRPXZtm">いいえ</label>
+                            <label htmlFor="radiobutton1-4LHukiKwnkJRPXZtm">いいえ</label>
                         </li>
                       </ul>
 
@@ -282,7 +282,7 @@ const StylistFulltimeTreatment = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_nN9gfdQfybTERsw46" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">円</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">円</span>
                       </div>
 
 

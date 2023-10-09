@@ -393,12 +393,38 @@ export const inviteLogin = async (userData, inviteCompany) => {
     });
 }
 
-// --------------------------------------- actions for feature list by fatty ---------------------------------------
-export const answer = async () => {
-  var companyId = 1;
+export const getFeatureList = async (companyId) => {
+  return await API({
+    method: 'get',
+    url: '/features/list/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const getFeature = async (companyId, featureId) => {
+  return await API({
+    method: 'get',
+    url: '/features/' + featureId + '/' + companyId,
+  })
+    .then((res) => {
+      return { status: res.status, data: res.data };
+    })
+    .catch(error => {
+      return error.response.data;
+    });
+}
+
+export const answer = async (data, featureId) => {
+  const companyId = Auth.getCompanyId();
   return await API({
     method: 'post',
-    url: '/traffic_insurance/' + companyId,
+    url: '/features/' + featureId + '/' + companyId,
+    data: data
   })
     .then((res) => {
       return { status: res.status, data: res.data };

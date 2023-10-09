@@ -7,7 +7,8 @@ const ensureAuthenticated = require('../modules/ensureAuthenticated')
 var bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
-const { User, Company, Billing, Feature, PayList, PaymentBank, PaymentCard, Plan, Store, sequelize } = require("../models");
+const { User, Company, Billing, Feature, PayList, PaymentBank, PaymentCard, Plan, Store, FeatureList, GeneralFeature, HairdresserFeature, EyelistFeature, NailistFeature, sequelize } = require("../models");
+const db = require("../models");
 const TypedError = require('../modules/ErrorHandler')
 const emailVerificationService = require('../modules/mailVerified');
 
@@ -58,122 +59,156 @@ const sendVerificationEmail = async (user, token) => {
 }
 
 // router.get('/', async function (req, res, next) {
-//   var data = [
+//   const cardInfo = [
 //     {
-//       business_type: '美容師',
-//       plan1: {
-//         degree: "美容師免許なし",
-//         price: 16.5,
-//         license: "",
-//         senior: 0
-//       },
-//       plan2: {
-//         degree: "新卒／アシスタント",
-//         price: 22,
-//         license: "美容師免許有り",
-//         senior: 0
-//       },
-//       plan3: {
-//         degree: "スタイリスト",
-//         price: 33,
-//         license: "美容師免許有り",
-//         senior: 1
-//       },
-//       plan4: {
-//         degree: "管理美容師",
-//         price: 38.5,
-//         license: "美容師免許有り",
-//         senior: 1
-//       },
-//       total_plan: [
-//         "資格なし 16.5万円(税込)",
-//         "新卒(資格取得見込み) 22万円(税込)",
-//         "アシスタント(資格あり) 22万円(税込)",
-//         "スタイリスト(資格あり) 33万円(税込)",
-//         "管理美容師(資格あり) 38.5万円(税込)"
-//       ]
+//       title: '交通費・社会保険',
+//       category: '0',
+//       model_name: 'GeneralFeature'
 //     },
 //     {
-//       business_type: 'アイリスト',
-//       plan1: {
-//         degree: "受付等",
-//         price: 16.5,
-//         license: "免許なし",
-//         senior: 0
-//       },
-//       plan2: {
-//         degree: "未経験者",
-//         price: 22,
-//         license: "免許あり（新卒・既卒）",
-//         senior: 0
-//       },
-//       plan3: {
-//         degree: "実務経験者",
-//         price: 33,
-//         license: "免許あり（3年未満）",
-//         senior: 1
-//       },
-//       plan4: {
-//         degree: "実務経験者",
-//         price: 38.5,
-//         license: "免許あり（3年以上）",
-//         senior: 1
-//       },
-//       total_plan: [
-//         "資格なし 受付・未経験 16.5万円(税込)",
-//         "資格あり 実務経験なし(新卒・既卒) 22万円(税込)",
-//         "資格あり 実務経験あり(3年未満) 33万円(税込)",
-//         "資格あり 実務経験あり(3年以上) 38.5万円(税込)"
-//       ]
+//       title: '休暇の取得',
+//       category: '0',
+//       model_name: 'GeneralFeature'
 //     },
 //     {
-//       business_type: 'ネイリスト/エステ',
-//       plan1: {
-//         degree: "受付・未経験",
-//         price: 16.5,
-//         license: "",
-//         senior: 0
-//       },
-//       plan2: {
-//         degree: "専門orスクール",
-//         price: 22,
-//         license: "在学中・新卒・既卒",
-//         senior: 0
-//       },
-//       plan3: {
-//         degree: "実務経験者",
-//         price: 27.5,
-//         license: "3年未満",
-//         senior: 1
-//       },
-//       plan4: {
-//         degree: "実務経験者",
-//         price: 33,
-//         license: "3年以上",
-//         senior: 1
-//       },
-//       total_plan: [
-//         "受付・未経験 16.5万円(税込)",
-//         "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-//         "実務経験あり(3年未満) 27.5万円(税込)",
-//         "実務経験あり(3年以上) 33万円(税込)"
-//       ]
+//       title: '勤務スタイル・選考の補足',
+//       category: '0',
+//       model_name: 'GeneralFeature'
 //     },
 //     {
-//       business_type: '美容師',
-//       total_plan: [
-//         "受付・未経験 16.5万円(税込)",
-//         "専門orスクール 在学中/新卒/既卒 22万円(税込)",
-//         "実務経験あり(3年未満) 27.5万円(税込)",
-//         "実務経験あり(3年以上) 33万円(税込)"
-//       ]
+//       title: '制度・設備',
+//       category: '0',
+//       model_name: 'GeneralFeature'
+//     },
+//     {
+//       title: '選考方法',
+//       category: '0',
+//       model_name: 'GeneralFeature'
+//     },
+//     {
+//       title: '【美容師】採用の要件',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】業務委託スタイリストの待遇',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】正社員スタイリストの待遇',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】正社員アシスタントの待遇',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】メニュー及び専門業務について',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】その他の特徴',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】アルバイト',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【美容師】教育・勤務例',
+//       category: '1',
+//       model_name: 'HairdresserFeature'
+//     },
+//     {
+//       title: '【アイリスト】採用の要件',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】正社員(経験者)の待遇',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】正社員(未経験者)の待遇',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】業務委託の待遇',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】アルバイト/パートの待遇',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】教育・勤務例',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】その他の特徴',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【アイリスト】メニュー及び専門業務',
+//       category: '2',
+//       model_name: 'EyelistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】採用の要件',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】正社員(経験者)の待遇',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】正社員(未経験者)の待遇',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】業務委託の待遇',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】アルバイト/パートの待遇',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】教育・勤務例',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】メニュー及び専門業務',
+//       category: '3',
+//       model_name: 'NailistFeature'
+//     },
+//     {
+//       title: '【ネイリスト】その他の特徴',
+//       category: '3',
+//       model_name: 'NailistFeature'
 //     },
 //   ];
 
-//   await Plan.bulkCreate(data);
+//   await FeatureList.bulkCreate(cardInfo);
 //   console.log('done');
-//   const result = await emailVerificationService.sendVerificationEmail(1);
-//   console.log(result);
 // })
 
 //POST /signup
@@ -832,6 +867,69 @@ router.post('/invite/login', async function (req, res, next) {
     .catch(err => {
       return next(err);
     })
+})
+
+router.get('/features/list/:companyId', ensureAuthenticated, async function (req, res, next) {
+  try {
+    const { companyId } = req.params;
+    const company = await Company.findOne({
+      attributes: ['business_types'],
+      order: [['id', 'ASC']],
+      where: { id: companyId }
+    });
+    await FeatureList.findAll({
+      attributes: ['id', 'title', 'status', 'category'],
+      where: { category: { [Op.in]: [...company.business_types, '0'] } }
+    })
+      .then(async (featureList) => {
+        res.status(200).json(featureList);
+      })
+      .catch(err => {
+        throw err;
+        return next(err);
+      })
+  }
+  catch (err) {
+    throw err;
+  }
+})
+
+router.get('/features/:featureId/:companyId', ensureAuthenticated, async function (req, res, next) {
+  try {
+    const { companyId, featureId } = req.params;
+    const featureList = await FeatureList.findOne({
+      attributes: ['category', 'model_name'],
+      where: { id: featureId }
+    });
+    const model = db[featureList.model_name];
+    const modelData = await model.findOne({ where: { company_id: companyId } });
+    res.status(200).json(modelData);
+  }
+  catch (err) {
+    throw err;
+  }
+})
+
+router.post('/features/:featureId/:companyId', async function (req, res, next) {
+  const { featureId, companyId } = req.params;
+  const data = req.body;
+  try {
+    const feature = await FeatureList.findOne({ where: { id: featureId } });
+    const status = feature.status;
+    const model = db[feature.model_name];
+    const modelData = await model.findOne({ where: { company_id: companyId } });
+    if (!modelData) {
+      await model.create({ ...data, company_id: companyId });
+    }
+    else {
+      await modelData.update(data);
+    }
+    await feature.update({ status: '1' });
+    res.status(200).json(status);
+  }
+  catch (err) {
+    throw err;
+  }
 })
 
 

@@ -71,12 +71,12 @@ const StylistEmploymentRequirement = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_pWQYjNvMcckkYZvoo" value="1" id="radiobutton0-pWQYjNvMcckkYZvoo" />
-                            <label for="radiobutton0-pWQYjNvMcckkYZvoo">はい</label>
+                            <label htmlFor="radiobutton0-pWQYjNvMcckkYZvoo">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_pWQYjNvMcckkYZvoo" value="0" id="radiobutton1-pWQYjNvMcckkYZvoo" />
-                            <label for="radiobutton1-pWQYjNvMcckkYZvoo">いいえ</label>
+                            <label htmlFor="radiobutton1-pWQYjNvMcckkYZvoo">いいえ</label>
                         </li>
                       </ul>
 
@@ -132,12 +132,12 @@ const StylistEmploymentRequirement = () => {
                       <ul className="form--type_checkbox_card">
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_8esFSMSiRy6vWH5Go" value="1" id="radiobutton0-8esFSMSiRy6vWH5Go" />
-                            <label for="radiobutton0-8esFSMSiRy6vWH5Go">はい</label>
+                            <label htmlFor="radiobutton0-8esFSMSiRy6vWH5Go">はい</label>
                         </li>
 
                         <li>
                           <input type="radio" className="form--type_radio_card formPart" name="2_8esFSMSiRy6vWH5Go" value="0" id="radiobutton1-8esFSMSiRy6vWH5Go" />
-                            <label for="radiobutton1-8esFSMSiRy6vWH5Go">いいえ</label>
+                            <label htmlFor="radiobutton1-8esFSMSiRy6vWH5Go">いいえ</label>
                         </li>
                       </ul>
 
@@ -168,28 +168,28 @@ const StylistEmploymentRequirement = () => {
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_5MX9TCmDfdjZWAWWY_1" name="6_5MX9TCmDfdjZWAWWY" value="1" />
-                            <label for="checkbox_5MX9TCmDfdjZWAWWY_1">
+                            <label htmlFor="checkbox_5MX9TCmDfdjZWAWWY_1">
                               <span>カラー習得済み</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_5MX9TCmDfdjZWAWWY_2" name="6_5MX9TCmDfdjZWAWWY" value="2" />
-                            <label for="checkbox_5MX9TCmDfdjZWAWWY_2">
+                            <label htmlFor="checkbox_5MX9TCmDfdjZWAWWY_2">
                               <span>カット習得済み</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_5MX9TCmDfdjZWAWWY_3" name="6_5MX9TCmDfdjZWAWWY" value="3" />
-                            <label for="checkbox_5MX9TCmDfdjZWAWWY_3">
+                            <label htmlFor="checkbox_5MX9TCmDfdjZWAWWY_3">
                               <span>パーマ習得済み</span>
                             </label>
                         </div>
 
                         <div className="form--type_checkbox_group">
                           <input type="checkbox" className="formPart" id="checkbox_5MX9TCmDfdjZWAWWY_4" name="6_5MX9TCmDfdjZWAWWY" value="4" />
-                            <label for="checkbox_5MX9TCmDfdjZWAWWY_4">
+                            <label htmlFor="checkbox_5MX9TCmDfdjZWAWWY_4">
                               <span>求めるスキルなし</span>
                             </label>
                         </div>
@@ -214,7 +214,7 @@ const StylistEmploymentRequirement = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_o6k55WNTzpvkziRdZ" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">日以上</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">日以上</span>
                       </div>
 
 
@@ -238,7 +238,7 @@ const StylistEmploymentRequirement = () => {
 
                       <div className="u-d-flex">
                         <input type="number" className="form--type_text formPart" name="4_NXGqTBQPh74niC4Aj" min="0" />
-                          <span style={{ margin: 'auto, 0' }} className="u-pl-xs">時間以上</span>
+                          <span style={{ margin: 'auto 0' }} className="u-pl-xs">時間以上</span>
                       </div>
 
 

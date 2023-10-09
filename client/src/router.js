@@ -25,6 +25,7 @@ import Term from './routes/Term/Term';
 import PaidTerm from './routes/Term/PaidTerm';
 import CampaignPaidTerm from './routes/Term/CampaignPaidTerm';
 import Notification from './routes/Notification/Notification';
+import Features from './routes/Feature/Features';
 
 import Login from './routes/Auth/Login.jsx';
 import Register from './routes/Auth/Register';
@@ -36,28 +37,6 @@ import InviteRegister from './routes/Auth/Invite/InviteRegister';
 import Invite from './routes/Auth/Invite/Invite';
 import InviteConfirm from './routes/Auth/Invite/InviteConfirm';
 
-import TrafficInsurance from './routes/Feature/List/TrafficInsurance.jsx';
-import Vacation from './routes/Feature/List/Vacation.jsx';
-import Workstyle from './routes/Feature/List/Workstyle.jsx';
-import Equipment from './routes/Feature/List/Equipment.jsx';
-import SelectionMethod from './routes/Feature/List/SelectionMethod.jsx';
-import StylistEmploymentRequirement from './routes/Feature/List/StylistEmploymentRequirement.jsx';
-import StylistOutsourcingTreatment from './routes/Feature/List/StylistOutsourcingTreatment.jsx';
-import StylistFulltimeTreatment from './routes/Feature/List/StylistFulltimeTreatment.jsx';
-import StylistAssistantTreatment from './routes/Feature/List/StylistAssistantTreatment.jsx';
-import StylistSpecialService from './routes/Feature/List/StylistSpecialService.jsx';
-import StylistExtraCharacter from './routes/Feature/List/StylistExtraCharacter.jsx';
-import StylistArbeitTreatment from './routes/Feature/List/StylistArbeitTreatment.jsx';
-import StylistEducation from './routes/Feature/List/StylistEducation.jsx';
-import IlistEmploymentRequirement from './routes/Feature/List/IlistEmploymentRequirement.jsx';
-import IlistExperiencedTreatment from './routes/Feature/List/IlistExperiencedTreatment.jsx';
-import IlistUnexperiencedTreatment from './routes/Feature/List/IlistUnexperiencedTreatment.jsx';
-import IlistOutsourcingTreatment from './routes/Feature/List/IlistOutsourcingTreatment.jsx';
-import IlistArbeitTreatment from './routes/Feature/List/IlistArbeitTreatment.jsx';
-import IlistEducation from './routes/Feature/List/IlistEducation.jsx';
-import IlistExtraCharacter from './routes/Feature/List/IlistExtraCharacter.jsx';
-import IlistSpecialService from './routes/Feature/List/IlistSpecialService.jsx';
-
 const HomeRouter = ({ component, ...options }) => {
   const finalComponent =
     Auth.getUserDetails() !== undefined && Auth.getUserDetails() !== null ? (
@@ -65,7 +44,6 @@ const HomeRouter = ({ component, ...options }) => {
     ) : (
       <Redirect to="/enterprise/login" />
     );
-  // <Route {...options} component={component} />
 
   return finalComponent;
 }
@@ -92,134 +70,134 @@ const StepRouter = ({ component, ...options }) => {
   return finalComponent;
 }
 
-const FeatureRoutes = [
-  {
-    path: '/enterprise/basicSurveyEnquete/1',
-    exact: true,
-    layout: FeatureLayout,
-    component: TrafficInsurance
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/2',
-    exact: true,
-    layout: FeatureLayout,
-    component: Vacation
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/3',
-    exact: true,
-    layout: FeatureLayout,
-    component: Workstyle
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/4',
-    exact: true,
-    layout: FeatureLayout,
-    component: Equipment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/5',
-    exact: true,
-    layout: FeatureLayout,
-    component: SelectionMethod
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/6',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistEmploymentRequirement
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/7',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistOutsourcingTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/8',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistFulltimeTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/9',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistAssistantTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/10',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistSpecialService
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/11',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistExtraCharacter
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/12',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistArbeitTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/13',
-    exact: true,
-    layout: FeatureLayout,
-    component: StylistEducation
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/14',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistEmploymentRequirement
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/15',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistExperiencedTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/16',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistUnexperiencedTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/17',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistOutsourcingTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/18',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistArbeitTreatment
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/19',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistEducation
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/20',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistExtraCharacter
-  },
-  {
-    path: '/enterprise/basicSurveyEnquete/21',
-    exact: true,
-    layout: FeatureLayout,
-    component: IlistSpecialService
-  },
-];
+// const FeatureRoutes = [
+//   {
+//     path: '/enterprise/basicSurveyEnquete/:id',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: Features
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/2',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: Vacation
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/3',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: Workstyle
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/4',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: Equipment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/5',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: SelectionMethod
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/6',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistEmploymentRequirement
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/7',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistOutsourcingTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/8',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistFulltimeTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/9',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistAssistantTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/10',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistSpecialService
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/11',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistExtraCharacter
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/12',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistArbeitTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/13',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: StylistEducation
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/14',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistEmploymentRequirement
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/15',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistExperiencedTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/16',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistUnexperiencedTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/17',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistOutsourcingTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/18',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistArbeitTreatment
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/19',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistEducation
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/20',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistExtraCharacter
+//   },
+//   {
+//     path: '/enterprise/basicSurveyEnquete/21',
+//     exact: true,
+//     layout: FeatureLayout,
+//     component: IlistSpecialService
+//   },
+// ];
 
 const HomeRoutes = [
   {
@@ -263,6 +241,12 @@ const HomeRoutes = [
     exact: true,
     layout: FeatureLayout,
     component: FeatureList
+  },
+  {
+    path: '/enterprise/basicSurveyEnquete/:id',
+    exact: true,
+    layout: FeatureLayout,
+    component: Features
   },
   {
     path: '/enterprise/entriesList',
@@ -422,22 +406,6 @@ const Routes = () => {
             );
           }}
         />
-        {FeatureRoutes.map((homeRoute, index) => {
-          return (
-            <Route
-              key={index}
-              path={homeRoute.path}
-              exact={homeRoute.exact}
-              component={props => {
-                return (
-                  <homeRoute.layout {...props}>
-                    <homeRoute.component {...props} />
-                  </homeRoute.layout>
-                );
-              }}
-            />
-          );
-        })}
         {InviteRoutes.map((inviteRoute, index) => {
           return (
             <Route

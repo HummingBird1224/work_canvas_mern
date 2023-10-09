@@ -235,7 +235,7 @@ label {
   display: none;
 }
 
-.form__type__checkbox__card li input:checked+label>.checked__icon {
+li input:checked+label>.checked__icon {
   display: block;
 }
 
